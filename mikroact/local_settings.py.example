@@ -1,0 +1,27 @@
+import os
+from settings import FILEROOT
+
+# NB this is only for *uploaded* media
+MEDIA_ROOT = os.path.join(FILEROOT, '..', 'media')
+
+STATIC_ROOT = os.path.join(FILEROOT, '..', 'static')
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    # ('Your Name', 'your_email@example.com'),
+)
+
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mikroact',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
