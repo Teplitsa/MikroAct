@@ -16,12 +16,12 @@ Getting started
   $ python manage.py runserver
   ```
 
-Then navigate to http://localhost:8000
+Then navigate to `http://localhost:8000`
 
 Contributing
 --------
 
-Please ensure that all submissions (commits or pull requests) to this repository adhere to relveant best practices:
+Please ensure that all submissions (commits or pull requests) to this repository follow relevant best practices:
 
 * Valid, semantic HTML (ideally conforming to [Web Content Accessibility Guidelines](http://www.w3.org/WAI/WCAG20/quickref/Overview.php))
 * Python code adhering to [PEP-8](http://www.python.org/dev/peps/pep-0008/), and checked with [pyflakes](http://pypi.python.org/pypi/pyflakes)
