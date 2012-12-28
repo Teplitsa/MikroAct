@@ -6,17 +6,27 @@ Private repository for the MikroAct project.
 Getting started
 --------
 
-  ```none
-  $ git clone git@github.com:Teplitsa/MikroAct.git
-  ...
-  $ cd MikroAct.git
-  $ pip install -r requirements.txt
-  $ cp mikroact/local_settings.py.example mikroact/local_settings.py
-  $ python manage.py syncdb --migrate
-  $ python manage.py runserver
-  ```
+1. Install dependencies:
+    * Python 2.5-2.7 with [pip](http://www.pip-installer.org/en/latest/)
+    * Postgresql ([installation guides](http://wiki.postgresql.org/wiki/Detailed_installation_guides))
+    * Postgres development headers (`-dev` or `-devel` packages)
 
-Then navigate to `http://localhost:8000`
+2. Set up a [Postgres database with Postgis](https://docs.djangoproject.com/en/1.5/ref/contrib/gis/install/postgis/).
+
+3. Check out code and create local configuration:
+    
+        $ git clone git@github.com:Teplitsa/MikroAct.git
+        ...
+        $ cd MikroAct.git
+        $ pip install -r requirements.txt
+        $ cp mikroact/local_settings.py.example mikroact/local_settings.py
+
+4. Edit `local_settings.py` as appropriate (particularly `DATABASES['default']['USER']`), then initialise the database and start the server:
+    
+        $ python manage.py syncdb --migrate
+        $ python manage.py runserver
+
+5. Navigate to `http://localhost:8000`
 
 Contributing
 --------
