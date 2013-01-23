@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}: Collectives {% endblock %}
+{% block title %}{{ block.super }}: Collectives {% endblock %}
 
 {% block content %}
 {% for collective in collectives %}
