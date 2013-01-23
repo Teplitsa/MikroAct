@@ -15,6 +15,9 @@ class UserProfile(UserenaBaseProfile):
     location_point = PointField(null=True)
     location_address = DefaultCharField(blank=True)
 
+    def __unicode__(self):
+        return "profile for %s" % self.user.username
+
 
 class CollectiveMembership(models.Model):
     collective = models.ForeignKey('Collective')
@@ -38,3 +41,6 @@ class Collective(models.Model):
     members = models.ManyToManyField(UserProfile, through=CollectiveMembership)
 
     date_created = models.DateTimeField(default=timezone.now, editable=False)
+
+    def __unicode__(self):
+        return "%s (%d members)" % (self.name, self.members.count())

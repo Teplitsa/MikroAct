@@ -35,6 +35,9 @@ class MikroAct(models.Model):
 
     objects = models.Manager()
 
+    def __unicode__(self):
+        return "%s (on %s)" % (self.name, self.date)
+
 
 class CollectionMembership(models.Model):
     mikro_act = models.ForeignKey(MikroAct)
@@ -51,3 +54,6 @@ class Collection(models.Model):
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
     mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership)
+
+    def __unicode__(self):
+        return "%s (%d members)" % (self.name, self.mikro_acts.count())
