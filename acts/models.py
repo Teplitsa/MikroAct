@@ -8,13 +8,14 @@ from django.utils import timezone
 from dj.choices import Choices
 from dj.choices.fields import ChoiceField
 
-from shortcuts import DefaultCharField
+from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
 
 
 class MikroAct(models.Model):
     title = DefaultCharField()
     date = models.DateField()
     description = models.TextField()
+    author = models.ForeignKey(User)
 
     location_point = PointField(null=True)
     location_address = DefaultCharField(blank=True)
@@ -27,6 +28,7 @@ class MikroAct(models.Model):
     status = ChoiceField(choices=Statuses,
                          default=Statuses.call_to_action)
 
+    date_created = models.DateTimeField(default=timezone.now, editable=False)
     is_published = models.BooleanField()
 
     photo = models.ImageField(upload_to='mikro_act')
@@ -37,14 +39,15 @@ class MikroAct(models.Model):
 class CollectionMembership(models.Model):
     mikro_act = models.ForeignKey(MikroAct)
     collection = models.ForeignKey('Collection')
-    join_date = models.DateTimeField(default=timezone.now, editable=False)
+    date_joined = models.DateTimeField(default=timezone.now, editable=False)
 
 
 class Collection(models.Model):
     name = DefaultCharField()
     author = models.ForeignKey(User)
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH)
 
     is_private = models.BooleanField()
-    creation_date = models.DateTimeField(default=timezone.now, editable=False)
+    date_created = models.DateTimeField(default=timezone.now, editable=False)
 
     mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership)

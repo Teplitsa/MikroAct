@@ -1,7 +1,14 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
+from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
 from .models import Collective
 
+
+class CollectiveListView(ListView):
+   model = Collective
+   context_object_name = 'collectives'
+
+
 class CollectiveDetailView(DetailView):
-   model = Collective 
+   model = Collective
