@@ -1,10 +1,5 @@
-import os
-from settings import FILEROOT
-
-# NB this is only for *uploaded* media
-MEDIA_ROOT = os.path.join(FILEROOT, '..', 'media')
-
-STATIC_ROOT = os.path.join(FILEROOT, '..', 'static')
+# vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
+from .base import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

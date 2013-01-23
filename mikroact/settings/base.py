@@ -1,36 +1,54 @@
-import os, sys
-FILEROOT = os.path.dirname(__file__)
+# vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
+from os import environ
+from os.path import join, abspath, dirname
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
+# Normally you should not import ANYTHING from Django directly
+# into your settings, but ImproperlyConfigured is an exception.
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_variable(var_name):
+    """ Get the environment variable or return exception """
+    try:
+        return environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s env variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+
+here = lambda *x: join(abspath(dirname(__file__)), *x)
+PROJECT_ROOT = here("..", "..")
+root = lambda *x: join(abspath(PROJECT_ROOT), *x)
+
+# Local time zone for this installation.
 TIME_ZONE = 'America/New_York'
 
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
+# Language code for this installation.
 LANGUAGE_CODE = 'en-us'
-
-SITE_ID = 1
 
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+SITE_ID = 1
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = root('media')
+
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = ()
-
+STATIC_ROOT = root('collected_static')
+STATICFILES_DIRS = (
+    root('mikroact', 'static'),
+)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-# Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n(%q&+ze7$q)-lpex#zto!_g5_hf#s%kn%ujo*ordinn=$ox+)'
 
-# List of callables that know how to import templates from various sources.
+TEMPLATE_DIRS = (
+    root('mikroact', 'templates'),
+)
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -42,17 +60,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'mikroact.urls'
 
 WSGI_APPLICATION = 'mikroact.wsgi.application'
-
-TEMPLATE_DIRS = (
-    os.path.join(FILEROOT, 'templates') 
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -101,16 +113,8 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 ANONYMOUS_USER_ID = -1
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
-
-try:
-    from local_settings import *
-except ImportError:
-    print "You need to create a local_settings.py file."
-    print "You might want to `cp mikroact/local_settings.py.example mikroact/local_settings.py`"
-    sys.exit(1)
