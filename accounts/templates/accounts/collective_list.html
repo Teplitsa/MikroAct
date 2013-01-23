@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}: Collectives {% endblock %}
+
+{% block content %}
+{% for collective in collectives %}
+	{{ collective }}
+{% endfor %}
+{% endblock content %}

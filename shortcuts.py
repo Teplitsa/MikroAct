@@ -7,3 +7,6 @@ class DefaultCharField(models.CharField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('max_length', DEFAULT_CHARFIELD_LENGTH)
         super(DefaultCharField, self).__init__(*args, **kwargs)
+
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^shortcuts\.DefaultCharField"])

@@ -4,6 +4,6 @@ from django.shortcuts import render
 from .models import MikroAct
 
 def home(request):
-    mikro_acts = MikroAct.objects.filter(is_published=True) 
+    mikro_acts = MikroAct.objects.filter(is_published=True)
 
-    return render (request, 'index.html', {'mikro_acts': mikro_acts}) 
+    return render (request, 'index.html', {'mikro_acts': mikro_acts})
