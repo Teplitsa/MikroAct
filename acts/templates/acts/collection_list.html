@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }}: Collections{% endblock %}
+
+{% block content %}
+{% for collection in collections %}
+	{{ collective }}
+{% endfor %}
+{% endblock content %}
