@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}: Home{% endblock title %}
+{% block title %}{{ block.super }}: Home{% endblock title %}
 
 {% block content %}
 {% for mikro_act in mikro_acts %}
