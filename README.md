@@ -10,6 +10,7 @@ Getting started
     * Python 2.5-2.7 with [pip](http://www.pip-installer.org/en/latest/)
     * Postgresql ([installation guides](http://wiki.postgresql.org/wiki/Detailed_installation_guides))
     * Postgres development headers (`-dev` or `-devel` packages)
+    * Postgis (version 2 strongly recommended over version 1)
 
 2. Set up a [Postgres database with Postgis](https://docs.djangoproject.com/en/1.5/ref/contrib/gis/install/postgis/).
 
