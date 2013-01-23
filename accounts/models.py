@@ -5,7 +5,7 @@ from django.contrib.gis.db.models import PointField
 
 from userena.models import UserenaBaseProfile
 
-from shortcuts import DefaultCharField
+from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
 
 
 class UserProfile(UserenaBaseProfile):
@@ -22,6 +22,8 @@ class CollectiveMembership(models.Model):
 
 class Collective(models.Model):
     # TODO should be related to a contrib.auth.models.Group for permissions
+    name = DefaultCharField() 
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH) 
 
     location_point = PointField()
     location_address = DefaultCharField()

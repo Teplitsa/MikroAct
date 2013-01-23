@@ -51,6 +51,7 @@ ROOT_URLCONF = 'mikroact.urls'
 WSGI_APPLICATION = 'mikroact.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(FILEROOT, 'templates') 
 )
 
 INSTALLED_APPS = (

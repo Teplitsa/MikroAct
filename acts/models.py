@@ -25,11 +25,13 @@ class MikroAct(models.Model):
         in_progress = _('In Progress')
         complete = _('Complete')
     status = ChoiceField(choices=Statuses,
-                                        default=Statuses.call_to_action)
+                         default=Statuses.call_to_action)
 
     is_published = models.BooleanField()
 
     photo = models.ImageField(upload_to='mikro_act')
+
+    objects = models.Manager()
 
 
 class CollectionMembership(models.Model):
