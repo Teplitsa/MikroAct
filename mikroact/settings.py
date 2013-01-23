@@ -64,6 +64,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'bootstrap_toolkit',
     'south',
+    'acts',
+    'userena',
+    'accounts',
+    'guardian',
+    'easy_thumbnails'
 )
 
 LOGGING = {
@@ -90,9 +95,21 @@ LOGGING = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+ANONYMOUS_USER_ID = -1
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+
 try:
-	from local_settings import *
+    from local_settings import *
 except ImportError:
-	print "You need to create a local_settings.py file."
-	print "You might want to `cp mikroact/local_settings.py.example mikroact/local_settings.py`"
-	sys.exit(1)
+    print "You need to create a local_settings.py file."
+    print "You might want to `cp mikroact/local_settings.py.example mikroact/local_settings.py`"
+    sys.exit(1)
