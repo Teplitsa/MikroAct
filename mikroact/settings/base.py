@@ -44,8 +44,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-SECRET_KEY = 'n(%q&+ze7$q)-lpex#zto!_g5_hf#s%kn%ujo*ordinn=$ox+)'
-
 TEMPLATE_DIRS = (
     root('mikroact', 'templates'),
 )
@@ -61,6 +59,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
+
+SECRET_KEY = get_env_variable("SECRET_KEY")
 
 ROOT_URLCONF = 'mikroact.urls'
 
