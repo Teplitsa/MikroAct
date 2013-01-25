@@ -1,8 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
-from django.db import models
-
 from django.contrib.auth.models import User
 from django.contrib.gis.db.models import PointField
+from django.db import models
 from django.utils import timezone
 
 from dj.choices import Choices
@@ -59,4 +58,4 @@ class Collection(models.Model):
     mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership)
 
     def __unicode__(self):
-        return "%s (%d members)" % (self.name, self.mikro_acts.count())
+        return "%s (%d mikroacts)" % (self.name, self.mikro_acts.count())

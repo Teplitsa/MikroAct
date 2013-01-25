@@ -1,7 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
-from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.gis.db.models import PointField
+from django.db import models
 from django.utils import timezone
 
 from userena.models import UserenaBaseProfile
@@ -31,8 +31,8 @@ class Collective(models.Model):
     name = DefaultCharField()
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH)
 
-    location_point = PointField()
-    location_address = DefaultCharField()
+    location_point = PointField(null=True, blank=True)
+    location_address = DefaultCharField(blank=True)
 
     description = models.TextField()
 
