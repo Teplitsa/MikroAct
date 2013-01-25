@@ -3,7 +3,7 @@
 {% block title %}{{ block.super }}: Collections{% endblock %}
 
 {% block content %}
-{% for collection in collections %}
+{% for collection in collection_list %}
 	{{ collection }}
 {% endfor %}
 {% endblock content %}

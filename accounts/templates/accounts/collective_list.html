@@ -3,7 +3,7 @@
 {% block title %}{{ block.super }}: Collectives {% endblock %}
 
 {% block content %}
-{% for collective in collectives %}
+{% for collective in collective_list %}
 	{{ collective }}
 {% endfor %}
 {% endblock content %}

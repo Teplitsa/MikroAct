@@ -6,9 +6,8 @@ from .models import Collective
 
 
 class CollectiveListView(ListView):
-   model = Collective
-   context_object_name = 'collectives'
+    model = Collective
 
 
 class CollectiveDetailView(DetailView):
-   model = Collective
+    model = Collective
