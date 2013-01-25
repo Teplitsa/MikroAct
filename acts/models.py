@@ -1,4 +1,5 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.gis.db.models import PointField
 from django.db import models
@@ -46,6 +47,18 @@ class CollectionMembership(models.Model):
     collection = models.ForeignKey('Collection')
     date_joined = models.DateTimeField(default=timezone.now, editable=False)
 
+    class Meta:
+        unique_together = ('mikro_act', 'collection')
+
+
+class CollectionFollow(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    collection = models.ForeignKey('Collection')
+    date_followed = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        unique_together = ('user', 'collection')
+
 
 class Collection(models.Model):
     name = DefaultCharField()
@@ -56,6 +69,10 @@ class Collection(models.Model):
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
     mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership)
+
+    followers = models.ManyToManyField(settings.AUTH_USER_MODEL, 
+                                       related_name='following',
+                                       through=CollectionFollow)
 
     def __unicode__(self):
         return "%s (%d mikroacts)" % (self.name, self.mikro_acts.count())

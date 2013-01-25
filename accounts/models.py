@@ -25,6 +25,9 @@ class CollectiveMembership(models.Model):
 
     date_joined = models.DateTimeField(default=timezone.now, editable=False)
 
+    class Meta:
+        unique_together = ('collective', 'user_profile')
+
 
 class Collective(models.Model):
     # TODO should be related to a contrib.auth.models.Group for permissions
