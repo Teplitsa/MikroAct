@@ -17,7 +17,7 @@ class MikroAct(models.Model):
     description = models.TextField()
     author = models.ForeignKey(User)
 
-    location_point = PointField(null=True)
+    location_point = PointField(blank=True, null=True)
     location_address = DefaultCharField(blank=True)
 
     class Statuses(Choices):
@@ -31,12 +31,15 @@ class MikroAct(models.Model):
     date_created = models.DateTimeField(default=timezone.now, editable=False)
     is_published = models.BooleanField()
 
-    photo = models.ImageField(upload_to='mikro_act')
+    photo = models.ImageField(upload_to='mikro_act', null=True, blank=True)
 
     objects = models.Manager()
 
     def __unicode__(self):
-        return "%s (on %s)" % (self.name, self.date)
+        return "%s (on %s)" % (self.title, self.date)
+
+    class Meta:
+        verbose_name = "MikroAct"
 
 
 class CollectionMembership(models.Model):
