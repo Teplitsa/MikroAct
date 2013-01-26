@@ -9,7 +9,7 @@ from userena.models import UserenaBaseProfile
 from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
 
 
-class UserProfile(UserenaBaseProfile):
+class UserProfile(models.Model):
     user = models.OneToOneField(User,
                                 unique=True)
     location_point = PointField(null=True)

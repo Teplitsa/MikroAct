@@ -9,5 +9,7 @@ urlpatterns = patterns('',
     url(r'^collective/', include('accounts.urls_collectives')),
     url(r'^collection/', include('acts.urls_collections')),
 
+    url(r'^user/', include('accounts.urls_userprofiles')),
+
     url(r'^admin/', include(admin.site.urls)),
 )

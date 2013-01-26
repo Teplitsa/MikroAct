@@ -78,10 +78,8 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'south',
     'acts',
-    'userena',
     'accounts',
     'guardian',
-    'easy_thumbnails'
 )
 
 LOGGING = {
@@ -109,12 +107,10 @@ LOGGING = {
 }
 
 AUTHENTICATION_BACKENDS = (
-    'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 ANONYMOUS_USER_ID = -1
-LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
-LOGIN_URL = '/accounts/signin/'
-LOGOUT_URL = '/accounts/signout/'
+LOGIN_URL = '/user/login/'
+LOGOUT_URL = '/user/logout/'
