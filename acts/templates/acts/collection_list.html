@@ -6,4 +6,7 @@
 {% for collection in collection_list %}
 	{{ collection }}
 {% endfor %}
+<ul class="actions">
+	<li><a href="{% url "collection_add" %}">Add Collection</a></li>
+</ul>
 {% endblock content %}

@@ -6,4 +6,7 @@
 {% for collective in collective_list %}
 <a href="{{ collective.get_absolute_url }}">{{ collective }}</a>
 {% endfor %}
+<ul class="actions">
+	<li><a href="{% url "collective_add" %}">Add Collective</a></li>
+</ul>
 {% endblock content %}

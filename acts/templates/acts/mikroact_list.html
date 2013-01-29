@@ -6,4 +6,7 @@
 {% for mikroact in mikroact_list %}
 	{{ mikroact }}
 {% endfor %}
+<ul class="actions">
+	<li><a href="{% url "mikroact_add" %}">Add MikroAct</a></li>
+</ul>
 {% endblock content %}
