@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
 from .models import Collection, MikroAct
+from .forms import MikroActForm
 
 
 class CollectionListView(ListView):
@@ -28,7 +29,11 @@ class MikroActListView(ListView):
 
 class MikroActCreateView(CreateView):
     model = MikroAct
+    form_class = MikroActForm
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super (MikroActCreateView, self).form_valid(form)
 
 class MikroActUpdateView(UpdateView):
     model = MikroAct
