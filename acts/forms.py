@@ -7,5 +7,5 @@ from .models import MikroAct
 class MikroActForm(forms.ModelForm):
     class Meta:
         model = MikroAct
-        fields = ("title", "slug", "date", "description", "location_point",
-                  "location_address", "status", "is_published", "photo")
+        fields = ("title", "slug", "date", "description", "location_address",
+                  "status", "is_published", "photo")

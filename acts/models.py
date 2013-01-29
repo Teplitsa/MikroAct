@@ -8,6 +8,7 @@ from django.utils import timezone
 
 from dj.choices import Choices
 from dj.choices.fields import ChoiceField
+from geopy import geocoders
 
 from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
 
@@ -19,7 +20,7 @@ class MikroAct(models.Model):
     description = models.TextField()
     author = models.ForeignKey(User)
 
-    location_point = PointField(blank=True, null=True)
+    location_point = PointField(blank=True, null=True, editable=False)
     location_address = DefaultCharField(blank=True)
 
     class Statuses(Choices):
@@ -42,6 +43,19 @@ class MikroAct(models.Model):
 
     def get_absolute_url(self):
         return reverse("mikroact_detail", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        """ Set location_point from self.location_address, if possible
+
+        FIXME: use different geocoder service
+        FIXME: handle geocoding errors gracefully
+        TODO: break out to separate function to expose as API view """
+        if self.location_address:
+            lat, lon = geocoders.Google().geocode(self.location_address)[1]
+            print lat, lon
+            self.location_point = "POINT(%s %s)" % (lon, lat)
+
+        super(MikroAct, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "MikroAct"
@@ -75,7 +89,7 @@ class Collection(models.Model):
 
     mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership)
 
-    followers = models.ManyToManyField(settings.AUTH_USER_MODEL, 
+    followers = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                        related_name='following',
                                        through=CollectionFollow)
 
