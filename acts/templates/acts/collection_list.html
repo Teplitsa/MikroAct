@@ -3,9 +3,11 @@
 {% block title %}{{ block.super }}: Collections{% endblock %}
 
 {% block content %}
-{% for collection in collection_list %}
-	{{ collection }}
-{% endfor %}
+<ul>
+	{% for collection in collection_list %}
+	<li><a href="{{ collection.get_absolute_url }}">{{ collection }}</a></li>
+	{% endfor %}
+</ul>
 <ul class="actions">
 	<li><a href="{% url "collection_add" %}">Add Collection</a></li>
 </ul>
