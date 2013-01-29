@@ -1,9 +1,10 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset=utf-8 />
 	<title>{% block title %}MikroAct{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="css/master.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{% static "css/master.css" %}" />
 </head>
 <body>
 	<ul>
