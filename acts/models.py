@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.gis.db.models import PointField
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
@@ -13,6 +14,7 @@ from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
 
 class MikroAct(models.Model):
     title = DefaultCharField()
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH)
     date = models.DateField()
     description = models.TextField()
     author = models.ForeignKey(User)
@@ -37,6 +39,9 @@ class MikroAct(models.Model):
 
     def __unicode__(self):
         return "%s (on %s)" % (self.title, self.date)
+
+    def get_absolute_url(self):
+        return reverse("mikroact_detail", kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = "MikroAct"

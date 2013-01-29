@@ -11,8 +11,6 @@ class Migration(SchemaMigration):
         # Adding model 'UserProfile'
         db.create_table(u'accounts_userprofile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('mugshot', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
-            ('privacy', self.gf('django.db.models.fields.CharField')(default='registered', max_length=15)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
             ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True)),
             ('location_address', self.gf('shortcuts.DefaultCharField')(max_length=255, blank=True)),
@@ -28,13 +26,16 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'accounts', ['CollectiveMembership'])
 
+        # Adding unique constraint on 'CollectiveMembership', fields ['collective', 'user_profile']
+        db.create_unique(u'accounts_collectivemembership', ['collective_id', 'user_profile_id'])
+
         # Adding model 'Collective'
         db.create_table(u'accounts_collective', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('shortcuts.DefaultCharField')(max_length=255)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
-            ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')()),
-            ('location_address', self.gf('shortcuts.DefaultCharField')(max_length=255)),
+            ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True, blank=True)),
+            ('location_address', self.gf('shortcuts.DefaultCharField')(max_length=255, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
@@ -43,6 +44,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Removing unique constraint on 'CollectiveMembership', fields ['collective', 'user_profile']
+        db.delete_unique(u'accounts_collectivemembership', ['collective_id', 'user_profile_id'])
+
         # Deleting model 'UserProfile'
         db.delete_table(u'accounts_userprofile')
 
@@ -59,15 +63,15 @@ class Migration(SchemaMigration):
             'date_created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'description': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255'}),
-            'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {}),
+            'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255', 'blank': 'True'}),
+            'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
             'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['accounts.UserProfile']", 'through': u"orm['accounts.CollectiveMembership']", 'symmetrical': 'False'}),
             'name': ('shortcuts.DefaultCharField', [], {'max_length': '255'}),
             'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'})
         },
         u'accounts.collectivemembership': {
-            'Meta': {'object_name': 'CollectiveMembership'},
+            'Meta': {'unique_together': "(('collective', 'user_profile'),)", 'object_name': 'CollectiveMembership'},
             'collective': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['accounts.Collective']"}),
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -78,8 +82,6 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255', 'blank': 'True'}),
             'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True'}),
-            'mugshot': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'privacy': ('django.db.models.fields.CharField', [], {'default': "'registered'", 'max_length': '15'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
         },
         u'auth.group': {

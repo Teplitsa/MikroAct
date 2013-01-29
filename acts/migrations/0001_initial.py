@@ -12,15 +12,16 @@ class Migration(SchemaMigration):
         db.create_table(u'acts_mikroact', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('shortcuts.DefaultCharField')(max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
             ('date', self.gf('django.db.models.fields.DateField')()),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True)),
+            ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True, blank=True)),
             ('location_address', self.gf('shortcuts.DefaultCharField')(max_length=255, blank=True)),
             ('status', self.gf(u'dj.choices.fields.ChoiceField')(unique=False, primary_key=False, db_column=None, blank=False, default=1, null=False, _in_south=True, db_index=False)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
             ('is_published', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
         ))
         db.send_create_signal(u'acts', ['MikroAct'])
 
@@ -32,6 +33,21 @@ class Migration(SchemaMigration):
             ('date_joined', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
         ))
         db.send_create_signal(u'acts', ['CollectionMembership'])
+
+        # Adding unique constraint on 'CollectionMembership', fields ['mikro_act', 'collection']
+        db.create_unique(u'acts_collectionmembership', ['mikro_act_id', 'collection_id'])
+
+        # Adding model 'CollectionFollow'
+        db.create_table(u'acts_collectionfollow', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('collection', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['acts.Collection'])),
+            ('date_followed', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+        ))
+        db.send_create_signal(u'acts', ['CollectionFollow'])
+
+        # Adding unique constraint on 'CollectionFollow', fields ['user', 'collection']
+        db.create_unique(u'acts_collectionfollow', ['user_id', 'collection_id'])
 
         # Adding model 'Collection'
         db.create_table(u'acts_collection', (
@@ -46,11 +62,20 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Removing unique constraint on 'CollectionFollow', fields ['user', 'collection']
+        db.delete_unique(u'acts_collectionfollow', ['user_id', 'collection_id'])
+
+        # Removing unique constraint on 'CollectionMembership', fields ['mikro_act', 'collection']
+        db.delete_unique(u'acts_collectionmembership', ['mikro_act_id', 'collection_id'])
+
         # Deleting model 'MikroAct'
         db.delete_table(u'acts_mikroact')
 
         # Deleting model 'CollectionMembership'
         db.delete_table(u'acts_collectionmembership')
+
+        # Deleting model 'CollectionFollow'
+        db.delete_table(u'acts_collectionfollow')
 
         # Deleting model 'Collection'
         db.delete_table(u'acts_collection')
@@ -61,14 +86,22 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Collection'},
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'followers': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'following'", 'symmetrical': 'False', 'through': u"orm['acts.CollectionFollow']", 'to': u"orm['auth.User']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_private': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'mikro_acts': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['acts.MikroAct']", 'through': u"orm['acts.CollectionMembership']", 'symmetrical': 'False'}),
             'name': ('shortcuts.DefaultCharField', [], {'max_length': '255'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'})
         },
+        u'acts.collectionfollow': {
+            'Meta': {'unique_together': "(('user', 'collection'),)", 'object_name': 'CollectionFollow'},
+            'collection': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['acts.Collection']"}),
+            'date_followed': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+        },
         u'acts.collectionmembership': {
-            'Meta': {'object_name': 'CollectionMembership'},
+            'Meta': {'unique_together': "(('mikro_act', 'collection'),)", 'object_name': 'CollectionMembership'},
             'collection': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['acts.Collection']"}),
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -83,8 +116,9 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255', 'blank': 'True'}),
-            'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True'}),
-            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
+            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'}),
             'status': (u'dj.choices.fields.ChoiceField', [], {'unique': 'False', 'primary_key': 'False', 'db_column': 'None', 'blank': 'False', u'default': '1', 'null': 'False', '_in_south': 'True', 'db_index': 'False'}),
             'title': ('shortcuts.DefaultCharField', [], {'max_length': '255'})
         },
