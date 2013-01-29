@@ -1,6 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django.contrib.auth.models import User
 from django.contrib.gis.db.models import PointField
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
@@ -47,3 +48,6 @@ class Collective(models.Model):
 
     def __unicode__(self):
         return "%s (%d members)" % (self.name, self.members.count())
+
+    def get_absolute_url(self):
+        return reverse("collective_detail", kwargs={"slug": self.slug})

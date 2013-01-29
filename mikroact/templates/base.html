@@ -6,6 +6,17 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="css/master.css" />
 </head>
 <body>
+	<ul>
+		<li><a href="{% url "home" %}">Home</a></li>
+		<li><a href="{# url "mikroact_list" #}">MikroActs</a></li>
+		<li><a href="{% url "collection_list" %}">Collections</a></li>
+		<li><a href="{% url "collective_list" %}">Collectives</a></li>
+		{% if user.is_authenticated %}
+		<li><a href="{% url "logout" %}">Log out</a></li>
+		{% else %}
+		<li><a href="{% url "login" %}">Log in</a></li>
+		{% endif %}
+	</ul>
 	{% block content %}{% endblock content %}
 </body>
 </html>

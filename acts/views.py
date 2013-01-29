@@ -1,7 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from .models import Collection
 
@@ -11,6 +11,10 @@ class CollectionListView(ListView):
 
 
 class CollectionCreateView(CreateView):
+    model = Collection
+
+
+class CollectionUpdateView(UpdateView):
     model = Collection
 
 

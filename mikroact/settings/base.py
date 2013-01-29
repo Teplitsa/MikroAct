@@ -114,3 +114,4 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 ANONYMOUS_USER_ID = -1
 LOGIN_URL = '/user/login/'
 LOGOUT_URL = '/user/logout/'
+LOGIN_REDIRECT_URL = '/'

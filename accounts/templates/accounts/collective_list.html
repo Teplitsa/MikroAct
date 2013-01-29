@@ -4,6 +4,6 @@
 
 {% block content %}
 {% for collective in collective_list %}
-	{{ collective }}
+<a href="{{ collective.get_absolute_url }}">{{ collective }}</a>
 {% endfor %}
 {% endblock content %}
