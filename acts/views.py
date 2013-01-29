@@ -3,22 +3,37 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
-from braces.views import LoginRequiredMixin
+from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from .models import Collection, MikroAct
-from .forms import MikroActForm
+from .forms import MikroActForm, CollectionForm
 
 
 class CollectionListView(ListView):
     model = Collection
 
 
-class CollectionCreateView(LoginRequiredMixin, CreateView):
+class CollectionCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = "acts.add_collection"
     model = Collection
 
+    form_class = CollectionForm
 
-class CollectionUpdateView(LoginRequiredMixin, UpdateView):
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(CollectionCreateView, self).form_valid(form)
+
+    # guardian's PermissionRequiredMixin doesn't like CreateView, which doesn't
+    # indicate that there is no associated model (yet) very meaningfully
+    object = None
+    def get_object(self):
+        return None
+
+
+class CollectionUpdateView(PermissionRequiredMixin, UpdateView):
     model = Collection
+    permission_required = "acts.change_collection"
+    form_class = CollectionForm
 
 
 class CollectionDetailView(DetailView):
@@ -29,18 +44,30 @@ class MikroActListView(ListView):
     model = MikroAct
 
 
-class MikroActCreateView(LoginRequiredMixin, CreateView):
+class MikroActCreateView(PermissionRequiredMixin, CreateView):
     model = MikroAct
     form_class = MikroActForm
+    permission_required = "acts.add_mikroact"
+
+    # guardian's PermissionRequiredMixin doesn't like CreateView, which doesn't
+    # indicate that there is no associated model (yet) very meaningfully
+    object = None
+    def get_object(self):
+        return None
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(MikroActCreateView, self).form_valid(form)
 
 
-class MikroActUpdateView(LoginRequiredMixin, UpdateView):
+class MikroActUpdateView(PermissionRequiredMixin, UpdateView):
     model = MikroAct
     form_class = MikroActForm
+    permission_required = "acts.change_mikroact"
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(MikroActCreateView, self).form_valid(form)
 
 
 class MikroActDetailView(DetailView):
