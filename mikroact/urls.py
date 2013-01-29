@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^$', 'mikroact.views.home', name='home'),
     url(r'^collective/', include('accounts.urls_collectives')),
     url(r'^collection/', include('acts.urls_collections')),
+    url(r'^act/', include('acts.urls_mikroacts')),
 
     url(r'^user/', include('accounts.urls_userprofiles')),
 

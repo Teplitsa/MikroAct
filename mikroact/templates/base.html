@@ -8,7 +8,7 @@
 <body>
 	<ul>
 		<li><a href="{% url "home" %}">Home</a></li>
-		<li><a href="{# url "mikroact_list" #}">MikroActs</a></li>
+		<li><a href="{% url "mikroact_list" %}">MikroActs</a></li>
 		<li><a href="{% url "collection_list" %}">Collections</a></li>
 		<li><a href="{% url "collective_list" %}">Collectives</a></li>
 		{% if user.is_authenticated %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }}: Mikroacts{% endblock %}
+
+{% block content %}
+{% for mikroact in mikroact_list %}
+	{{ mikroact }}
+{% endfor %}
+{% endblock content %}

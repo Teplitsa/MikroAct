@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
-from .models import Collection
+from .models import Collection, MikroAct
 
 
 class CollectionListView(ListView):
@@ -20,3 +20,19 @@ class CollectionUpdateView(UpdateView):
 
 class CollectionDetailView(DetailView):
     model = Collection
+
+
+class MikroActListView(ListView):
+    model = MikroAct
+
+
+class MikroActCreateView(CreateView):
+    model = MikroAct
+
+
+class MikroActUpdateView(UpdateView):
+    model = MikroAct
+
+
+class MikroActDetailView(DetailView):
+    model = MikroAct
