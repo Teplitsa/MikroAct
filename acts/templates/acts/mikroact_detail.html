@@ -4,4 +4,7 @@
 
 {% block content %}
 {{ mikroact }}
+<ul class="actions">
+	<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
+</ul>
 {% endblock content %}
