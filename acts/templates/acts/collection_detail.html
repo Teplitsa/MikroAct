@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }}: {{ collection.name }}{% endblock %}
+
+{% block content %}
+{{ collection }}
+<ul>
+	{% for mikroact in collection.mikro_acts.all %}
+	<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
+	{% endfor %}
+</ul>
+<ul class="actions">
+	<li><a href="{% url "collection_edit" slug=collection.slug %}">Edit</a></li>
+</ul>
+{% endblock content %}
