@@ -15,7 +15,7 @@ from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
 
 class MikroAct(models.Model):
     title = DefaultCharField()
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH)
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
     date = models.DateField()
     description = models.TextField()
     author = models.ForeignKey(User)
@@ -82,12 +82,12 @@ class CollectionFollow(models.Model):
 class Collection(models.Model):
     name = DefaultCharField()
     author = models.ForeignKey(User)
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH)
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
 
     is_private = models.BooleanField()
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
-    mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership)
+    mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership, related_name="collections")
 
     followers = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                        related_name='following',
@@ -95,3 +95,6 @@ class Collection(models.Model):
 
     def __unicode__(self):
         return "%s (%d mikroacts)" % (self.name, self.mikro_acts.count())
+
+    def get_absolute_url(self):
+        return reverse("collection_detail", kwargs={"slug": self.slug})
