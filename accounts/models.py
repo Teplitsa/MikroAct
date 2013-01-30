@@ -30,9 +30,10 @@ class Collective(models.Model):
 
     description = models.TextField()
 
-    photo = models.ImageField(upload_to='collective')
+    photo = models.ImageField(upload_to='collective', null=True, blank=True)
 
-    members = models.ManyToManyField(User, related_name='collectives')
+    members = models.ManyToManyField(User, related_name='collectives',
+            null=True, blank=True)
 
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
