@@ -17,18 +17,6 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'accounts', ['UserProfile'])
 
-        # Adding model 'CollectiveMembership'
-        db.create_table(u'accounts_collectivemembership', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('collective', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.Collective'])),
-            ('user_profile', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.UserProfile'])),
-            ('date_joined', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-        ))
-        db.send_create_signal(u'accounts', ['CollectiveMembership'])
-
-        # Adding unique constraint on 'CollectiveMembership', fields ['collective', 'user_profile']
-        db.create_unique(u'accounts_collectivemembership', ['collective_id', 'user_profile_id'])
-
         # Adding model 'Collective'
         db.create_table(u'accounts_collective', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -42,19 +30,24 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'accounts', ['Collective'])
 
+        # Adding M2M table for field members on 'Collective'
+        db.create_table(u'accounts_collective_members', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('collective', models.ForeignKey(orm[u'accounts.collective'], null=False)),
+            ('user', models.ForeignKey(orm[u'auth.user'], null=False))
+        ))
+        db.create_unique(u'accounts_collective_members', ['collective_id', 'user_id'])
+
 
     def backwards(self, orm):
-        # Removing unique constraint on 'CollectiveMembership', fields ['collective', 'user_profile']
-        db.delete_unique(u'accounts_collectivemembership', ['collective_id', 'user_profile_id'])
-
         # Deleting model 'UserProfile'
         db.delete_table(u'accounts_userprofile')
 
-        # Deleting model 'CollectiveMembership'
-        db.delete_table(u'accounts_collectivemembership')
-
         # Deleting model 'Collective'
         db.delete_table(u'accounts_collective')
+
+        # Removing M2M table for field members on 'Collective'
+        db.delete_table('accounts_collective_members')
 
 
     models = {
@@ -65,17 +58,10 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255', 'blank': 'True'}),
             'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
-            'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['accounts.UserProfile']", 'through': u"orm['accounts.CollectiveMembership']", 'symmetrical': 'False'}),
+            'members': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'collectives'", 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
             'name': ('shortcuts.DefaultCharField', [], {'max_length': '255'}),
             'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'})
-        },
-        u'accounts.collectivemembership': {
-            'Meta': {'unique_together': "(('collective', 'user_profile'),)", 'object_name': 'CollectiveMembership'},
-            'collective': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['accounts.Collective']"}),
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'user_profile': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['accounts.UserProfile']"})
         },
         u'accounts.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
