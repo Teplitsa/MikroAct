@@ -1,9 +1,14 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.views.generic import View
 from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
+from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView
 
-from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from follow import utils as follow_utils
+from stream import utils as stream_utils
+from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
 from .models import Collection, MikroAct
 from .forms import MikroActForm, CollectionForm
@@ -38,6 +43,33 @@ class CollectionUpdateView(PermissionRequiredMixin, UpdateView):
 
 class CollectionDetailView(DetailView):
     model = Collection
+
+
+class CollectionFollowView(LoginRequiredMixin, View, SingleObjectMixin):
+    model = Collection
+
+    def post(self, request, *args,  **kwargs):
+        self.object = self.get_object()
+
+        follow_utils.follow(request.user, self.object)
+
+        return HttpResponseRedirect(reverse("collection_detail", 
+                                    kwargs={"slug": self.object.slug}))
+
+    def head(self, request, *args, **kwargs):                                   
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def get(self, request, *args, **kwargs):                                   
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def options(self, request, *args, **kwargs):                                
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def delete(self, request, *args, **kwargs):                                 
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def put(self, request, *args, **kwargs):                                    
+        return self.post(request, *args, **kwargs)    
 
 
 class MikroActListView(ListView):

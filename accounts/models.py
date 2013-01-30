@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
-from userena.models import UserenaBaseProfile
+from stream import utils
 
 from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
 
@@ -20,16 +20,6 @@ class UserProfile(models.Model):
         return "profile for %s" % self.user.username
 
 
-class CollectiveMembership(models.Model):
-    collective = models.ForeignKey('Collective')
-    user_profile = models.ForeignKey(UserProfile)
-
-    date_joined = models.DateTimeField(default=timezone.now, editable=False)
-
-    class Meta:
-        unique_together = ('collective', 'user_profile')
-
-
 class Collective(models.Model):
     # TODO should be related to a contrib.auth.models.Group for permissions
     name = DefaultCharField()
@@ -42,7 +32,7 @@ class Collective(models.Model):
 
     photo = models.ImageField(upload_to='collective')
 
-    members = models.ManyToManyField(UserProfile, through=CollectiveMembership)
+    members = models.ManyToManyField(User, related_name='collectives')
 
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
@@ -51,3 +41,7 @@ class Collective(models.Model):
 
     def get_absolute_url(self):
         return reverse("collective_detail", kwargs={"slug": self.slug})
+
+
+utils.register_actor(User)
+utils.register_target(Collective)

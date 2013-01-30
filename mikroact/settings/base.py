@@ -80,6 +80,16 @@ INSTALLED_APPS = (
     'acts',
     'accounts',
     'guardian',
+    'stream',
+    'follow',
+)
+
+STREAM_VERBS = (
+    ('default', 'Stream Item'),
+    ('edit', 'Object edited'),
+    ('created','Object created'),
+    ('deleted','Object deleted'),
+    ('followed', 'Object followed'),
 )
 
 LOGGING = {

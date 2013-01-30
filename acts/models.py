@@ -8,6 +8,8 @@ from django.utils import timezone
 
 from dj.choices import Choices
 from dj.choices.fields import ChoiceField
+from follow import utils as follow_utils
+from stream import utils as stream_utils
 from geopy import geocoders
 
 from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
@@ -61,24 +63,6 @@ class MikroAct(models.Model):
         verbose_name = "MikroAct"
 
 
-class CollectionMembership(models.Model):
-    mikro_act = models.ForeignKey(MikroAct)
-    collection = models.ForeignKey('Collection')
-    date_joined = models.DateTimeField(default=timezone.now, editable=False)
-
-    class Meta:
-        unique_together = ('mikro_act', 'collection')
-
-
-class CollectionFollow(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    collection = models.ForeignKey('Collection')
-    date_followed = models.DateTimeField(default=timezone.now, editable=False)
-
-    class Meta:
-        unique_together = ('user', 'collection')
-
-
 class Collection(models.Model):
     name = DefaultCharField()
     author = models.ForeignKey(User)
@@ -87,14 +71,16 @@ class Collection(models.Model):
     is_private = models.BooleanField()
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
-    mikro_acts = models.ManyToManyField(MikroAct, through=CollectionMembership, related_name="collections")
-
-    followers = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                       related_name='following',
-                                       through=CollectionFollow)
+    mikro_acts = models.ManyToManyField(MikroAct, related_name="collections")
 
     def __unicode__(self):
         return "%s (%d mikroacts)" % (self.name, self.mikro_acts.count())
 
     def get_absolute_url(self):
         return reverse("collection_detail", kwargs={"slug": self.slug})
+
+
+stream_utils.register_target(MikroAct)
+stream_utils.register_target(Collection)
+
+follow_utils.register(Collection)

@@ -3,10 +3,17 @@
 {% block title %}{{ block.super }}: {{ collection.name }}{% endblock %}
 
 {% block content %}
-{{ collection }}
+<h1>{{ collection }}</h1>
+<h2>{{ collection.mikro_acts.count }} MikroActs</h2>
 <ul>
 	{% for mikroact in collection.mikro_acts.all %}
 	<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
+	{% endfor %}
+</ul>
+<h2>{{ collection.follow_collection.count }} Followers</h2>
+<ul>
+	{% for follow in collection.follow_collection.all %}
+	<li>{{ follow.user }}</li>
 	{% endfor %}
 </ul>
 <ul class="actions">
