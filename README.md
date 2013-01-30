@@ -30,7 +30,7 @@ Getting started
 5. Set required environment variables:
 
         $ export PYTHONPATH=$PYTHONPATH:$PWD
-        $ export DJANGO_SETTINGS_MODULE='mikroact.settings.local_dan.py'
+        $ export DJANGO_SETTINGS_MODULE='mikroact.settings.local_dan'
         $ export SECRET_KEY='A passphrase of your choosing'
    You could save these commands as a script, or add them to
    `virtualenvwrapper`'s `postactivate` hook.
