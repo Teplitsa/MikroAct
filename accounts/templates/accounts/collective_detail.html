@@ -3,5 +3,14 @@
 {% block title %}{{ block.super }}: {{ collective.name }}{% endblock %}
 
 {% block content %}
-{{ collective }}
+<div class="row">
+	<ul class="span3 nav nav-list well">
+		<li><h3>{{ collective.name }}</h3></li>
+		<li><i class="icon-envelope"></i> email</li>
+		<li class="nav-header">Location</li>
+		<li>{{ collective.location_address }}</li>
+		<li class="nav-header">About</li>
+		<li>{{ collective.description }}</li>
+	</aside>
+</div>
 {% endblock content %}
