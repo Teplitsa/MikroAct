@@ -42,6 +42,10 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
 )
 
 TEMPLATE_DIRS = (
@@ -82,6 +86,7 @@ INSTALLED_APPS = (
     'guardian',
     'stream',
     'follow',
+    'compressor',
 )
 
 STREAM_VERBS = (
