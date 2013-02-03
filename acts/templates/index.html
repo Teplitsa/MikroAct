@@ -3,7 +3,26 @@
 {% block title %}{{ block.super }}: Home{% endblock title %}
 
 {% block content %}
-{% for mikro_act in mikro_acts %}
-	{{ mikro_act }}
-{% endfor %}
+<div class="row">
+	<p class="span8 well">
+		<img src="http://www.placecage.com/620/404" />
+	</p>
+	<aside class="span3">
+		<h3>Upcoming events</h3>
+		<ul>
+			{% for mikro_act in mikro_acts %}
+			<li><a href="{{ mikro_act.get_absolute_url }}">{{ mikro_act }}</a></li>
+			{% endfor %}
+		</ul>
+	</aside>
+</div>
+<nav class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="#">Explore</a>
+		<ul class="nav pull-right">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Call to Action</a></li>
+			<li><a href="#">In Progress</a></li>
+			<li><a href="#">Complete</a></li>
+		</ul>
 {% endblock content %}
