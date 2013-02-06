@@ -3,12 +3,23 @@
 {% block title %}{{ block.super }}: Mikroacts{% endblock %}
 
 {% block content %}
-<ul>
-{% for mikroact in mikroact_list %}
-	<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
-{% endfor %}
-</ul>
-<ul class="actions">
-	<li><a href="{% url "mikroact_add" %}">Add MikroAct</a></li>
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="span3">
+			<div class="sideBar">
+				
+			</div>
+		</div>
+		<div class="span9">
+			<ul>
+			{% for mikroact in mikroact_list %}
+				<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
+			{% endfor %}
+			</ul>
+			<ul class="actions">
+				<li><a href="{% url "mikroact_add" %}">Add MikroAct</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
 {% endblock content %}

@@ -27,6 +27,7 @@
     {% bootstrap_javascript_tag "modal" %}
     {% bootstrap_javascript_tag "transition" %}
     {% bootstrap_javascript_tag "alert" %}
+    {% bootstrap_javascript_tag "typeahead" %}
     <script src="{{ STATIC_URL }}js/jquery.totemticker.min.js" type="text/javascript"></script>
     <script src="{{ STATIC_URL }}js/modernizr.transitions.js" type="text/javascript"></script>
 	
@@ -36,7 +37,7 @@
 	{% include "inc/globalHeader.html" %}
 	
 		{% block content %}{% endblock content %}
-		
+
 	{% include "inc/globalFooter.html" %}
 </body>
 </html>

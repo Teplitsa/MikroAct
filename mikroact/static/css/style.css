@@ -92,12 +92,17 @@ section.panel .loginLink.open {
 #loginModal{
 	text-align: center;
 }
+
 #loginModal form{
 	margin-bottom: 0;
 }
 #loginModal input{
 	width: 200px;
 	background:#fff;
+}
+#loginModal i{
+	color:#fff;
+	margin-right: 3px;
 }
 #loginModal .modal-footer{
 	font-size: 10px;
@@ -107,6 +112,27 @@ section.panel .loginLink.open {
 	margin-top: 20px;
 }
 
+.loginPanel{
+	background:#fff;
+	padding: 20px;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	text-align: center;
+}
+.loginPanel .alert{
+	font-size: 12px;
+	text-align: center;
+}
+.loginPanel form{
+	margin-top: 20px;
+}
+.loginPanel input{
+	width: 200px;
+	background:#fff;
+}
 /**********************/
 /***    HEADER      ***/
 /**********************/
@@ -364,6 +390,34 @@ ul#filter {
 #filter li a.selected{
 	background:#f5f5f5;
 }
+
+
+
+
+.createForm{
+	background:#fff;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	padding: 20px;
+}
+/**********************/
+/***     SIDEBAR    ***/
+/**********************/
+
+.sideBar{
+	background:#fff;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	height: 500px;
+}
+
+
 /**********************/
 /***     FOOTER     ***/
 /**********************/
