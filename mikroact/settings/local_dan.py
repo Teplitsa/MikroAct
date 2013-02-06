@@ -15,7 +15,7 @@ DATABASES = {
 	   'ENGINE' : 'django.contrib.gis.db.backends.postgis',
 	   'NAME' : 'mikroact',
 	   'USER' : 'postgres',
-	   'PASSWORD' : 'postgres',
+	   'PASSWORD' : None,
 	   'HOST': 'localhost',
            'PORT': '',
 	}

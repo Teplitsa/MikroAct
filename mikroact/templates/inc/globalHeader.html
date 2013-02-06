@@ -1,0 +1,65 @@
+<section class="panel">
+	<div class="container">
+		<div class="row">
+			<div class="span6"></div>
+			<div class="span6 relative">
+				<div class="userNav pull-right">
+					{% if user.is_authenticated %}
+					<ul>
+						<li>Hello <span style="color: #6fcbd7;">MikroActivist!</span></li>
+						<li class="registerLink"><a href="{% url "logout" %}">Logout</a></li>
+					</ul>
+					{% else %}
+					<ul>
+						<li>Hello <span style="color: #6fcbd7;">MikroActivist!</span></li>
+						<li class="registerLink"><a href="{% url "logout" %}">Register</a></li>
+						<li><a href="#loginModal" data-toggle="modal">Login</a></li>
+					</ul>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	    <h3 id="myModalLabel">Modal header</h3>
+	  </div>
+	  <div class="modal-body">
+	    <form action="{% url "login" %}" class="pull-right" method="post">
+			{% csrf_token %}
+			<input name="username" id="id_username" type="text" class="span2" placeholder="username">
+			<input name="password" type="password" class="span2" placeholder="password">
+			<button type="submit" class="btn">Login</button>
+		</form>
+	  </div>
+	</div>
+</section><!--END TOP LOGIN PANEL-->
+<section class="header">
+	<div class="container">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+	    			<span class="icon-bar"></span>
+	    			<span class="icon-bar"></span>
+	    			<span class="icon-bar"></span>
+	    		</a>
+	    		<a class="brand" href="#"><h1><span style="font-weight: 300;">Mikro</span>Act</h1></a>
+	    		<div class="nav-collapse collapse pull-right">	 
+	    			      		
+					<ul class="nav mainNav">
+						<li><a href="#"><i class="icon-sitemap icon-large"></i> Collections</a></li>
+						<li><a href="#"><i class="icon-group icon-large"></i> Collectives</a></li>
+						<li><a href="#"><i class="icon-fullscreen icon-large"></i> Explore</a></li>
+						<li><a href="#"><i class="icon-edit icon-large"></i> Create</a></li>
+					</ul>	
+					<form class="navbar-search">
+					  <input type="text" class="search-query span2 headerSearch" data-provide="typeahead" placeholder="Search">
+					</form> 			
+					
+	    		</div>
+			</div>
+		</div>
+	</div>
+</section>

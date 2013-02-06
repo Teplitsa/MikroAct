@@ -1,0 +1,27 @@
+<section class="footer">
+	
+</section>
+
+
+<script src="{{ STATIC_URL }}js/functions.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.panelTitle').click(function(){
+			accordionAction($(this).parent());
+		});
+		$('.element').hover(function(){
+			$(this).children('.elementWrap').slideToggle('fast');
+		});
+	})
+</script>
+<script type="text/javascript">
+		$(function(){
+			$('#vertical-ticker').totemticker({
+				row_height	:	'119px',
+				speed		:	800,
+				interval    :   3000,
+				mousestop	:	true,
+				direction	:	'up',
+			});
+		});
+</script>

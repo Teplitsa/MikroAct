@@ -1,0 +1,20 @@
+<section class="explore">
+	<div class="container exploreBar">
+		<section id="options" class="clearfix">
+		    <div class="option-combo">
+		      <div class="panelTitle">
+		      	<h2>Explore</h2>
+		      </div>
+		      <ul id="filter" class="option-set clearfix pull-right" data-option-key="filter">
+		        <li><a href="#show-all" data-option-value="*" class="selected">All</a></li>
+		        <li><a style="color:#ed7a2f;" href="#action" data-option-value=".action">Call to Action</a></li>
+		        <li><a style="color:#6fcbd7;" href="#progress" data-option-value=".progress">In Progress</a></li>
+		        <li><a style="color:#55b74e;" href="#complete" data-option-value=".complete">Complete</a></li>
+		      </ul>
+		    </div>
+		 </section>
+	</div>
+	
+	{% include "inc/ma_tiles.html" %}
+	<div class="container tilesBottom"></div>
+</section>

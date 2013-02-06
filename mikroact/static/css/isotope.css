@@ -1,0 +1,160 @@
+/* Start: Recommended Isotope styles */
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+/*
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+*/
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+/* End: Recommended Isotope styles */
+
+
+
+/* disable CSS transitions for containers with infinite scrolling*/
+.isotope.infinite-scrolling {
+  -webkit-transition: none;
+     -moz-transition: none;
+      -ms-transition: none;
+       -o-transition: none;
+          transition: none;
+}
+
+
+
+
+/**** Isotope styles ****/
+
+/* required for containers to inherit vertical size from window */
+html,
+body {
+  height: 100%;
+}
+
+#container {
+	margin: 5px auto 80px auto;
+	
+}
+
+.element {
+  width: 282px;
+  height: 150px;
+  margin: 5px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  color: #222;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.elementTitle{
+	height: 50px;
+	background: rgba(20,20,20,.9);
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+.elementWrap{
+	background: rgba(20,20,20,.9);
+	position:absolute;
+	width: 100%;
+	height: 100px;
+	display:none;
+	bottom:50px;
+	left: 0;
+}
+.height2 .elementWrap{
+	height: 150px;
+}
+.height3 .elementWrap{
+	height: 220px;
+}
+
+.element * {
+  position: absolute;
+  margin: 0;
+}
+
+.element.complete{color:#55b74e;}
+.element.progress{color:#6fcbd7;}
+.element.action{color:#ed7a2f;}
+
+.variable-sizes .element.height2 { height: 200px; }
+.variable-sizes .element.height3 { height: 270px; }
+
+
+
+/**** Infinite Scroll ****/
+
+#infscr-loading {
+  position: fixed;
+  text-align: center;
+  bottom: 30px;
+  left: 42%;
+  z-index: 100;
+  background: white;
+  background: hsla( 0, 0%, 100%, 0.9 );
+  padding: 20px;
+  color: #222;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+}
+
+
+
+/* The Magnificent Clearfix: nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
