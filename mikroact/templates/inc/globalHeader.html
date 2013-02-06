@@ -23,15 +23,20 @@
 	<div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-	    <h3 id="myModalLabel">Modal header</h3>
+	    <h1><span style="font-weight: 300;">Mikro</span>Act</h1>
 	  </div>
 	  <div class="modal-body">
-	    <form action="{% url "login" %}" class="pull-right" method="post">
+	    <form action="{% url "login" %}" method="post">
 			{% csrf_token %}
-			<input name="username" id="id_username" type="text" class="span2" placeholder="username">
-			<input name="password" type="password" class="span2" placeholder="password">
-			<button type="submit" class="btn">Login</button>
+			<p><input name="username" id="id_username" type="text" class="span2" placeholder="Username"></p>
+			<p><input name="password" type="password" class="span2" placeholder="Password"></p>
+			<div class="submitBottom">
+				<button type="submit" class="btn">Login</button>
+			</div>
 		</form>
+	  </div>
+	  <div class="modal-footer">
+	  	Not registered? <a href="#">Register Now</a>
 	  </div>
 	</div>
 </section><!--END TOP LOGIN PANEL-->
