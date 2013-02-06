@@ -73,7 +73,39 @@ section.panel a.active{
 section.panel .loginLink.open {
 	color:#6fcbd7;
 }
-
+#loginModal.modal{
+	width: 450px;
+	margin-left: -225px;
+	background: #388787; /* Old browsers */
+	background: -moz-linear-gradient(top, #388787 0%, #0f6666 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#388787), color-stop(100%,#0f6666)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #388787 0%,#0f6666 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #388787 0%,#0f6666 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #388787 0%,#0f6666 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #388787 0%,#0f6666 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#388787', endColorstr='#0f6666',GradientType=0 ); /* IE6-9 */
+}
+.modal-header{
+	text-align: center;
+	border: none;
+}
+#loginModal{
+	text-align: center;
+}
+#loginModal form{
+	margin-bottom: 0;
+}
+#loginModal input{
+	width: 200px;
+	background:#fff;
+}
+#loginModal .modal-footer{
+	font-size: 10px;
+	color:#999;
+}
+#loginModal .submitBottom{
+	margin-top: 20px;
+}
 
 /**********************/
 /***    HEADER      ***/
@@ -339,7 +371,7 @@ section.footer{
 	bottom: 0;
 	width: 100%;
 	position: fixed;
-	z-index:1001;
+	z-index:1005;
 	min-height: 50px;
 	line-height: 40px;
 	background:#353535 url(../img/bgPanel.jpg) repeat-x;
