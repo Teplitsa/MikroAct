@@ -1,7 +1,5 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.gis.db.models import PointField
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
@@ -12,7 +10,7 @@ from follow import utils as follow_utils
 from stream import utils as stream_utils
 from geopy import geocoders
 
-from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
+from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
 
 
 class MikroAct(models.Model):
@@ -22,7 +20,8 @@ class MikroAct(models.Model):
     description = models.TextField()
     author = models.ForeignKey(User)
 
-    location_point = PointField(blank=True, null=True, editable=False)
+    location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
+    location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
     location_address = DefaultCharField(blank=True)
 
     class Statuses(Choices):

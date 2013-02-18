@@ -1,19 +1,19 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django.contrib.auth.models import User
-from django.contrib.gis.db.models import PointField
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
 from stream import utils
 
-from shortcuts import DefaultCharField, DEFAULT_CHARFIELD_LENGTH
+from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User,
                                 unique=True)
-    location_point = PointField(null=True)
+    location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
+    location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
     location_address = DefaultCharField(blank=True)
 
     def __unicode__(self):
@@ -25,7 +25,8 @@ class Collective(models.Model):
     name = DefaultCharField()
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH)
 
-    location_point = PointField(null=True, blank=True)
+    location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
+    location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
     location_address = DefaultCharField(blank=True)
 
     description = models.TextField()

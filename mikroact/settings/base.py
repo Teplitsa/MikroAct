@@ -42,10 +42,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
 )
 
 TEMPLATE_DIRS = (
@@ -73,7 +69,6 @@ WSGI_APPLICATION = 'mikroact.wsgi.application'
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.gis',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
@@ -86,7 +81,6 @@ INSTALLED_APPS = (
     'guardian',
     'stream',
     'follow',
-    'compressor',
 )
 
 STREAM_VERBS = (
