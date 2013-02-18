@@ -46,16 +46,13 @@ class MikroAct(models.Model):
         return reverse("mikroact_detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
-        """ Set location_point from self.location_address, if possible
+        """ Set location from self.location_address, if possible
 
         FIXME: use different geocoder service
         FIXME: handle geocoding errors gracefully
         TODO: break out to separate function to expose as API view """
         if self.location_address:
-            lat, lon = geocoders.Google().geocode(self.location_address)[1]
-            print lat, lon
-            self.location_point = "POINT(%s %s)" % (lon, lat)
-
+            self.location_lat, self.location_lon = geocoders.Google().geocode(self.location_address)[1]
         super(MikroAct, self).save(*args, **kwargs)
 
     class Meta:
