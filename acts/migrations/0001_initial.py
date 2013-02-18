@@ -16,7 +16,8 @@ class Migration(SchemaMigration):
             ('date', self.gf('django.db.models.fields.DateField')()),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True, blank=True)),
+            ('location_lat', self.gf('shortcuts.DefaultDecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
+            ('location_lon', self.gf('shortcuts.DefaultDecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
             ('location_address', self.gf('shortcuts.DefaultCharField')(max_length=255, blank=True)),
             ('status', self.gf(u'dj.choices.fields.ChoiceField')(unique=False, primary_key=False, db_column=None, blank=False, default=1, null=False, _in_south=True, db_index=False)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
@@ -25,8 +26,8 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'acts', ['MikroAct'])
 
-        # Adding model 'Collection'
-        db.create_table(u'acts_collection', (
+        # Adding model 'List'
+        db.create_table(u'acts_list', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('shortcuts.DefaultCharField')(max_length=255)),
             ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
@@ -34,31 +35,31 @@ class Migration(SchemaMigration):
             ('is_private', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
         ))
-        db.send_create_signal(u'acts', ['Collection'])
+        db.send_create_signal(u'acts', ['List'])
 
-        # Adding M2M table for field mikro_acts on 'Collection'
-        db.create_table(u'acts_collection_mikro_acts', (
+        # Adding M2M table for field mikro_acts on 'List'
+        db.create_table(u'acts_list_mikro_acts', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('collection', models.ForeignKey(orm[u'acts.collection'], null=False)),
+            ('list', models.ForeignKey(orm[u'acts.list'], null=False)),
             ('mikroact', models.ForeignKey(orm[u'acts.mikroact'], null=False))
         ))
-        db.create_unique(u'acts_collection_mikro_acts', ['collection_id', 'mikroact_id'])
+        db.create_unique(u'acts_list_mikro_acts', ['list_id', 'mikroact_id'])
 
 
     def backwards(self, orm):
         # Deleting model 'MikroAct'
         db.delete_table(u'acts_mikroact')
 
-        # Deleting model 'Collection'
-        db.delete_table(u'acts_collection')
+        # Deleting model 'List'
+        db.delete_table(u'acts_list')
 
-        # Removing M2M table for field mikro_acts on 'Collection'
-        db.delete_table('acts_collection_mikro_acts')
+        # Removing M2M table for field mikro_acts on 'List'
+        db.delete_table('acts_list_mikro_acts')
 
 
     models = {
-        u'acts.collection': {
-            'Meta': {'object_name': 'Collection'},
+        u'acts.list': {
+            'Meta': {'object_name': 'List'},
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -76,7 +77,8 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255', 'blank': 'True'}),
-            'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
+            'location_lat': ('shortcuts.DefaultDecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
+            'location_lon': ('shortcuts.DefaultDecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
             'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255'}),
             'status': (u'dj.choices.fields.ChoiceField', [], {'unique': 'False', 'primary_key': 'False', 'db_column': 'None', 'blank': 'False', u'default': '1', 'null': 'False', '_in_south': 'True', 'db_index': 'False'}),

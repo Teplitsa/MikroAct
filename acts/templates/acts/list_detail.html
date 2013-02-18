@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}{{ block.super }}: {{ collection.name }}{% endblock %}
+{% block title %}{{ block.super }}: {{ list.name }}{% endblock %}
 
 {% block content %}
-<h1>{{ collection }}</h1>
-<h2>{{ collection.mikro_acts.count }} MikroActs</h2>
+<h1>{{ list }}</h1>
+<h2>{{ list.mikro_acts.count }} MikroActs</h2>
 <ul>
-	{% for mikroact in collection.mikro_acts.all %}
+	{% for mikroact in list.mikro_acts.all %}
 	<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
 	{% endfor %}
 </ul>
-<h2>{{ collection.follow_collection.count }} Followers</h2>
+<h2>{{ list.follow_list.count }} Followers</h2>
 <ul>
-	{% for follow in collection.follow_collection.all %}
+	{% for follow in list.follow_list.all %}
 	<li>{{ follow.user }}</li>
 	{% endfor %}
 </ul>
 <ul class="actions">
-	<li><a href="{% url "collection_edit" slug=collection.slug %}">Edit</a></li>
+	<li><a href="{% url "list_edit" slug=list.slug %}">Edit</a></li>
 </ul>
 {% endblock content %}

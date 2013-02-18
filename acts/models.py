@@ -62,7 +62,7 @@ class MikroAct(models.Model):
         verbose_name = "MikroAct"
 
 
-class Collection(models.Model):
+class List(models.Model):
     name = DefaultCharField()
     author = models.ForeignKey(User)
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
@@ -70,16 +70,16 @@ class Collection(models.Model):
     is_private = models.BooleanField()
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
-    mikro_acts = models.ManyToManyField(MikroAct, related_name="collections")
+    mikro_acts = models.ManyToManyField(MikroAct, related_name="lists")
 
     def __unicode__(self):
         return "%s (%d mikroacts)" % (self.name, self.mikro_acts.count())
 
     def get_absolute_url(self):
-        return reverse("collection_detail", kwargs={"slug": self.slug})
+        return reverse("list_detail", kwargs={"slug": self.slug})
 
 
 stream_utils.register_target(MikroAct)
-stream_utils.register_target(Collection)
+stream_utils.register_target(List)
 
-follow_utils.register(Collection)
+follow_utils.register(List)

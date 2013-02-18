@@ -1,7 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django import forms
 
-from .models import MikroAct, Collection
+from .models import MikroAct, List
 
 
 class MikroActForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class MikroActForm(forms.ModelForm):
                   "status", "is_published", "photo")
 
 
-class CollectionForm(forms.ModelForm):
+class ListForm(forms.ModelForm):
     class Meta:
-        model = Collection
+        model = List
         fields = ("name", "slug", "is_private")

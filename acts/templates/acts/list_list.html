@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ block.super }}: Collections{% endblock %}
+{% block title %}{{ block.super }}: Lists{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -12,12 +12,12 @@
 		</div>
 		<div class="span9">
 			<ul>
-				{% for collection in collection_list %}
-				<li><a href="{{ collection.get_absolute_url }}">{{ collection }}</a></li>
+				{% for list in list_list %}
+				<li><a href="{{ list.get_absolute_url }}">{{ list }}</a></li>
 				{% endfor %}
 			</ul>
 			<ul class="actions">
-				<li><i class="icon-sitemap"></i><a href="{% url "collection_add" %}">Add Collection</a></li>
+				<li><i class="icon-sitemap"></i><a href="{% url "list_add" %}">Add List</a></li>
 			</ul>
 		</div>
 	</div>

@@ -10,23 +10,23 @@ from follow import utils as follow_utils
 from stream import utils as stream_utils
 from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
-from .models import Collection, MikroAct
-from .forms import MikroActForm, CollectionForm
+from .models import List, MikroAct
+from .forms import MikroActForm, ListForm
 
 
-class CollectionListView(ListView):
-    model = Collection
+class ListListView(ListView):
+    model = List
 
 
-class CollectionCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = "acts.add_collection"
-    model = Collection
+class ListCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = "acts.add_list"
+    model = List
 
-    form_class = CollectionForm
+    form_class = ListForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super(CollectionCreateView, self).form_valid(form)
+        return super(ListCreateView, self).form_valid(form)
 
     # guardian's PermissionRequiredMixin doesn't like CreateView, which doesn't
     # indicate that there is no associated model (yet) very meaningfully
@@ -35,25 +35,25 @@ class CollectionCreateView(PermissionRequiredMixin, CreateView):
         return None
 
 
-class CollectionUpdateView(PermissionRequiredMixin, UpdateView):
-    model = Collection
-    permission_required = "acts.change_collection"
-    form_class = CollectionForm
+class ListUpdateView(PermissionRequiredMixin, UpdateView):
+    model = List
+    permission_required = "acts.change_list"
+    form_class = ListForm
 
 
-class CollectionDetailView(DetailView):
-    model = Collection
+class ListDetailView(DetailView):
+    model = List
 
 
-class CollectionFollowView(LoginRequiredMixin, View, SingleObjectMixin):
-    model = Collection
+class ListFollowView(LoginRequiredMixin, View, SingleObjectMixin):
+    model = List
 
     def post(self, request, *args,  **kwargs):
         self.object = self.get_object()
 
         follow_utils.follow(request.user, self.object)
 
-        return HttpResponseRedirect(reverse("collection_detail", 
+        return HttpResponseRedirect(reverse("list_detail", 
                                     kwargs={"slug": self.object.slug}))
 
     def head(self, request, *args, **kwargs):                                   

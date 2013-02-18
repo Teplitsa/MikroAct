@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import MikroAct, Collection
+from .models import MikroAct, List
 
 admin.site.register(MikroAct)
-admin.site.register(Collection)
+admin.site.register(List)

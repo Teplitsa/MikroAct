@@ -12,7 +12,8 @@ class Migration(SchemaMigration):
         db.create_table(u'accounts_userprofile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True)),
+            ('location_lat', self.gf('shortcuts.DefaultDecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
+            ('location_lon', self.gf('shortcuts.DefaultDecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
             ('location_address', self.gf('shortcuts.DefaultCharField')(max_length=255, blank=True)),
         ))
         db.send_create_signal(u'accounts', ['UserProfile'])
@@ -22,10 +23,11 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('shortcuts.DefaultCharField')(max_length=255)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
-            ('location_point', self.gf('django.contrib.gis.db.models.fields.PointField')(null=True, blank=True)),
+            ('location_lat', self.gf('shortcuts.DefaultDecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
+            ('location_lon', self.gf('shortcuts.DefaultDecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
             ('location_address', self.gf('shortcuts.DefaultCharField')(max_length=255, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
-            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
         ))
         db.send_create_signal(u'accounts', ['Collective'])
@@ -57,17 +59,19 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255', 'blank': 'True'}),
-            'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
-            'members': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'collectives'", 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
+            'location_lat': ('shortcuts.DefaultDecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
+            'location_lon': ('shortcuts.DefaultDecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
+            'members': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'collectives'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
             'name': ('shortcuts.DefaultCharField', [], {'max_length': '255'}),
-            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'})
         },
         u'accounts.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location_address': ('shortcuts.DefaultCharField', [], {'max_length': '255', 'blank': 'True'}),
-            'location_point': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True'}),
+            'location_lat': ('shortcuts.DefaultDecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
+            'location_lon': ('shortcuts.DefaultDecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
         },
         u'auth.group': {
