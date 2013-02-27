@@ -6,13 +6,15 @@
 				<div class="userNav pull-right">
 					{% if user.is_authenticated %}
 					<ul>
-						<li>Hello <span style="color: #6fcbd7;">MikroActivist!</span></li>
-						<li class="registerLink"><a href="{% url "logout" %}">Logout</a></li>
+						<li>Hello <span style="color: #6fcbd7;">
+							{{ user.get_full_name|default:"MikroActivist" }}!
+						</span></li>
+						<li class="registerLink"><a href="{% url "user_logout" %}">Logout</a></li>
 					</ul>
 					{% else %}
 					<ul>
 						<li>Hello <span style="color: #6fcbd7;">MikroActivist!</span></li>
-						<li class="registerLink"><a href="{% url "logout" %}">Register</a></li>
+						<li class="registerLink"><a href="{% url "user_register" %}">Register</a></li>
 						<li><a href="#loginModal" data-toggle="modal">Login</a></li>
 					</ul>
 					{% endif %}
@@ -26,7 +28,7 @@
 	    <h1><span style="font-weight: 300;">Mikro</span>Act</h1>
 	  </div>
 	  <div class="modal-body">
-	    <form action="{% url "login" %}" method="post">
+	    <form action="{% url "user_login" %}" method="post">
 			{% csrf_token %}
 
 			<p><i class="icon-user icon-large"></i><input name="username" id="id_username" type="text" class="span2" placeholder="Username"></p>
