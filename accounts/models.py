@@ -1,6 +1,6 @@
-# vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
-from django.contrib.auth.models import User
+# vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
@@ -8,6 +8,7 @@ from stream import utils
 
 from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
 
+import signals
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User,

@@ -121,6 +121,13 @@ AUTHENTICATION_BACKENDS = (
 )
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 ANONYMOUS_USER_ID = -1
+DEFAULT_PERMISSIONS = [
+    # users can always change & delete their own content...
+    'acts.add_mikroact',
+    'acts.add_list',
+    'accounts.add_collective',
+]
+
 LOGIN_URL = '/user/login/'
 LOGOUT_URL = '/user/logout/'
 LOGIN_REDIRECT_URL = '/'
