@@ -3,6 +3,16 @@
 
 {% block title %}{{ block.super }}: Mikroact{% endblock %}
 
+{% block extra_head %}
+	<script src="{{ STATIC_URL }}js/jquery.slugify.js"></script>
+	<script type="text/javascript">
+		{# FIXME move to "form.js" or a generic form template #}
+		$(document).ready(function() {
+				createSlugs();
+		});
+	</script>
+{% endblock %}
+
 {% block content %}
 <form action="." method="post">
 	{% csrf_token %}
