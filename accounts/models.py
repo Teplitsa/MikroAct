@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
+from follow.models import Follow
 from stream import utils
 
 from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
@@ -19,6 +20,10 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return "profile for %s" % self.user.username
+
+    def is_following(self, obj):
+        # FIXME django-follow docs recommend against calling this repeatedly
+        return Follow.objects.is_following(self, obj)
 
 
 class Collective(models.Model):

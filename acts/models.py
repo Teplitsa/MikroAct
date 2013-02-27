@@ -7,6 +7,7 @@ from django.utils import timezone
 from dj.choices import Choices
 from dj.choices.fields import ChoiceField
 from follow import utils as follow_utils
+from follow.models import Follow
 from stream import utils as stream_utils
 from geopy import geocoders
 
@@ -74,6 +75,14 @@ class List(models.Model):
 
     def get_absolute_url(self):
         return reverse("list_detail", kwargs={"slug": self.slug})
+
+    def is_followed_by(self, user):
+        if not isinstance(user, User):
+            raise TypeError(
+                "Expecting django.contrib.auth.models.User, given %s" % type(user)
+            )
+
+        return Follow.objects.is_following(user, self)
 
 
 stream_utils.register_target(MikroAct)
