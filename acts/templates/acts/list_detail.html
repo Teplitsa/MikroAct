@@ -11,6 +11,7 @@
 	{% endfor %}
 </ul>
 <h2>{{ list.follow_list.count }} Followers</h2>
+<a class="btn btn-inverse" href="{% url "list_follow" slug=list.slug %}">Follow</a>
 <ul>
 	{% for follow in list.follow_list.all %}
 	<li>{{ follow.user }}</li>
