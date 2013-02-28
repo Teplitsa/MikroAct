@@ -21,3 +21,7 @@ class ListForm(forms.ModelForm):
     class Meta:
         model = List
         fields = ("name", "slug", "is_private")
+        widgets = {
+            "slug": forms.TextInput(attrs={"data-slug-from": "name"}),
+        }
+

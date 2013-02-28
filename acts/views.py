@@ -35,6 +35,19 @@ class ListCreateView(PermissionRequiredMixin, CreateView):
     def get_object(self):
         return None
 
+    def form_valid(self, form):
+        _list = form.save(commit=False)
+        _list.author = self.request.user
+        _list.save()
+
+        self.object = _list
+
+        # TODO: see below
+        assign("change_list", self.request.user, _list)
+        assign("delete_list", self.request.user, _list)
+
+        return HttpResponseRedirect(self.get_success_url())
+
 
 class ListUpdateView(PermissionRequiredMixin, UpdateView):
     model = List
@@ -95,6 +108,7 @@ class MikroActCreateView(PermissionRequiredMixin, CreateView):
 
         self.object = mikroact
 
+        # TODO should this be in MikroActForm.save, or even MikroAct.save()?
         assign("change_mikroact", self.request.user, mikroact)
         assign("delete_mikroact", self.request.user, mikroact)
 
