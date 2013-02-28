@@ -9,6 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from follow import utils as follow_utils
 from stream import utils as stream_utils
 from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from guardian.shortcuts import assign
 
 from .models import List, MikroAct
 from .forms import MikroActForm, ListForm
@@ -88,8 +89,17 @@ class MikroActCreateView(PermissionRequiredMixin, CreateView):
         return None
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super(MikroActCreateView, self).form_valid(form)
+        mikroact = form.save(commit=False)
+        mikroact.author = self.request.user
+        mikroact.save()
+
+        self.object = mikroact
+
+        assign("change_mikroact", self.request.user, mikroact)
+        assign("delete_mikroact", self.request.user, mikroact)
+
+        return HttpResponseRedirect(self.get_success_url())
+
 
 
 class MikroActUpdateView(PermissionRequiredMixin, UpdateView):
