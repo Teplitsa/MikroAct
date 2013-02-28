@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView, SingleObjectMixin
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from follow import utils as follow_utils
 from stream import utils as stream_utils
@@ -107,9 +107,13 @@ class MikroActUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = MikroActForm
     permission_required = "acts.change_mikroact"
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super(MikroActCreateView, self).form_valid(form)
+
+class MikroActDeleteView(PermissionRequiredMixin, DeleteView):
+    model = MikroAct
+    permission_required = "acts.delete_mikroact"
+
+    def get_success_url(self):
+        return reverse("mikroact_list")
 
 
 class MikroActDetailView(DetailView):
