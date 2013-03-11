@@ -11,13 +11,14 @@
 			</div>
 		</div>
 		<div class="span9">
+			
+			<div class="actions">
+				<a href="{% url "mikroact_add" %}">Create MikroAct</a>
+			</div>
 			<ul>
 			{% for mikroact in mikroact_list %}
 				<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
 			{% endfor %}
-			</ul>
-			<ul class="actions">
-				<li><a href="{% url "mikroact_add" %}">Add MikroAct</a></li>
 			</ul>
 		</div>
 	</div>

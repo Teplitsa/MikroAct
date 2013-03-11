@@ -11,13 +11,13 @@
 			</div>
 		</div>
 		<div class="span9">
+			<div class="actions">
+				<a href="{% url "list_add" %}"><i class="icon-sitemap icon-large"></i> Create List</a>
+			</div>
 			<ul>
 				{% for list in list_list %}
 				<li><a href="{{ list.get_absolute_url }}">{{ list }}</a></li>
 				{% endfor %}
-			</ul>
-			<ul class="actions">
-				<li><i class="icon-sitemap"></i><a href="{% url "list_add" %}">Add List</a></li>
 			</ul>
 		</div>
 	</div>

@@ -6,13 +6,19 @@
 {% block content %}
 {% get_obj_perms user for mikroact as "mikroact_perms" %}
 
-{{ mikroact }}
-<ul class="actions">
-	{% if "change_mikroact" in mikroact_perms %}
-	<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
-	{% endif %}
-	{% if "delete_mikroact" in mikroact_perms %}
-	<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete</a></li>
-	{% endif %}
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="span12">
+		{{ mikroact }}
+			<ul class="actions">
+				{% if "change_mikroact" in mikroact_perms %}
+				<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
+				{% endif %}
+				{% if "delete_mikroact" in mikroact_perms %}
+				<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
 {% endblock content %}

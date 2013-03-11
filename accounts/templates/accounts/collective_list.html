@@ -11,12 +11,12 @@
 			</div>
 		</div>
 		<div class="span9">
+			<div class="actions">
+				<a href="{% url "collective_add" %}"><i class="icon-group icon-large"></i> Add Collective</a>
+			</div>
 			{% for collective in collective_list %}
 			<a href="{{ collective.get_absolute_url }}">{{ collective }}</a>
 			{% endfor %}
-			<ul class="actions">
-				<li><a href="{% url "collective_add" %}">Add Collective</a></li>
-			</ul>
 		</div>
 	</div>
 </div>

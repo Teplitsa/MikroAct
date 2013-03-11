@@ -3,21 +3,28 @@
 {% block title %}{{ block.super }}: {{ list.name }}{% endblock %}
 
 {% block content %}
-<h1>{{ list }}</h1>
-<h2>{{ list.mikro_acts.count }} MikroActs</h2>
-<ul>
-	{% for mikroact in list.mikro_acts.all %}
-	<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
-	{% endfor %}
-</ul>
-<h2>{{ list.follow_list.count }} Followers</h2>
-<a class="btn btn-inverse" href="{% url "list_follow" slug=list.slug %}">Follow</a>
-<ul>
-	{% for follow in list.follow_list.all %}
-	<li>{{ follow.user }}</li>
-	{% endfor %}
-</ul>
-<ul class="actions">
-	<li><a href="{% url "list_edit" slug=list.slug %}">Edit</a></li>
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			
+			<h1>{{ list }}</h1>
+			<h2>{{ list.mikro_acts.count }} MikroActs</h2>
+			<ul>
+				{% for mikroact in list.mikro_acts.all %}
+				<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
+				{% endfor %}
+			</ul>
+			<h2>{{ list.follow_list.count }} Followers</h2>
+			<a class="btn btn-inverse" href="{% url "list_follow" slug=list.slug %}">Follow</a>
+			<ul>
+				{% for follow in list.follow_list.all %}
+				<li>{{ follow.user }}</li>
+				{% endfor %}
+			</ul>
+			<ul class="actions">
+				<li><a href="{% url "list_edit" slug=list.slug %}">Edit</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
 {% endblock content %}

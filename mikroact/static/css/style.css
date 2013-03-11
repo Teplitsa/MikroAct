@@ -3,7 +3,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700&subset=latin,cyrillic-ext);
 
 body{
-	background:#f4f4f4 url(../img/furley_bg.png);
+	background:#f4f4f4 url(../img/agsquare.png);
 }
 
 
@@ -517,5 +517,25 @@ section.footer ul li{
 }
 .ribbon-green:after {
   right: 0;
+}
+
+
+
+.actions a{
+	background: #009999; /* Old browsers */
+	background: -moz-linear-gradient(top, #009999 0%, #00828e 50%, #007987 51%, #00565e 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#009999), color-stop(50%,#00828e), color-stop(51%,#007987), color-stop(100%,#00565e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #009999 0%,#00828e 50%,#007987 51%,#00565e 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #009999 0%,#00828e 50%,#007987 51%,#00565e 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #009999 0%,#00828e 50%,#007987 51%,#00565e 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #009999 0%,#00828e 50%,#007987 51%,#00565e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#009999', endColorstr='#00565e',GradientType=0 ); /* IE6-9 */
+	border: 1px solid #009999;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 8px 10px;
+	color:#fff;
+	font-size: 12px;
 }
 

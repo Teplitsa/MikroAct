@@ -12,9 +12,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
 	'default' : {
-	   'ENGINE': 'django.db.backends.sqlite3',
-	   'NAME' : 'mikroact.db',
-	   
+	   'ENGINE' : 'django.contrib.gis.db.backends.postgis',
+	   'NAME' : 'mikroact',
+	   'USER' : 'postgres',
+	   'PASSWORD' : None,
+	   'HOST': 'localhost',
+           'PORT': '',
 	}
 }
 
