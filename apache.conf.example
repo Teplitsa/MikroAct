@@ -1,0 +1,10 @@
+<VirtualHost *:82>
+        WSGIDaemonProcess mikroact threads=10 python-path=/usr/local/virtualenvs/mikroact/lib/python2.6/site-packages
+        WSGIProcessGroup mikroact
+        WSGIScriptAlias / /var/www/django/mikroact/releases/current/mikroact/wsgi.py
+        <Directory /var/www/django/mikroact/releases/current/>
+            Order deny,allow
+            Allow from all
+        </Directory>
+	Alias "/static" "/var/www/django/mikroact/releases/current/collected_static"
+</VirtualHost>
