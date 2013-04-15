@@ -3,3 +3,4 @@
 *.pyo
 mikroact.db
 .DS_Store
+/env/
