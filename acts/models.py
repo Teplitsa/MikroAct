@@ -19,7 +19,7 @@ class MikroAct(models.Model):
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
     date = models.DateField()
     description = models.TextField()
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, related_name='mikroacts')
 
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
