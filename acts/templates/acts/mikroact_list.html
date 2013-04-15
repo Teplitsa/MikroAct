@@ -6,21 +6,28 @@
 <div class="container">
 	<div class="row">
 		<div class="span3">
-			<div class="sideBar">
+			<div class="sideCol">
 				
 			</div>
 		</div>
 		<div class="span9">
-			
-			<div class="actions">
-				<a href="{% url "mikroact_add" %}">Create MikroAct</a>
+			<div class="mainCol collectiveAll">
+				<div class="actions">
+					<ul>
+						<li><a href="{% url "mikroact_add" %}"><i class="icon-edit icon-large"></i> Create MikroAct</a></li>
+					</ul>
+				</div>
 			</div>
-			<ul>
-			{% for mikroact in mikroact_list %}
-				<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
-			{% endfor %}
-			</ul>
+			<div id="tileWrapper" class="tiles">
+				<ul class="row">
+					{% for mikroact in mikroact_list %}
+					<li class="{{ mikroact.status }} span3 tile"><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}<br />{{ mikroact.location_address }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			
 		</div>
+		
 	</div>
 </div>
 {% endblock content %}

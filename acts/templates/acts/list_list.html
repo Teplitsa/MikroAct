@@ -5,15 +5,20 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="span3">
-			<div class="sideBar">
+		<div class="span4">
+			<div class="sideCol">
 				
 			</div>
 		</div>
-		<div class="span9">
-			<div class="actions">
-				<a href="{% url "list_add" %}"><i class="icon-sitemap icon-large"></i> Create List</a>
+		<div class="span8">
+			<div class="mainCol lists">
+				<div class="actions">
+					<ul>
+						<li><a href="{% url "list_add" %}"><i class="icon-sitemap icon-large"></i> Create List</a></li>
+					</ul>
+				</div>
 			</div>
+			
 			<ul>
 				{% for list in list_list %}
 				<li><a href="{{ list.get_absolute_url }}">{{ list }}</a></li>

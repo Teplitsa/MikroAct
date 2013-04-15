@@ -8,16 +8,35 @@
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
-		{{ mikroact }}
-			<ul class="actions">
-				{% if "change_mikroact" in mikroact_perms %}
-				<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
+		<div class="span4">
+			<div class="sideCol act">
+				<h1>{{ mikroact.slug }}</h1>
+				<p class="status">Status: <span>{{ mikroact.status }}</span></p>
+				<p class="desc">{{ mikroact.description }}</p>
+				<p>{{ mikroact.location_address }}</p>
+			</div>
+			
+			<div class="sideCol author">
+				<p>{{ mikroact.author }}</p>
+			</div>
+		</div>
+		<div class="span8">
+			<div class="mainCol act">
+				{% if user.is_authenticated %}
+						<div class="actions">
+							<ul>
+								{% if "change_mikroact" in mikroact_perms %}
+								<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
+								{% endif %}
+								{% if "delete_mikroact" in mikroact_perms %}
+								<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete</a></li>
+								{% endif %}
+							</ul>
+						</div>
+						{% else %}
+						
 				{% endif %}
-				{% if "delete_mikroact" in mikroact_perms %}
-				<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete</a></li>
-				{% endif %}
-			</ul>
+			</div>
 		</div>
 	</div>
 </div>

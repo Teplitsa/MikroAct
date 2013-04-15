@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: django-braces
+Version: 0.2.2
+Summary: Reusable, generic mixins for Django
+Home-page: https://github.com/brack3t/django-braces/
+Author: Kenneth Love <kenneth@brack3t.com>, Chris Jones <chris@brack3t.com>
+Author-email: kenneth@brack3t.com
+License: BSD
+Description: Mixins to add easy functionality to Django class-based views, forms, and models.
+Keywords: django,views,forms,mixins
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Framework :: Django
+Classifier: Environment :: Web Environment
