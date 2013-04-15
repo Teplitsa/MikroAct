@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 from guardian.mixins import LoginRequiredMixin
 
 from .models import Collective
-from .forms import UserForm, UserProfileForm
+from .forms import UserForm, UserProfileForm, RegistrationForm
 
 
 class CollectiveListView(ListView):
@@ -59,7 +59,7 @@ class CollectiveJoinView(LoginRequiredMixin, View, SingleObjectMixin):
 class UserRegisterView(CreateView):
     model = User
 
-    form_class = UserForm
+    form_class = RegistrationForm
     template_name = "accounts/user_register.html"
 
     def get_success_url(self):

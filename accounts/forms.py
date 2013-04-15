@@ -7,9 +7,9 @@ from .models import UserProfile
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), 
-                                label="Password")
+                                label="Password", required=False)
     password2 = forms.CharField(widget=forms.PasswordInput(), 
-                                label="Confirm password")
+                                label="Confirm password", required=False)
 
     class Meta:
         model = User
@@ -25,10 +25,19 @@ class UserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super(UserForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password"])
+        if self.cleaned_data.get('password', False):
+            user.set_password(self.cleaned_data["password"])
         if commit:
             user.save()
         return user
+
+
+class RegistrationForm(UserForm):
+    def __init__(self, *args, **kwargs):
+        self.base_fields['password'].required = True
+        self.base_fields['password2'].required = True
+
+        return super(RegistrationForm, self).__init__(*args, **kwargs)
 
 
 class UserProfileForm(forms.ModelForm):
