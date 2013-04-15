@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }}: Users{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="span4">
+			<div class="sideCol">
+				
+			</div>
+		</div>
+		<div class="span8">
+			<div class="mainCol lists">
+				<div class="actions">
+					
+				</div>
+			</div>
+			
+			<ul>
+				{% for user in userprofile_list %}
+				<li>{{ user }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock content %}

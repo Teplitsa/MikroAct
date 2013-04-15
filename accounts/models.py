@@ -24,7 +24,7 @@ class UserProfile(models.Model):
         return Follow.objects.is_following(self, obj)
 
     def get_absolute_url(self):
-        return reverse('user_detail', username=self.user.username)
+        return reverse('user_detail', kwargs={'username' : self.user.username})
 
 
 class Collective(models.Model):

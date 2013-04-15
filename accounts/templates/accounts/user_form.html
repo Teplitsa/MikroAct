@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load bootstrap_toolkit %}
+
+{% block title %}{{ block.super }}: Edit User{% endblock %}
+
+{% block extra_head %}
+	<script src="{{ STATIC_URL }}js/jquery.slugify.js"></script>
+	<script type="text/javascript">
+		{# FIXME move to "form.js" or a generic form template #}
+		$(document).ready(function() {
+				createSlugs();
+		});
+	</script>
+	{{ form.media }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2">
+			<form  class="createForm" action="." method="post">
+				{% csrf_token %}
+				{{ form|as_bootstrap }}
+				{{ user_form|as_bootstrap }}
+				{{ user_form.errors }}
+				{{ form.errors }}
+				<button type="submit">Save</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

@@ -8,9 +8,9 @@ from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse
 
-from guardian.mixins import LoginRequiredMixin
+from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
-from .models import Collective
+from .models import Collective, UserProfile
 from .forms import UserForm, UserProfileForm, RegistrationForm
 
 
@@ -79,7 +79,62 @@ class UserRegisterView(CreateView):
         # FIXME send "activate" email here
 
         return HttpResponseRedirect(self.get_success_url())
+        
 
 
 class UserRegisterCompleteView(TemplateView):
     template_name = "accounts/user_register_done.html"
+    
+
+class UserListView(ListView):
+    model = UserProfile
+    template_name = "accounts/user_list.html"
+      
+    
+class UserDetailView(DetailView):
+    model = UserProfile
+    template_name = "accounts/user_detail.html"
+    
+    def get_object(self):
+    	try:
+    		return UserProfile.objects.get(user__username=self.kwargs['username'])
+    	except UserProfile.DoesNotExist:
+    		user = User.objects.get(username = self.kwargs['username'])
+    		userprofile = UserProfile.objects.create(user=user)
+    		assign("change_userprofile", user, userprofile)
+    		return userprofile
+
+
+class UserUpdateView(PermissionRequiredMixin, UpdateView):
+    model = UserProfile
+    permission_required = "accounts.change_userprofile"
+    
+    slug_field = "user__username"
+    slug_url_kwarg = "username"
+    template_name = "accounts/user_form.html"
+    form_class = UserProfileForm
+    
+    def get_form(self, form_class):
+    	if self.request.method == 'POST' :
+    		self.userform = UserForm(self.request.POST, instance = self.object.user)
+    	else:
+    		self.userform = UserForm(instance = self.object.user)
+    	
+    	return super(UserUpdateView, self).get_form(form_class)
+    	
+    def get_context_data(self, **kwargs):
+    	kwargs['user_form'] = self.userform
+    	return super(UserUpdateView, self).get_context_data(**kwargs)
+    	
+    def form_valid(self, form):
+    	userprofile = form.save(commit=False)
+    	if self.userform.is_valid():
+    		userprofile.save()
+    		self.userform.save()
+    		
+    		return HttpResponseRedirect(self.get_success_url())
+    	
+    	# import pdb; pdb.set_trace()
+    	return self.form_invalid(form)
+    	
+    
