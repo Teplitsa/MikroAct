@@ -29,6 +29,23 @@
 	color:#666;
 	line-height: 20px;
 }
+.mainCol.act{
+	background:#fff;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.mainCol.comment{
+	background:#fff;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	min-height: 200px;
+}
 .mainCol .actions{
 	background:#fff;
 	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
