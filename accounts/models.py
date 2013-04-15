@@ -9,8 +9,6 @@ from stream import utils
 
 from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
 
-import signals
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User,
                                 unique=True)
@@ -24,6 +22,9 @@ class UserProfile(models.Model):
     def is_following(self, obj):
         # FIXME django-follow docs recommend against calling this repeatedly
         return Follow.objects.is_following(self, obj)
+
+    def get_absolute_url(self):
+        return reverse('user_detail', username=self.user.username)
 
 
 class Collective(models.Model):
