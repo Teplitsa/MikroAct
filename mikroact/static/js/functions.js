@@ -29,3 +29,6 @@ function createSlugs(){
 		$(this).slugify("#id_" + $(this).data("slug-from"));
 	})
 }
+$(function () {
+    $('#actTab a:last').tab('show');
+  })

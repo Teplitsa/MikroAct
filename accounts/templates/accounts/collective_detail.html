@@ -5,15 +5,53 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="span3 sideBar">
-			<ul>
-				<li><h3>{{ collective.name }}</h3></li>
-				<li><i class="icon-envelope"></i> email</li>
-				<li class="nav-header">Location</li>
-				<li>{{ collective.location_address }}</li>
-				<li class="nav-header">About</li>
-				<li>{{ collective.description }}</li>
-			</ul>
+		<div class="span4">
+			<div class="sideCol collective">
+				<div class="collectiveTitle">
+					<img src="http://placecage.com/75/75">
+					<div class="collectiveInfo">
+						<h2>{{ collective.name }}</h2>
+						<ul>
+							<li><i class="icon-envelope"></i>Email</li>
+							<li><i class="icon-facebook"></i></li>
+							<li><i class="icon-twitter"></i></li>
+							<li><i class="icon-linkedin-sign"></i></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<h4>Location</h4>
+				<p>{{ collective.location_address }}</p>
+				<h4>About</h4>
+				<p>{{ collective.description }}</p>
+			
+			</div>
+			<div class="sideCol members">
+				<ul>
+					{% for member in collective.members.all %}
+					<li>{{ member }}</li>
+					{% endfor %}
+				</ul>
+			
+			</div>
+		</div>
+		<div class="span8">
+			<div class="mainCol act">
+				{% if user.is_authenticated %}
+						<div class="actions">
+							<ul>
+								{% if "change_collective" in collective_perms %}
+								<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
+								{% endif %}
+								{% if "delete_collective" in collective_perms %}
+								<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete</a></li>
+								{% endif %}
+							</ul>
+						</div>
+						{% else %}
+						
+				{% endif %}
+			</div>
 		</div>
 	</div>
 </div>

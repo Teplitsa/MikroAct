@@ -5,8 +5,8 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="span12">
-			
+		<div class="span4">
+			<div class="sideCol list">
 			<h1>{{ list }}</h1>
 			<h2>{{ list.mikro_acts.count }} MikroActs</h2>
 			<ul>
@@ -24,7 +24,9 @@
 			<ul class="actions">
 				<li><a href="{% url "list_edit" slug=list.slug %}">Edit</a></li>
 			</ul>
+			</div>
 		</div>
+		<div class="span8"></div>
 	</div>
 </div>
 {% endblock content %}

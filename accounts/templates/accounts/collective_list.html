@@ -6,17 +6,26 @@
 <div class="container">
 	<div class="row">
 		<div class="span3">
-			<div class="sideBar">
+			<div class="sideCol">
 				
 			</div>
 		</div>
 		<div class="span9">
-			<div class="actions">
-				<a href="{% url "collective_add" %}"><i class="icon-group icon-large"></i> Add Collective</a>
+			<div class="mainCol collectiveAll">
+				<div class="actions">
+					<ul>
+						<li><a href="{% url "collective_add" %}"><i class="icon-group icon-large"></i> Create List</a></li>
+					</ul>
+				</div>
 			</div>
-			{% for collective in collective_list %}
-			<a href="{{ collective.get_absolute_url }}">{{ collective }}</a>
-			{% endfor %}
+			<div id="tileWrapper" class="tiles">
+				<ul class="row">
+					{% for collective in collective_list %}
+					<li class="span3 tile"><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			
 		</div>
 	</div>
 </div>

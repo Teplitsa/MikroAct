@@ -8,17 +8,55 @@
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
-		{{ mikroact }}
-			<ul class="actions">
-				{% if "change_mikroact" in mikroact_perms %}
-				<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
+		<div class="span8">
+			<div class="mainCol act">
+				
+				<div class="actGallery">
+					<img src="http://placecage.com/770/400"/>
+				</div>
+				{% if user.is_authenticated %}
+						<div class="actions">
+							<ul>
+								{% if "change_mikroact" in mikroact_perms %}
+								<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit MikroAct</a></li>
+								{% endif %}
+								{% if "delete_mikroact" in mikroact_perms %}
+								<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete MikroAct</a></li>
+								{% endif %}
+							</ul>
+						</div>
+						{% else %}
+						
 				{% endif %}
-				{% if "delete_mikroact" in mikroact_perms %}
-				<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete</a></li>
-				{% endif %}
-			</ul>
+				
+			</div>
+			<div class="mainCol comment">
+				<ul class="nav nav-tabs" id="actTab">
+				  <li class="active"><a href="#stream">Stream</a></li>
+				  <li><a href="#instructions">Instructions</a></li>
+				</ul>
+				 
+				<div class="tab-content">
+				  <div class="tab-pane active" id="stream">...</div>
+				  <div class="tab-pane" id="instructions">...</div>
+				</div>
+				 
+				
+			</div>
 		</div>
+		<div class="span4">
+			<div class="sideCol act">
+				<h1>{{ mikroact.slug }}</h1>
+				<p class="status">Status: <span>{{ mikroact.status }}</span></p>
+				<p class="desc">{{ mikroact.description }}</p>
+				<p>{{ mikroact.location_address }}</p>
+			</div>
+			
+			<div class="sideCol author">
+				<p>{{ mikroact.author }}</p>
+			</div>
+		</div>
+		
 	</div>
 </div>
 {% endblock content %}
