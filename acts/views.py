@@ -11,23 +11,23 @@ from stream import utils as stream_utils
 from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from guardian.shortcuts import assign
 
-from .models import List, MikroAct
-from .forms import MikroActForm, ListForm
+from .models import Campaign, MikroAct
+from .forms import MikroActForm, CampaignForm
 
 
-class ListListView(ListView):
-    model = List
+class CampaignListView(ListView):
+    model = Campaign
 
 
-class ListCreateView(PermissionRequiredMixin, CreateView):
+class CampaignCreateView(PermissionRequiredMixin, CreateView):
     permission_required = "acts.add_list"
-    model = List
+    model = Campaign
 
-    form_class = ListForm
+    form_class = CampaignForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super(ListCreateView, self).form_valid(form)
+        return super(CampaignCreateView, self).form_valid(form)
 
     # guardian's PermissionRequiredMixin doesn't like CreateView, which doesn't
     # indicate that there is no associated model (yet) very meaningfully
@@ -49,18 +49,18 @@ class ListCreateView(PermissionRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ListUpdateView(PermissionRequiredMixin, UpdateView):
-    model = List
+class CampaignUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Campaign
     permission_required = "acts.change_list"
-    form_class = ListForm
+    form_class = CampaignForm
 
 
-class ListDetailView(DetailView):
-    model = List
+class CampaignDetailView(DetailView):
+    model = Campaign
 
 
-class ListFollowView(LoginRequiredMixin, View, SingleObjectMixin):
-    model = List
+class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):
+    model = Campaign
 
     def post(self, request, *args,  **kwargs):
         self.object = self.get_object()

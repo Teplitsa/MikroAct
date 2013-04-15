@@ -3,7 +3,7 @@ from django import forms
 
 from bootstrap_toolkit.widgets import BootstrapDateInput
 
-from .models import MikroAct, List
+from .models import MikroAct, Campaign
 
 
 class MikroActForm(forms.ModelForm):
@@ -17,9 +17,9 @@ class MikroActForm(forms.ModelForm):
         }
 
 
-class ListForm(forms.ModelForm):
+class CampaignForm(forms.ModelForm):
     class Meta:
-        model = List
+        model = Campaign
         fields = ("name", "slug", "is_private")
         widgets = {
             "slug": forms.TextInput(attrs={"data-slug-from": "name"}),

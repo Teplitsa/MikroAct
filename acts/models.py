@@ -52,7 +52,7 @@ class MikroAct(models.Model):
         verbose_name = "MikroAct"
 
 
-class List(models.Model):
+class Campaign(models.Model):
     name = DefaultCharField()
     author = models.ForeignKey(User)
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
@@ -78,6 +78,6 @@ class List(models.Model):
 
 
 stream_utils.register_target(MikroAct)
-stream_utils.register_target(List)
+stream_utils.register_target(Campaign)
 
-follow_utils.register(List)
+follow_utils.register(Campaign)
