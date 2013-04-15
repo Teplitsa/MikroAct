@@ -10,7 +10,7 @@ class MikroActForm(forms.ModelForm):
     class Meta:
         model = MikroAct
         fields = ("title", "slug", "date", "description", "location_address",
-                  "status", "is_published", "photo")
+                  "is_published", "photo")
         widgets = {
             "slug": forms.TextInput(attrs={"data-slug-from": "title"}),
             "date": BootstrapDateInput()

@@ -25,14 +25,6 @@ class MikroAct(models.Model):
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
     location_address = DefaultCharField(blank=True)
 
-    class Statuses(Choices):
-        _ = Choices.Choice
-        call_to_action = _('Call to Action')
-        in_progress = _('In Progress')
-        complete = _('Complete')
-    status = ChoiceField(choices=Statuses,
-                         default=Statuses.call_to_action)
-
     date_created = models.DateTimeField(default=timezone.now, editable=False)
     is_published = models.BooleanField()
 
