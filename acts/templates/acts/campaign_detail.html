@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }}: {{ campaign.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="span4">
+			<div class="sideCol campaign">
+			<h1>{{ campaign }}</h1>
+			<h2>{{ campaign.mikro_acts.count }} MikroActs</h2>
+			<ul>
+				{% for mikroact in campaign.mikro_acts.all %}
+				<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
+				{% endfor %}
+			</ul>
+			<h2>{{ campaign.follow_campaign.count }} Followers</h2>
+			<a class="btn btn-inverse" href="{% url "campaign_follow" slug=campaign.slug %}">Follow</a>
+			<ul>
+				{% for follow in campaign.follow_campaign.all %}
+				<li>{{ follow.user }}</li>
+				{% endfor %}
+			</ul>
+			<ul class="actions">
+				<li><a href="{% url "campaign_edit" slug=campaign.slug %}">Edit</a></li>
+			</ul>
+			</div>
+		</div>
+		<div class="span8"></div>
+	</div>
+</div>
+{% endblock content %}
