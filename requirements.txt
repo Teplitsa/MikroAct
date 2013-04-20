@@ -10,7 +10,7 @@ django-fluent-comments==0.8.0
 django-guardian==1.0.4
 django-stream==0.2.3
 fuzzywuzzy==0.1
-geopy==0.94.2
+geopy==0.95.1
 pytz==2012j
 selenium==2.28.0
 wsgiref==0.1.2

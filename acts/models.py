@@ -45,7 +45,7 @@ class MikroAct(models.Model):
         FIXME: handle geocoding errors gracefully
         TODO: break out to separate function to expose as API view """
         if self.location_address:
-            self.location_lat, self.location_lon = geocoders.Google().geocode(self.location_address)[1]
+            self.location_lat, self.location_lon = geocoders.GoogleV3().geocode(self.location_address)[1]
         super(MikroAct, self).save(*args, **kwargs)
 
     class Meta:
