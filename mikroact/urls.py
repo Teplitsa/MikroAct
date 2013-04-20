@@ -13,4 +13,6 @@ urlpatterns = patterns('',
     url(r'^user/', include('accounts.urls_userprofiles')),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^comments/', include('fluent_comments.urls')),
 )

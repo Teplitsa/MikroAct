@@ -115,7 +115,6 @@ class MikroActCreateView(PermissionRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-
 class MikroActUpdateView(PermissionRequiredMixin, UpdateView):
     model = MikroAct
     form_class = MikroActForm

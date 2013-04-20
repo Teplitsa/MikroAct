@@ -81,6 +81,9 @@ INSTALLED_APPS = (
     'guardian',
     'stream',
     'follow',
+    'fluent_comments',
+    'crispy_forms',
+    'django.contrib.comments'
 )
 
 STREAM_VERBS = (
@@ -131,3 +134,6 @@ DEFAULT_PERMISSIONS = [
 LOGIN_URL = '/user/login/'
 LOGOUT_URL = '/user/logout/'
 LOGIN_REDIRECT_URL = '/'
+
+FLUENT_COMMENTS_EXCLUDE_FIELDS = ('name', 'email', 'url')
+COMMENTS_APP = 'fluent_comments'
