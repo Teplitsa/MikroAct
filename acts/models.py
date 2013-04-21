@@ -45,7 +45,7 @@ class MikroAct(models.Model):
         FIXME: handle geocoding errors gracefully
         TODO: break out to separate function to expose as API view """
         if self.location_address:
-            self.location_lat, self.location_lon = geocoders.Google().geocode(self.location_address)[1]
+            self.location_lat, self.location_lon = geocoders.GoogleV3().geocode(self.location_address)[1]
         super(MikroAct, self).save(*args, **kwargs)
 
     class Meta:
@@ -60,13 +60,13 @@ class Campaign(models.Model):
     is_private = models.BooleanField()
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
-    mikro_acts = models.ManyToManyField(MikroAct, related_name="lists")
+    mikro_acts = models.ManyToManyField(MikroAct, related_name="campaigns")
 
     def __unicode__(self):
         return "%s (%d mikroacts)" % (self.name, self.mikro_acts.count())
 
     def get_absolute_url(self):
-        return reverse("list_detail", kwargs={"slug": self.slug})
+        return reverse("campaign_detail", kwargs={"slug": self.slug})
 
     def is_followed_by(self, user):
         if not isinstance(user, User):

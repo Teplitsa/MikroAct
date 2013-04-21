@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% load guardian_tags %}
+{% load comments %}
 
 {% block title %}{{ block.super }}: {{ mikroact.title }}{% endblock %}
+
+{% block extra_head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}fluent_comments/css/ajaxcomments.css" />
+	<script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
+{% endblock %}
 
 {% block content %}
 {% get_obj_perms user for mikroact as "mikroact_perms" %}
@@ -37,11 +44,16 @@
 				</ul>
 				 
 				<div class="tab-content">
-				  <div class="tab-pane active" id="stream">...</div>
+					<div class="tab-pane active" id="stream">
+					</div>
 				  <div class="tab-pane" id="instructions">...</div>
 				</div>
-				 
-				
+				{% render_comment_list for mikroact %}
+				{% if user.is_authenticated %}
+				{% render_comment_form for mikroact %}
+				{% else %}
+				<a href="{% url 'user_login' %}">Log in</a> to leave a comment
+				{% endif %}
 			</div>
 		</div>
 		<div class="span4">

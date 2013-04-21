@@ -7,10 +7,12 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'mikroact.views.home', name='home'),
     url(r'^collective/', include('accounts.urls_collectives')),
-    url(r'^list/', include('acts.urls_lists')),
+    url(r'^campaign/', include('acts.urls_campaigns')),
     url(r'^act/', include('acts.urls_mikroacts')),
 
     url(r'^user/', include('accounts.urls_userprofiles')),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^comments/', include('fluent_comments.urls')),
 )
