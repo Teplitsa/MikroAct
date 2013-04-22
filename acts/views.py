@@ -20,7 +20,7 @@ class CampaignListView(ListView):
 
 
 class CampaignCreateView(PermissionRequiredMixin, CreateView):
-    permission_required = "acts.add_list"
+    permission_required = "acts.add_campaign"
     model = Campaign
 
     form_class = CampaignForm
