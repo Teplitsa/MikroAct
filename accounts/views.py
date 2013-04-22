@@ -19,8 +19,27 @@ class CollectiveListView(ListView):
     model = Collective
 
 
-class CollectiveCreateView(CreateView):
+class CollectiveCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = "accounts.add_collective"
     model = Collective
+
+
+    # guardian's PermissionRequiredMixin doesn't like CreateView, which doesn't
+    # indicate that there is no associated model (yet) very meaningfully
+    object = None
+    def get_object(self):
+        return None
+
+    def form_valid(self, form):
+        collective = form.save(commit=False)
+        collective.save()
+
+        self.object = collective
+
+        assign("change_collective", self.request.user, collective)
+        assign("delete_collective", self.request.user, collective)
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class CollectiveUpdateView(UpdateView):

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-
+{% load guardian_tags %}
 {% block title %}{{ block.super }}: {{ campaign.name }}{% endblock %}
 
 {% block content %}
+{% get_obj_perms user for campaign as "campaign_perms" %}
 <div class="container">
 	<div class="row">
 		<div class="span4">
@@ -21,8 +22,13 @@
 				<li>{{ follow.user }}</li>
 				{% endfor %}
 			</ul>
-			<ul class="actions">
+			<ul class="userAction">
+				{% if "change_campaign" in campaign_perms %}
 				<li><a href="{% url "campaign_edit" slug=campaign.slug %}">Edit</a></li>
+				{% endif %}	
+			</ul>
+				
+				
 			</ul>
 			</div>
 		</div>
