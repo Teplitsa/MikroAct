@@ -15,13 +15,16 @@
 	})
 </script>
 <script type="text/javascript">
-		$(function(){
-			$('#vertical-ticker').totemticker({
-				row_height	:	'119px',
-				speed		:	800,
-				interval    :   3000,
-				mousestop	:	true,
-				direction	:	'up',
-			});
-		});
+		
+		
+		
+		
+		$('#actTabs a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		})
 </script>
+<script>
+    $('#tileWrapper').masonry({
+	    itemSelector: '.tile'
+  	});</script>

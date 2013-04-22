@@ -1,15 +1,24 @@
 {% extends "base.html" %}
-
+{% load comments %}
 {% block title %}{{ block.super }}: {{ collective.name }}{% endblock %}
-
+{% block extra_head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}fluent_comments/css/ajaxcomments.css" />
+	<script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
+{% endblock %}
 {% block content %}
 <div class="container">
 	<div class="row">
 		<div class="span4">
 			<div class="sideCol collective">
 				<div class="collectiveTitle">
-					<img src="http://placecage.com/75/75">
+					{% if collective.photo %}
+							<img src="{{ collective.photo }}">
+						{% else %}
+							<img src="http://placecage.com/75/75">
+						{% endif %}	
 					<div class="collectiveInfo">
+						
 						<h2>{{ collective.name }}</h2>
 						<ul>
 							<li><i class="icon-envelope"></i>Email</li>
@@ -51,6 +60,22 @@
 						{% else %}
 						
 				{% endif %}
+			</div>
+			<div class="mainCol comment">
+				<div class="tab-content">
+				  <div class="tab-pane active" id="stream">
+					  	{% render_comment_list for collective %}
+						{% if user.is_authenticated %}
+						{% render_comment_form for collective %}
+						{% else %}
+						<a class="userLogin" href="{% url 'user_login' %}">Log in</a> to leave a comment
+						{% endif %}
+				  </div>
+				  <div class="tab-pane" id="instruction">
+					  {{ mikroact.description }}
+				  </div>
+				</div>
+				
 			</div>
 		</div>
 	</div>

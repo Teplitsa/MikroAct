@@ -7,7 +7,7 @@
 					{% if user.is_authenticated %}
 					<ul>
 						<li>Hello <span style="color: #6fcbd7;">
-							{{ user.get_username|default:"MikroActivist" }}!
+							<a href="{% url 'user_detail' username=user.get_username %}">{{ user.get_username }}!</a>
 						</span></li>
 						<li class="registerLink"><a href="{% url "user_logout" %}">Logout</a></li>
 					</ul>

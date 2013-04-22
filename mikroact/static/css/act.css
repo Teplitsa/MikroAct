@@ -2,11 +2,6 @@
 .sideCol.act{
 	background:#fff;
 	padding: 15px;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .sideCol.act h1{
@@ -31,39 +26,15 @@
 }
 .mainCol.act{
 	background:#fff;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .mainCol.comment{
 	background:#fff;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 	min-height: 200px;
-}
-.mainCol .actions{
-	background:#fff;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	line-height:40px;
-	margin-bottom: 15px;
+	margin-bottom: 100px;
 }
 
-.mainCol .actions ul{
-	margin: 0;
-	padding: 0;
-	background:#353535;
-	padding-right: 15px;
-	text-align:right;
-}
+
+
 .mainCol .actions ul li{
 	list-style: none;
 	display: inline;
@@ -81,11 +52,6 @@
 .sideCol.author{
 	background:#fff;
 	margin-top: 15px;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 	padding: 15px;
 	height: 75px;
 }
@@ -94,11 +60,6 @@
 .sideCol.collective{
 	background:#fff;
 	padding: 15px;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .sideCol.collective h4{
 	font-size: 14px;
@@ -142,9 +103,132 @@
 	background:#fff;
 	
 	padding: 15px;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+/*GALLERY*/
+.actGallery{
+	text-align: center;
+	background:#353535;
+}
+
+/*ACTIONS */
+
+.mainCol .actions{
+	background:#353535;
+	line-height:40px;
+	height:40px;
+}
+.actions .userAction{
+	float:right;
+	padding-right:10px;
+}
+#actTabs{float:left;}
+.actions .nav{
+	margin-bottom:0;
+	border:none;
+}
+.actions .nav .active{
+	
+}
+.actions .nav a{
+	border:none;
+	line-height:40px;
+	border-radius:0;
+	margin:0;
+	padding:0 20px;
+	
+	transition: all 1s ease-in-out;
+	-webkit-transition:all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+	-o-transition: all .1s ease-in-out;
+	-ms-transition:all .1s ease-in-out;
+}
+.actions .nav .active a{
+	color:#009999;
+	background:#fff;
+	
+}
+.actions .nav .active a:hover{
+	border:none;
+	background:#fff;
+}
+.actions .nav a:hover{
+	border-radius:0;
+	border:none;
+	background:#f4f4f4;
+}
+/*INSTRUCTIONS */
+#instruction{
+	padding: 15px;
+	color:#666;
+	line-height: 20px;
+	font-size:13px;
+}
+/*COMMENTS */
+#comments{
+	padding: 20px;
+}
+.comment .tab-content{width:100%;}
+.comment-item{
+	margin-top: 10px;
+	
+	padding: 10px;
+	background:#f4f4f4;
+	border: 1px solid #e3e3e3;
+	
+}
+#comments h4{
+	margin:0;
+	padding: 0;
+	font-size:14px;
+}
+.comment-date{
+	font-style:italic;
+	color:#999;
+	font-size:12px;
+}
+.comment-text{
+	margin-top: 10px;
+}
+.comment-item h3{
+	font-size:16px;
+	color:#ccc;
+	line-height: 18px;
+	margin: 0;
+	margin-bottom: 10px;
+}
+#div_id_comment{
+	border-top: 1px solid #ccc;
+	
+	margin: 15px 0 0;
+	background:#f4f4f4;
+	padding-bottom: 15px;
+	
+}
+#div_id_comment .control-label{
+	width: auto;
+	float:none;
+	text-align: left;
+	padding-left:20px;
+	display:block;
+	margin-top: 15px;
+}
+#div_id_comment .controls{
+	margin: 0 20px;
+}
+#div_id_comment .controls textarea{
+	width: 98%;
+}
+#stream form{
+	margin:0;
+}
+#stream .form-actions{
+	margin: 0;
+	border-top: none;
+	border-bottom: 1px solid #ccc;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+#stream .userLogin{
+	line-height: 48px;
+	margin-left:20px;
 }

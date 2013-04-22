@@ -1,7 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django.conf.urls import patterns, include, url
 
-from .views import UserRegisterView, UserRegisterCompleteView, UserUpdateView, UserDetailView
+from .views import UserRegisterView, UserRegisterCompleteView, UserUpdateView, UserDetailView, UserListView
 
 urlpatterns = patterns('django.contrib.auth.views',
     url(r'login/$', 'login', {'template_name': 'accounts/login.html'}, name='user_login'), 
@@ -11,6 +11,7 @@ urlpatterns = patterns('django.contrib.auth.views',
 
 urlpatterns += patterns('',
     url(r'register/$', UserRegisterView.as_view(), name='user_register'), 
+    url(r'^$', UserListView.as_view(), name='user_list'),
     url(r'register/done/$', UserRegisterCompleteView.as_view(), name='user_register_done'), 
     url(r'(?P<username>[-_\w]+)/edit/$', UserUpdateView.as_view(), name='user_edit'),
     url(r'(?P<username>[-_\w]+)/$', UserDetailView.as_view(), name='user_detail'),

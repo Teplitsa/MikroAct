@@ -19,7 +19,7 @@
 			
 			<ul>
 				{% for user in userprofile_list %}
-				<li>{{ user }}</li>
+				<li><a href="{% url 'user_detail' username=user.user %}">{{ user }}</a></li>
 				{% endfor %}
 			</ul>
 		</div>

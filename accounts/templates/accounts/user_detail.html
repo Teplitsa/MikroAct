@@ -22,30 +22,25 @@
 						
 				{% endif %}
 			<div class="mainCol act">
-				
-				
-				
-				
+			
 			</div>
 			<div class="mainCol comment">
-				
-				 
-				
+			
 			</div>
 		</div>
 		<div class="span4">
 			<div class="sideCol act">
-				<h1>{{ user.username }}</h1>
+				<h1>{{ user }}</h1>
 			</div>
 			<div class="sideCol members">
 				<ul>
 					{% for mikroact in user.mikroacts.all %}
-					<li>{{ mikroact.slug }}</li>
+					<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}</a></li>
 					{% endfor %}
 				</ul>
 				<ul>
 					{% for collective in user.collectives.all %}
-					<li>{{ collective.name }}</li>
+					<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
 					{% endfor %}
 				</ul>
 			</div>

@@ -19,11 +19,20 @@
 			<div class="mainCol act">
 				
 				<div class="actGallery">
-					{{ mikroact.photo }}
+					{% if mikroact.photo %}
+					<img src="/media/{{ mikroact.photo.url }}" />
+					{% else %}
+					<img src="http://placecage.com/750/400" />
+					{% endif %}
 				</div>
-				{% if user.is_authenticated %}
+				
 						<div class="actions">
-							<ul>
+							<ul class="nav nav-tabs" id="actTabs">
+							  <li class="active"><a href="#stream">Stream</a></li>
+							  <li><a href="#instruction">Instructions</a></li>
+							</ul>
+							{% if user.is_authenticated %}
+							<ul class="userAction">
 								{% if "change_mikroact" in mikroact_perms %}
 								<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit MikroAct</a></li>
 								{% endif %}
@@ -31,29 +40,25 @@
 								<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete MikroAct</a></li>
 								{% endif %}
 							</ul>
+							{% else %}
+							{% endif %}
 						</div>
-						{% else %}
-						
-				{% endif %}
-				
 			</div>
 			<div class="mainCol comment">
-				<ul class="nav nav-tabs" id="actTab">
-				  <li class="active"><a href="#stream">Stream</a></li>
-				  <li><a href="#instructions">Instructions</a></li>
-				</ul>
-				 
 				<div class="tab-content">
-					<div class="tab-pane active" id="stream">
-					</div>
-				  <div class="tab-pane" id="instructions">...</div>
+				  <div class="tab-pane active" id="stream">
+					  	{% render_comment_list for mikroact %}
+						{% if user.is_authenticated %}
+						{% render_comment_form for mikroact %}
+						{% else %}
+						<a class="userLogin" href="{% url 'user_login' %}">Log in</a> to leave a comment
+						{% endif %}
+				  </div>
+				  <div class="tab-pane" id="instruction">
+					  {{ mikroact.description }}
+				  </div>
 				</div>
-				{% render_comment_list for mikroact %}
-				{% if user.is_authenticated %}
-				{% render_comment_form for mikroact %}
-				{% else %}
-				<a href="{% url 'user_login' %}">Log in</a> to leave a comment
-				{% endif %}
+				
 			</div>
 		</div>
 		<div class="span4">

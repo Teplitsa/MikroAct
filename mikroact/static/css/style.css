@@ -2,7 +2,7 @@
 
 
 body{
-	background:#f4f4f4 url(../img/agsquare.png);
+	background:#e3e3e3;
 }
 
 
@@ -10,7 +10,7 @@ body{
 /***     PANEL      ***/
 /**********************/
 section.panel{
-	background:#353535 url(../img/bgPanel.jpg) repeat-x;
+	background:#353535;
 	height: 40px;
 }
 section.panel .userNav {
@@ -138,11 +138,13 @@ section.panel .loginLink.open {
 
 section.header{
 	background:#fff;
-	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	/*
+-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 	-ms-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+*/
 	height: auto;
 	margin-bottom: 10px;
 	padding-bottom:10px;

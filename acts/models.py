@@ -10,6 +10,7 @@ from follow import utils as follow_utils
 from follow.models import Follow
 from stream import utils as stream_utils
 from geopy import geocoders
+from thumbs import ImageWithThumbsField 
 
 from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
 
@@ -60,7 +61,7 @@ class Campaign(models.Model):
     is_private = models.BooleanField()
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
-    mikro_acts = models.ManyToManyField(MikroAct, related_name="campaigns")
+    mikro_acts = models.ManyToManyField(MikroAct, related_name='campaigns')
 
     def __unicode__(self):
         return "%s (%d mikroacts)" % (self.name, self.mikro_acts.count())
