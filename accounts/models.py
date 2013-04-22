@@ -54,3 +54,5 @@ class Collective(models.Model):
 
 utils.register_actor(User)
 utils.register_target(Collective)
+
+from .signals import *

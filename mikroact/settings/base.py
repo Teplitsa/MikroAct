@@ -128,7 +128,7 @@ ANONYMOUS_USER_ID = -1
 DEFAULT_PERMISSIONS = [
     # users can always change & delete their own content...
     'acts.add_mikroact',
-    'acts.add_list',
+    'acts.add_campaign',
     'accounts.add_collective',
 ]
 

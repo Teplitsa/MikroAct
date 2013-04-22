@@ -10,24 +10,28 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         db.delete_table('acts_list_mikro_acts')
         db.rename_table('acts_list', 'acts_campaign')
+        db.rename_column('follow_follow', 'target_list_id', 'target_campaign_id')
+
         db.create_table(u'acts_campaign_mikro_acts', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('campaign', models.ForeignKey(orm[u'acts.campaign'], null=False)),
             ('mikroact', models.ForeignKey(orm[u'acts.mikroact'], null=False))
         ))
+        db.send_create_signal('acts', ['Campaign'])
         db.create_unique(u'acts_campaign_mikro_acts', ['campaign_id', 'mikroact_id'])
 
 
     def backwards(self, orm):
         db.delete_table('acts_campaign_mikro_acts')
 
-        db.rename_table('acts_list', 'acts_campaign')
+        db.rename_table('acts_campaign', 'acts_list')
 
         db.create_table(u'acts_list_mikro_acts', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('list', models.ForeignKey(orm[u'acts.list'], null=False)),
             ('mikroact', models.ForeignKey(orm[u'acts.mikroact'], null=False))
         ))
+        db.send_create_signal('acts', ['List'])
         db.create_unique(u'acts_list_mikro_acts', ['list_id', 'mikroact_id'])
 
 

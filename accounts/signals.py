@@ -8,8 +8,8 @@ from guardian.shortcuts import assign
 
 @receiver(post_save, sender=User)
 def set_default_permissions(sender, instance, created, **kwargs):
-	if not created:
-		return
+    if not created and not settings.DEBUG:
+        return
 
-	for perm in settings.DEFAULT_PERMISSIONS:
-		assign(perm, instance)
+    for perm in settings.DEFAULT_PERMISSIONS:
+        p = assign(perm, instance)
