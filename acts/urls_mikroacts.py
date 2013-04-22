@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, include, url
 
 from .views import MikroActListView, MikroActCreateView, MikroActUpdateView, \
-        MikroActDeleteView, MikroActDetailView
+    MikroActDeleteView, MikroActDetailView, MikroActCampaignView
 
 urlpatterns = patterns('',
     url(r'^$', MikroActListView.as_view(), name='mikroact_list'),
@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'(?P<slug>[-_\w]+)/edit/$', MikroActUpdateView.as_view(), name='mikroact_edit'),
     url(r'(?P<slug>[-_\w]+)/delete/$', MikroActDeleteView.as_view(), name='mikroact_delete'),
     url(r'(?P<slug>[-_\w]+)$', MikroActDetailView.as_view(), name='mikroact_detail'),
+    url(r'(?P<slug>[-_\w]+)/campaign/$', MikroActCampaignView.as_view(), name='mikroact_campaign_add'),
 )

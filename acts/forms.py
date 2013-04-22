@@ -25,3 +25,6 @@ class CampaignForm(forms.ModelForm):
             "slug": forms.TextInput(attrs={"data-slug-from": "name"}),
         }
 
+
+class AddToCampaignForm(forms.Form):
+    campaign = forms.ModelChoiceField(queryset=Campaign.objects.all())

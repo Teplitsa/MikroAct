@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView, SingleObjectMixin
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.shortcuts import get_object_or_404
 
 from follow import utils as follow_utils
 from stream import utils as stream_utils
@@ -12,7 +13,7 @@ from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from guardian.shortcuts import assign
 
 from .models import Campaign, MikroAct
-from .forms import MikroActForm, CampaignForm
+from .forms import MikroActForm, CampaignForm, AddToCampaignForm
 
 
 class CampaignListView(ListView):
@@ -126,3 +127,25 @@ class MikroActDeleteView(PermissionRequiredMixin, DeleteView):
 
 class MikroActDetailView(DetailView):
     model = MikroAct
+
+    def get_context_data(self, **kwargs):
+        kwargs.setdefault('campaign_form', AddToCampaignForm())
+        return super(MikroActDetailView, self).get_context_data(**kwargs)
+
+
+class MikroActCampaignView(DetailView, FormView):
+    model = MikroAct
+    form_class = AddToCampaignForm
+
+    def get(self, *args, **kwargs):
+        return HttpResponseRedirect(reverse('mikroact_detail', kwargs={
+            'slug': kwargs['slug']
+        }))
+
+    def form_valid(self, form):
+        self.object = self.get_object()
+
+        campaign = form.cleaned_data.get('campaign')
+        campaign.mikro_acts.add(self.object)
+
+        return self.get(slug=self.object.slug)

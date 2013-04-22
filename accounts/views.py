@@ -80,7 +80,6 @@ class UserRegisterView(CreateView):
         # FIXME send "activate" email here
 
         return HttpResponseRedirect(self.get_success_url())
-        
 
 
 class UserRegisterCompleteView(TemplateView):
@@ -135,7 +134,4 @@ class UserUpdateView(PermissionRequiredMixin, UpdateView):
     		
     		return HttpResponseRedirect(self.get_success_url())
     	
-    	# import pdb; pdb.set_trace()
     	return self.form_invalid(form)
-    	
-    
