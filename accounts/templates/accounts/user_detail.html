@@ -26,16 +26,16 @@
 		</div>
 		<div class="span4">
 			<div class="sideCol act">
-				<h1>{{ user }}</h1>
+				<h1>{{ userprofile.user }}</h1>
 			</div>
 			<div class="sideCol members">
 				<ul>
-					{% for mikroact in user.mikroacts.all %}
+					{% for mikroact in userprofile.user.mikroacts.all %}
 					<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}</a></li>
 					{% endfor %}
 				</ul>
 				<ul>
-					{% for collective in user.collectives.all %}
+					{% for collective in userprofile.user.collectives.all %}
 					<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
 					{% endfor %}
 				</ul>
