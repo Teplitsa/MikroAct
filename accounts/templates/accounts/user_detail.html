@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load guardian_tags %}
 
-{% block title %}{{ block.super }}: {{ mikroact.title }}{% endblock %}
+{% block title %}{{ block.super }}: {{ user }}{% endblock %}
 
 {% block content %}
 {% get_obj_perms user for userprofile as "userprofile_perms" %}
@@ -15,17 +15,13 @@
 								{% if "change_userprofile" in userprofile_perms %}
 								<li><a href="{% url "user_edit" username=userprofile.user.username %}">Edit Profile</a></li>
 								{% endif %}
-								
 							</ul>
 						</div>
 						{% else %}
-						
 				{% endif %}
 			<div class="mainCol act">
-			
 			</div>
 			<div class="mainCol comment">
-			
 			</div>
 		</div>
 		<div class="span4">

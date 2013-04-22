@@ -9,6 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse
 
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from guardian.shortcuts import assign
 
 from .models import Collective, UserProfile
 from .forms import UserForm, UserProfileForm, RegistrationForm
