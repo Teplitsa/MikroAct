@@ -83,7 +83,8 @@ INSTALLED_APPS = (
     'follow',
     'fluent_comments',
     'crispy_forms',
-    'django.contrib.comments'
+    'django.contrib.comments',
+    'micawber.contrib.mcdjango'
 )
 
 STREAM_VERBS = (

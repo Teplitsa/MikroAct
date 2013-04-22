@@ -17,6 +17,7 @@
   This should give you consistent dates across all views.
 {% endcomment %}
 {% load i18n %}
+{% load micawber_tags %}
         <div{% if preview %} id="comment-preview"{% else %} id="c{{ comment.id }}"{% endif %} class="comment-item">
           {% if preview %}<h3>{% trans "Preview of your comment" %}</h3>{% endif %}
           {% spaceless %}
@@ -29,5 +30,5 @@
             <span class="comment-date">{% blocktrans with submit_date=comment.submit_date %}on {{ submit_date }}{% endblocktrans %}</span>
             {% if not comment.is_public %}<span class="comment-moderated-flag">({% trans "moderated" %})</span>{% endif %}
 
-            <div class="comment-text">{{ comment.comment|linebreaks }}</div>
+            <div class="comment-text">{{ comment.comment|linebreaks|oembed:"600x600" }}</div>
         </div>
