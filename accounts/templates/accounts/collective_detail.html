@@ -38,7 +38,7 @@
 			<div class="sideCol members">
 				<ul>
 					{% for member in collective.members.all %}
-					<li>{{ member }}</li>
+					<li><a href="{% url 'user_detail' username=member %}">{{ member }}</a></li>
 					{% endfor %}
 				</ul>
 			

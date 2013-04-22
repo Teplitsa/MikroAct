@@ -20,7 +20,7 @@
 				
 				<div class="actGallery">
 					{% if mikroact.photo %}
-					<img src="/media/{{ mikroact.photo.url }}" />
+					<img src="{{ mikroact.photo.url }}" width="750" />
 					{% else %}
 					<img src="http://placecage.com/750/400" />
 					{% endif %}

@@ -108,6 +108,8 @@
 .actGallery{
 	text-align: center;
 	background:#353535;
+	height:400px;
+	overflow:hidden;
 }
 
 /*ACTIONS */
