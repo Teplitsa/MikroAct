@@ -21,7 +21,7 @@
 			<div id="tileWrapper" class="tiles">
 				<ul class="row">
 					{% for mikroact in mikroact_list %}
-					<li class="{{ mikroact.status }} span3 tile"><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}<br />{{ mikroact.location_address }}</a></li>
+					<li class="{{ mikroact.status }} span3 tile"><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}<br /></a></li>
 					{% endfor %}
 				</ul>
 			</div>

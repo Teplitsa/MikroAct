@@ -5,6 +5,16 @@
 {% block content %}
 
 <div class="container">
-	<p>The old Homepage will return soon</p>
+	<div class="mapContainer"></div>
+				<ul>
+					{% for mikroact in user.mikroacts.all %}
+					<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}</a></li>
+					{% endfor %}
+				</ul>
+				<ul>
+					{% for collective in user.collectives.all %}
+					<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
+					{% endfor %}
+				</ul>
 </div>
 {% endblock content %}

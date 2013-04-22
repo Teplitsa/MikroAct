@@ -15,7 +15,9 @@ class UserProfile(models.Model):
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
     location_address = DefaultCharField(blank=True)
-
+    
+    twitter = DefaultCharField(blank=True)
+    
     def __unicode__(self):
         return "profile for %s" % self.user.username
 

@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+{% load guardian_tags %}
 {% load comments %}
 {% block title %}{{ block.super }}: {{ collective.name }}{% endblock %}
 {% block extra_head %}
@@ -7,6 +9,8 @@
 	<script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
 {% endblock %}
 {% block content %}
+
+{% get_obj_perms user for collective as "collective_perms" %}
 <div class="container">
 	<div class="row">
 		<div class="span4">
@@ -39,6 +43,11 @@
 				<ul>
 					{% for member in collective.members.all %}
 					<li><a href="{% url 'user_detail' username=member %}">{{ member }}</a></li>
+						<ul>
+							{% for mikroact in member.userprofile.user.mikroacts.all %}
+							<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}</a></li>
+							{% endfor %}
+						</ul>
 					{% endfor %}
 				</ul>
 			
@@ -46,20 +55,13 @@
 		</div>
 		<div class="span8">
 			<div class="mainCol act">
-				{% if user.is_authenticated %}
 						<div class="actions">
 							<ul>
 								{% if "change_collective" in collective_perms %}
-								<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit</a></li>
-								{% endif %}
-								{% if "delete_collective" in collective_perms %}
-								<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete</a></li>
+								<li><a href="{% url "collective_edit" slug=collective.slug %}">Edit</a></li>
 								{% endif %}
 							</ul>
 						</div>
-						{% else %}
-						
-				{% endif %}
 			</div>
 			<div class="mainCol comment">
 				<div class="tab-content">
