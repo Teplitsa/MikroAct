@@ -37,6 +37,15 @@ Getting started
 
 6. Navigate to `http://localhost:8000`
 
+Updating
+--------
+
+After every `git pull`, run
+
+      $ pip install -r requirements.txt
+      $ django-admin.py syncdb --migrate
+
+
 Contributing
 --------
 
