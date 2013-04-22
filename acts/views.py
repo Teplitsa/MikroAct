@@ -25,10 +25,6 @@ class CampaignCreateView(PermissionRequiredMixin, CreateView):
 
     form_class = CampaignForm
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super(CampaignCreateView, self).form_valid(form)
-
     # guardian's PermissionRequiredMixin doesn't like CreateView, which doesn't
     # indicate that there is no associated model (yet) very meaningfully
     object = None
@@ -36,22 +32,21 @@ class CampaignCreateView(PermissionRequiredMixin, CreateView):
         return None
 
     def form_valid(self, form):
-        _list = form.save(commit=False)
-        _list.author = self.request.user
-        _list.save()
+        campaign = form.save(commit=False)
+        campaign.author = self.request.user
+        campaign.save()
 
-        self.object = _list
+        self.object = campaign
 
-        # TODO: see below
-        assign("change_list", self.request.user, _list)
-        assign("delete_list", self.request.user, _list)
+        assign("change_campaign", self.request.user, campaign)
+        assign("delete_campaign", self.request.user, campaign)
 
         return HttpResponseRedirect(self.get_success_url())
 
 
 class CampaignUpdateView(PermissionRequiredMixin, UpdateView):
     model = Campaign
-    permission_required = "acts.change_list"
+    permission_required = "acts.change_campaign"
     form_class = CampaignForm
 
 
@@ -67,7 +62,7 @@ class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):
 
         follow_utils.follow(request.user, self.object)
 
-        return HttpResponseRedirect(reverse("list_detail", 
+        return HttpResponseRedirect(reverse("campaign_detail", 
                                     kwargs={"slug": self.object.slug}))
 
     def head(self, request, *args, **kwargs):                                   
