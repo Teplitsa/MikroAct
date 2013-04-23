@@ -430,7 +430,7 @@ section.footer{
 	z-index:1005;
 	min-height: 50px;
 	line-height: 40px;
-	background:#353535 url(../img/bgPanel.jpg) repeat-x;
+	background:#353535;
 	font-size: 12px;
 	color:#999;
 	
@@ -523,5 +523,13 @@ section.footer ul li{
 
 
 
+form .errorlist{
+	margin:0;
+}
+form .errorlist li{
+	color:#b93939;
+	font-size:11px;
+	list-style:none;
+}
 
 

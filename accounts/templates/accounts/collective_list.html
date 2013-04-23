@@ -5,12 +5,7 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="span3">
-			<div class="sideCol">
-				
-			</div>
-		</div>
-		<div class="span9">
+		<div class="span12">
 			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
@@ -18,15 +13,19 @@
 					</ul>
 				</div>
 			</div>
-			<div id="tileWrapper" class="tiles">
-				<ul class="row">
-					{% for collective in collective_list %}
-					<li class="span3 tile"><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
-					{% endfor %}
-				</ul>
-			</div>
-			
 		</div>
+		<ul class="tiles">
+		{% for collective in collective_list %}
+			<li class="span3">
+				<div class="collectiveTile">
+					<div class="tilePhoto">{% if collective.photo %}<img src="{{ collective.photo.url }}" height="160"/>{% endif %}</div>
+					<a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a>
+				</div>
+			</li>
+		{% endfor %}
+		</ul>
+			
+			
 	</div>
 </div>
 {% endblock content %}

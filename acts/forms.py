@@ -20,7 +20,7 @@ class MikroActForm(forms.ModelForm):
 class CampaignForm(forms.ModelForm):
     class Meta:
         model = Campaign
-        fields = ("name", "slug", "is_private")
+        fields = ("name", "slug", "description", "is_private")
         widgets = {
             "slug": forms.TextInput(attrs={"data-slug-from": "name"}),
         }

@@ -43,4 +43,4 @@ class RegistrationForm(UserForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('location_address', 'twitter')
+        fields = ("location_address", "twitter", "photo")

@@ -7,34 +7,22 @@
 {% get_obj_perms user for userprofile as "userprofile_perms" %}
 
 <div class="container">
-	<div class="row">
-		<div class="span8">
-			{% if user.is_authenticated %}
-						<div class="actions">
-							<ul>
-								{% if "change_userprofile" in userprofile_perms %}
-								<li><a href="{% url "user_edit" username=userprofile.user.username %}">Edit Profile</a></li>
-								{% endif %}
-							</ul>
-						</div>
-						{% else %}
-				{% endif %}
-			<div class="mainCol act">
+	<div class="row-fluid">
+		
+		<div class="span3">
+			<div class="sideCol userPhoto">
+					{% if userprofile.photo %}
+					<img src="{{ userprofile.photo.url }}" title="{{ userprofile.user }}"/>
+					{% else %}
+					<div class="photoEmpty">{% if "change_userprofile" in userprofile_perms %}<a href="{% url "user_edit" username=userprofile.user.username %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
+					{% endif %}
 			</div>
-			<div class="mainCol comment">
-			</div>
-		</div>
-		<div class="span4">
 			<div class="sideCol act">
 				<h1>{{ userprofile.user }}</h1>
-				<p>{{ userprofile.twitter }}</p>
+				<p><i class="icon-twitter"></i> {{ userprofile.twitter }}</p>
 			</div>
 			<div class="sideCol members">
-				<ul>
-					{% for mikroact in userprofile.user.mikroacts.all %}
-					<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}</a></li>
-					{% endfor %}
-				</ul>
+				
 				<ul>
 					{% for collective in userprofile.user.collectives.all %}
 					<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
@@ -44,7 +32,36 @@
 			<div class="sideCol author">
 			</div>
 		</div>
-		
+		<div class="span9">
+			{% if "change_userprofile" in userprofile_perms %}
+			<div class="mainCol act">
+				<div class="actions">
+					
+					<div class="dropdown userAction pull-right">
+					  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					    <li><a href="{% url "user_edit" username=userprofile.user.username %}"><i class="icon-edit"></i>Edit Profile</a></li>
+					  </ul>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			<ul class="row-fluid tiles">
+				{% for mikroact in userprofile.user.mikroacts.all %}
+				<li class="span4">
+					<div class="collectiveTile">
+						<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+						<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
+					</div>
+					<div class="tileActions">
+						
+					</div>
+					
+				</li>
+				{% endfor %}
+			</ul>
+			
+		</div>
 	</div>
 </div>
 {% endblock content %}

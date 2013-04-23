@@ -16,6 +16,7 @@ class UserProfile(models.Model):
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
     location_address = DefaultCharField(blank=True)
     
+    photo = models.ImageField(upload_to='user', null=True, blank=True)
     twitter = DefaultCharField(blank=True)
     
     def __unicode__(self):
@@ -37,9 +38,12 @@ class Collective(models.Model):
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
     location_address = DefaultCharField(blank=True)
-
+    
     description = models.TextField()
-
+    twitter = DefaultCharField(blank=True)
+    email = DefaultCharField(blank=True)
+    
+    
     photo = models.ImageField(upload_to='collective', null=True, blank=True)
 
     members = models.ManyToManyField(User, related_name='collectives',

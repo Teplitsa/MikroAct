@@ -12,23 +12,22 @@
 
 {% get_obj_perms user for collective as "collective_perms" %}
 <div class="container">
-	<div class="row">
-		<div class="span4">
-			<div class="sideCol collective">
-				<div class="collectiveTitle">
+	<div class="row-fluid">
+		<div class="span3 collectiveCol">
+			<div class="sideCol collectivePhoto">
 					{% if collective.photo %}
-							<img src="{{ collective.photo }}">
-						{% else %}
-							<img src="http://placecage.com/75/75">
-						{% endif %}	
+					<img src="{{ collective.photo.url }}" height="220" title="{{ collective.name }}"/>
+					{% else %}
+					<div class="photoEmpty">{% if "change_collective" in collective_perms %}<a href="{% url "collective_edit" slug=collective.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
+					{% endif %}
+			</div>
+			<div class="sideCol collective">
+				<div class="collectiveTitle">	
 					<div class="collectiveInfo">
-						
 						<h2>{{ collective.name }}</h2>
 						<ul>
-							<li><i class="icon-envelope"></i>Email</li>
-							<li><i class="icon-facebook"></i></li>
-							<li><i class="icon-twitter"></i></li>
-							<li><i class="icon-linkedin-sign"></i></li>
+							{% if collective.email %}<li><a href="mailto:{{ collective.email }}"><i class="icon-envelope"></i>Email</a></li>{% endif %}
+							{% if collective.twitter %}<li><a href="{{ collective.twitter }}" target="_blank"><i class="icon-twitter"></i></a></li>{% endif %}	
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -39,30 +38,47 @@
 				<p>{{ collective.description }}</p>
 			
 			</div>
-			<div class="sideCol members">
-				<ul>
-					{% for member in collective.members.all %}
-					<li><a href="{% url 'user_detail' username=member %}">{{ member }}</a></li>
-						<ul>
-							{% for mikroact in member.userprofile.user.mikroacts.all %}
-							<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.slug }}</a></li>
-							{% endfor %}
-						</ul>
-					{% endfor %}
-				</ul>
+			{% for member in collective.members.all %}
+			<a href="{% url 'user_detail' username=member %}"><div class="sideCol author">
+				{% if member.userprofile.photo %}<img src="{{ member.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
+				<h4>{{ member }}</h4>
+				<p>{{ member.userprofile.twitter }}</p>
+			</div></a>
+			{% endfor %}
 			
-			</div>
 		</div>
-		<div class="span8">
+		<div class="span9">
+			{% if "change_collective" in collective_perms %}
 			<div class="mainCol act">
-						<div class="actions">
-							<ul>
-								{% if "change_collective" in collective_perms %}
-								<li><a href="{% url "collective_edit" slug=collective.slug %}">Edit</a></li>
-								{% endif %}
-							</ul>
-						</div>
+				<div class="actions">
+					
+					<div class="dropdown userAction pull-right">
+					  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					    <li><a href="{% url "collective_edit" slug=collective.slug %}"><i class="icon-edit"></i>Edit Collective</a></li>
+					  </ul>
+					</div>
+				</div>
 			</div>
+			{% endif %}
+			<ul class="row-fluid tiles">
+				{% for member in collective.members.all %}
+							{% for mikroact in member.userprofile.user.mikroacts.all %}
+							<li class="span4">
+								<div class="collectiveTile">
+									<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+									<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
+								</div>
+								<div class="tileActions">
+									
+								</div>
+								
+							</li>
+							{% endfor %}
+						
+				{% endfor %}
+			</ul>
+			
 			<div class="mainCol comment">
 				<div class="tab-content">
 				  <div class="tab-pane active" id="stream">

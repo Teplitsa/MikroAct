@@ -18,32 +18,23 @@
 	<div class="row">
 		<div class="span8">
 			<div class="mainCol act">
-				
-				<div class="actGallery">
-					{% if mikroact.photo %}
-					<img src="{{ mikroact.photo.url }}" width="750" />
-					{% else %}
-					<img src="http://placecage.com/750/400" />
+				<div class="actions">
+					<ul class="nav nav-tabs" id="actTabs">
+					  <li class="active"><a href="#stream">Stream</a></li>
+					  <li><a href="#instruction">Instructions</a></li>
+					</ul>
+					{% if "change_mikroact" in mikroact_perms %}
+					<div class="dropdown userAction pull-right">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					    	<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-edit"></i>Edit MikroAct</a></li>
+					    	{% if "delete_mikroact" in mikroact_perms %}
+					    	<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}"><i class="icon-remove"></i>Delete MikroAct</a></li>
+					    	{% endif %}
+					    </ul>
+					</div>
 					{% endif %}
 				</div>
-				
-						<div class="actions">
-							<ul class="nav nav-tabs" id="actTabs">
-							  <li class="active"><a href="#stream">Stream</a></li>
-							  <li><a href="#instruction">Instructions</a></li>
-							</ul>
-							{% if user.is_authenticated %}
-							<ul class="userAction">
-								{% if "change_mikroact" in mikroact_perms %}
-								<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}">Edit MikroAct</a></li>
-								{% endif %}
-								{% if "delete_mikroact" in mikroact_perms %}
-								<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}">Delete MikroAct</a></li>
-								{% endif %}
-							</ul>
-							{% else %}
-							{% endif %}
-						</div>
 			</div>
 			<div class="mainCol comment">
 				<div class="tab-content">
@@ -59,14 +50,22 @@
 						{{ mikroact.description }}
 					</div>
 				</div>
-				
 			</div>
 		</div>
-		<div class="span4">
+		
+		<div class="span4 mikroactCol">
+			<div class="sideCol actPhoto">
+					{% if mikroact.photo %}
+					<img src="{{ mikroact.photo.url }}" title="{{ mikroact.title }}"/>
+					{% else %}
+					<div class="photoEmpty">{% if "change_mikroact" in mikroact_perms %}<a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
+					{% endif %}
+			</div>
 			<div class="sideCol act">
+				
 				<h1>{{ mikroact.title }}</h1>
+				<p class="location">{{ mikroact.location_address }}</p>
 				<p class="desc">{{ mikroact.description }}</p>
-				<p>{{ mikroact.location_address }}</p>
 				<p class="status">Campaigns:</p>
 				<ul>
 					{% for campaign in mikroact.campaigns.all %}
@@ -79,9 +78,11 @@
 					<button type="submit" class="btn btn-submit">Add</button>
 			</div>
 			
-			<div class="sideCol author">
-				<p><a href="{% url 'user_detail' username=mikroact.author %}">{{ mikroact.author }}</a></p>
-			</div>
+			<a href="{% url 'user_detail' username=mikroact.author %}"><div class="sideCol author">
+				{% if mikroact.author.userprofile.photo %}<img src="{{ mikroact.author.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
+				<h4>{{ mikroact.author }}</h4>
+				<p>{{ mikroact.author.userprofile.twitter }}</p>
+			</div></a>
 		</div>
 		
 	</div>

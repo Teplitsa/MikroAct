@@ -1,16 +1,12 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}{{ block.super }}: Mikroacts{% endblock %}
 
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="span3">
-			<div class="sideCol">
-				
-			</div>
-		</div>
-		<div class="span9">
+		<div class="span12">
 			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
@@ -18,16 +14,20 @@
 					</ul>
 				</div>
 			</div>
-			<div id="tileWrapper" class="tiles">
-				<ul class="row">
-					{% for mikroact in mikroact_list %}
-					<li class="{{ mikroact.status }} span3 tile"><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}<br /></a></li>
-					{% endfor %}
-				</ul>
-			</div>
-			
 		</div>
-		
+		<ul class="tiles">
+		{% for mikroact in mikroact_list %}
+			<li class="span3">
+				<div class="collectiveTile">
+					<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+					<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
+				</div>
+				<div class="tileActions">
+					
+				</div>
+			</li>
+		{% endfor %}
+		</ul>
 	</div>
 </div>
 {% endblock content %}

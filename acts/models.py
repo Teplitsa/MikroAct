@@ -58,7 +58,7 @@ class Campaign(models.Model):
     name = DefaultCharField()
     author = models.ForeignKey(User)
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
-
+    description = models.TextField(blank=True)
     is_private = models.BooleanField()
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
