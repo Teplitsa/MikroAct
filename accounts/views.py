@@ -12,7 +12,7 @@ from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from guardian.shortcuts import assign
 
 from .models import Collective, UserProfile
-from .forms import UserForm, UserProfileForm, RegistrationForm
+from .forms import UserForm, UserProfileForm, RegistrationForm, CollectiveForm
 
 
 class CollectiveListView(ListView):
@@ -23,6 +23,7 @@ class CollectiveCreateView(PermissionRequiredMixin, CreateView):
     permission_required = "accounts.add_collective"
     model = Collective
 
+    form_class = CollectiveForm
 
     # guardian's PermissionRequiredMixin doesn't like CreateView, which doesn't
     # indicate that there is no associated model (yet) very meaningfully
@@ -43,6 +44,7 @@ class CollectiveCreateView(PermissionRequiredMixin, CreateView):
 
 
 class CollectiveUpdateView(UpdateView):
+    permission_required = "accounts.change_collective"
     model = Collective
 
 

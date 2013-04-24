@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import UserProfile
+from .models import UserProfile, Collective
 
 
 class UserForm(forms.ModelForm):
@@ -44,3 +44,13 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ("location_address", "twitter", "photo")
+
+
+class CollectiveForm(forms.ModelForm):
+    class Meta:
+        model = Collective
+        fields = ('name', 'slug', 'description', 'location_address', 'twitter',
+                  'email', 'photo', 'members')
+        widgets = {
+            "slug": forms.TextInput(attrs={"data-slug-from": "name"}),
+        }
