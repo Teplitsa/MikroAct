@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load guardian_tags %}
+{% load follow_tags %}
 {% block title %}{{ block.super }}: {{ campaign.name }}{% endblock %}
 
 {% block content %}
@@ -16,7 +17,15 @@
 				{% endfor %}
 			</ul>
 			<h2>{{ campaign.follow_campaign.count }} Followers</h2>
-			<a class="btn btn-inverse" href="{% url "campaign_follow" slug=campaign.slug %}">Follow</a>
+			<a class="btn btn-inverse" 
+				{% if not user|is_following:campaign %}
+				href="{% url 'campaign_follow' slug=campaign.slug %}">
+				Follow
+				{% else %}
+				href="{% url 'campaign_unfollow' slug=campaign.slug %}">
+				Unfollow
+				{% endif %}
+			</a>
 			<ul>
 				{% for follow in campaign.follow_campaign.all %}
 				<li>{{ follow.user }}</li>

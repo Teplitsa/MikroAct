@@ -81,6 +81,15 @@ class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):
     def put(self, request, *args, **kwargs):                                    
         return self.post(request, *args, **kwargs)    
 
+class CampaignUnFollowView(CampaignFollowView):
+    def post(self, request, *args,  **kwargs):
+        self.object = self.get_object()
+
+        follow_utils.unfollow(request.user, self.object)
+
+        return HttpResponseRedirect(reverse("campaign_detail", 
+                                    kwargs={"slug": self.object.slug}))
+
 
 class MikroActListView(ListView):
     model = MikroAct
