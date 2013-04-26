@@ -81,5 +81,6 @@ class Campaign(models.Model):
 
 stream_utils.register_target(MikroAct)
 stream_utils.register_target(Campaign)
+stream_utils.register_action_object(Campaign)  # for adding mikro acts
 
 follow_utils.register(Campaign)

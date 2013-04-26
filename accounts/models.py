@@ -1,6 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.comments.models import Comment
 from django.db import models
 from django.utils import timezone
 
@@ -8,6 +9,7 @@ from follow.models import Follow
 from stream import utils
 
 from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User,
@@ -60,5 +62,6 @@ class Collective(models.Model):
 
 utils.register_actor(User)
 utils.register_target(Collective)
+utils.register_action_object(Comment)
 
 from .signals import *

@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from guardian.shortcuts import assign
+from stream import utils as stream_utils
 
 from .models import Collective, UserProfile
 from .forms import UserForm, UserProfileForm, RegistrationForm, CollectiveForm
@@ -32,10 +33,11 @@ class CollectiveCreateView(PermissionRequiredMixin, CreateView):
         return None
 
     def form_valid(self, form):
-        collective = form.save(commit=False)
-        collective.save()
+        collective = form.save()
 
         self.object = collective
+
+        stream_utils.action.send(self.request.user, 'created', self.object)
 
         assign("change_collective", self.request.user, collective)
         assign("delete_collective", self.request.user, collective)
@@ -46,6 +48,15 @@ class CollectiveCreateView(PermissionRequiredMixin, CreateView):
 class CollectiveUpdateView(UpdateView):
     permission_required = "accounts.change_collective"
     model = Collective
+
+    def form_valid(self, form):
+        collective = form.save()
+
+        self.object = collective
+
+        stream_utils.action.send(self.request.user, 'created', self.object)
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class CollectiveDetailView(DetailView):

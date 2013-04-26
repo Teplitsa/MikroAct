@@ -76,6 +76,7 @@
 					{% csrf_token %}
 					{{ campaign_form|crispy }}
 					<button type="submit" class="btn btn-submit">Add</button>
+				</form>
 			</div>
 			
 			<a href="{% url 'user_detail' username=mikroact.author %}"><div class="sideCol author">
