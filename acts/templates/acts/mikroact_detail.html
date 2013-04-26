@@ -52,7 +52,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div class="span4 mikroactCol">
 			<div class="sideCol actPhoto">
 					{% if mikroact.photo %}
@@ -62,7 +61,6 @@
 					{% endif %}
 			</div>
 			<div class="sideCol act">
-				
 				<h1>{{ mikroact.title }}</h1>
 				<p class="location">{{ mikroact.location_address }}</p>
 				<p class="desc">{{ mikroact.description }}</p>
@@ -78,14 +76,8 @@
 					<button type="submit" class="btn btn-submit">Add</button>
 				</form>
 			</div>
-			
-			<a href="{% url 'user_detail' username=mikroact.author %}"><div class="sideCol author">
-				{% if mikroact.author.userprofile.photo %}<img src="{{ mikroact.author.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
-				<h4>{{ mikroact.author }}</h4>
-				<p>{{ mikroact.author.userprofile.twitter }}</p>
-			</div></a>
+			{% include "inc/userPane.html" with profile=mikroact.author.userprofile %}
 		</div>
-		
 	</div>
 </div>
 {% endblock content %}

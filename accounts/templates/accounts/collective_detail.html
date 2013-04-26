@@ -36,16 +36,10 @@
 				<p>{{ collective.location_address }}</p>
 				<h4>About</h4>
 				<p>{{ collective.description }}</p>
-			
 			</div>
 			{% for member in collective.members.all %}
-			<a href="{% url 'user_detail' username=member %}"><div class="sideCol author">
-				{% if member.userprofile.photo %}<img src="{{ member.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
-				<h4>{{ member }}</h4>
-				<p>{{ member.userprofile.twitter }}</p>
-			</div></a>
+				{% include "inc/userPane.html" with profile=member.userprofile %}
 			{% endfor %}
-			
 		</div>
 		<div class="span9">
 			{% if "change_collective" in collective_perms %}
