@@ -105,6 +105,8 @@ class UserRegisterView(CreateView):
         # user.is_active = False
 
         user.save()
+        user_profile = UserProfile(user=user)
+        user_profile.save()
 
         user.backend='django.contrib.auth.backends.ModelBackend'
         login(self.request, user)
