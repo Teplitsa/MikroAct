@@ -8,7 +8,6 @@
 
 <div class="container">
 	<div class="row-fluid">
-		
 		<div class="span3">
 			<div class="sideCol userPhoto">
 					{% if userprofile.photo %}
@@ -22,7 +21,6 @@
 				<p><i class="icon-twitter"></i> {{ userprofile.twitter }}</p>
 			</div>
 			<div class="sideCol members">
-				
 				<ul>
 					{% for collective in userprofile.user.collectives.all %}
 					<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
@@ -36,7 +34,6 @@
 			{% if "change_userprofile" in userprofile_perms %}
 			<div class="mainCol act">
 				<div class="actions">
-					
 					<div class="dropdown userAction pull-right">
 					  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -56,11 +53,9 @@
 					<div class="tileActions">
 						
 					</div>
-					
 				</li>
 				{% endfor %}
 			</ul>
-			
 		</div>
 	</div>
 </div>
