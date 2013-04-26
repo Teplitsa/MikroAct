@@ -1,5 +1,6 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.list import ListView
@@ -7,6 +8,7 @@ from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 
 from follow import utils as follow_utils
+from stream.models import Action
 from stream import utils as stream_utils
 from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from guardian.shortcuts import assign
@@ -60,8 +62,16 @@ class CampaignUpdateView(PermissionRequiredMixin, UpdateView):
 
         return HttpResponseRedirect(self.get_success_url())
 
+
 class CampaignDetailView(DetailView):
     model = Campaign
+
+    def get_context_data(self, **kwargs):
+        kwargs['stream'] = Action.objects.filter(
+            Q(target_campaign=self.object) |
+            Q(target_mikroact__in=self.object.mikro_acts.all())
+        ).order_by('-datetime')
+        return super(CampaignDetailView, self).get_context_data(**kwargs)
 
 
 class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):

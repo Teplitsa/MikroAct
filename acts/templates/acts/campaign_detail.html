@@ -1,47 +1,73 @@
 {% extends "base.html" %}
 {% load guardian_tags %}
 {% load follow_tags %}
+{% load stream_tags %}
 {% block title %}{{ block.super }}: {{ campaign.name }}{% endblock %}
 
 {% block content %}
 {% get_obj_perms user for campaign as "campaign_perms" %}
 <div class="container">
-	<div class="row">
-		<div class="span4">
+	<div class="row-fluid">
+		<div class="span3">
 			<div class="sideCol campaign">
-			<h1>{{ campaign }}</h1>
-			<h2>{{ campaign.mikro_acts.count }} MikroActs</h2>
-			<ul>
-				{% for mikroact in campaign.mikro_acts.all %}
-				<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact }}</a></li>
-				{% endfor %}
-			</ul>
-			<h2>{{ campaign.follow_campaign.count }} Followers</h2>
-			<a class="btn btn-inverse" 
-				{% if not user|is_following:campaign %}
-				href="{% url 'campaign_follow' slug=campaign.slug %}">
-				Follow
-				{% else %}
-				href="{% url 'campaign_unfollow' slug=campaign.slug %}">
-				Unfollow
-				{% endif %}
-			</a>
-			<ul>
-				{% for follow in campaign.follow_campaign.all %}
-				<li>{{ follow.user }}</li>
-				{% endfor %}
-			</ul>
-			<ul class="userAction">
-				{% if "change_campaign" in campaign_perms %}
-				<li><a href="{% url "campaign_edit" slug=campaign.slug %}">Edit</a></li>
-				{% endif %}	
-			</ul>
-				
-				
-			</ul>
+				<h1>{{ campaign.name }}</h1>
+				<h2>{{ campaign.follow_campaign.count }} Follower{{ campaign.follow_campaign.count|pluralize }}</h2>
+				<a class="btn btn-inverse" 
+					{% if not user|is_following:campaign %}
+					href="{% url 'campaign_follow' slug=campaign.slug %}">
+					Follow
+					{% else %}
+					href="{% url 'campaign_unfollow' slug=campaign.slug %}">
+					Unfollow
+					{% endif %}
+				</a>
 			</div>
+			{% for follow in campaign.follow_campaign.all %}
+				{% include "inc/userPane.html" with profile=follow.user.userprofile %}
+			{% endfor %}
 		</div>
-		<div class="span8"></div>
+		<div class="span9">
+			<div class="mainCol act">
+				<div class="actions">
+					<ul class="nav nav-tabs" id="actTabs">
+					  <li class="active"><a href="#stream">Stream</a></li>
+					</ul>
+					{% if "change_campaign" in campaign_perms %}
+					<div class="dropdown userAction pull-right">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+							<li><a href="{% url "campaign_edit" slug=campaign.slug %}">Edit</a></li>
+						</ul>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="mainCol comment">
+				<div class="tab-content">
+					<div class="tab-pane active" id="stream">
+						<ul>
+							{% for action in stream %}
+							<li>{% render_action action %}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="tab-pane" id="mikroacts">
+					</div>
+				</div>
+			</div>
+			<ul class="row-fluid tiles">
+				{% for mikroact in campaign.mikro_acts.all %}
+				<li class="span4">
+					<div class="collectiveTile">
+						<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+						<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
+					</div>
+					<div class="tileActions">
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
 	</div>
 </div>
 {% endblock content %}
