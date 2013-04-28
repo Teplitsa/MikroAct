@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load guardian_tags %}
 
-{% block title %}{{ block.super }}: {{ user }}{% endblock %}
+{% block title %}{{ block.super }}: {{ userprofile.user }}{% endblock %}
 
 {% block content %}
 {% get_obj_perms user for userprofile as "userprofile_perms" %}
