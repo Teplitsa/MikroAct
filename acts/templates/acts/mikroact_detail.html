@@ -16,6 +16,38 @@
 
 <div class="container">
 	<div class="row">
+		<div class="span4 mikroactCol">
+			<div class="sideCol actPhoto">
+					{% if mikroact.photo %}
+					<img src="{{ mikroact.photo.url }}" title="{{ mikroact.title }}"/>
+					{% else %}
+					<div class="photoEmpty">{% if "change_mikroact" in mikroact_perms %}<a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
+					{% endif %}
+			</div>
+			<div class="sideCol act">
+				
+				<h1>{{ mikroact.title }}</h1>
+				<p class="location">{{ mikroact.location_address }}</p>
+				<p class="desc">{{ mikroact.description }}</p>
+				<p class="status">Campaigns:</p>
+				<ul>
+					{% for campaign in mikroact.campaigns.all %}
+					<li><a href="{{ campaign.get_absolute_url }}">{{ campaign.name }}</a></li>
+					{% endfor %}
+				</ul>
+				<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
+					{% csrf_token %}
+					{{ campaign_form|crispy }}
+					<button type="submit" class="btn btn-submit">Add</button>
+				</form>
+			</div>
+			
+			<a href="{% url 'user_detail' username=mikroact.author %}"><div class="sideCol author">
+				{% if mikroact.author.userprofile.photo %}<img src="{{ mikroact.author.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
+				<h4>{{ mikroact.author }}</h4>
+				<p>{{ mikroact.author.userprofile.twitter }}</p>
+			</div></a>
+		</div>
 		<div class="span8">
 			<div class="mainCol act">
 				<div class="actions">
@@ -52,39 +84,6 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="span4 mikroactCol">
-			<div class="sideCol actPhoto">
-					{% if mikroact.photo %}
-					<img src="{{ mikroact.photo.url }}" title="{{ mikroact.title }}"/>
-					{% else %}
-					<div class="photoEmpty">{% if "change_mikroact" in mikroact_perms %}<a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
-					{% endif %}
-			</div>
-			<div class="sideCol act">
-				
-				<h1>{{ mikroact.title }}</h1>
-				<p class="location">{{ mikroact.location_address }}</p>
-				<p class="desc">{{ mikroact.description }}</p>
-				<p class="status">Campaigns:</p>
-				<ul>
-					{% for campaign in mikroact.campaigns.all %}
-					<li><a href="{{ campaign.get_absolute_url }}">{{ campaign.name }}</a></li>
-					{% endfor %}
-				</ul>
-				<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
-					{% csrf_token %}
-					{{ campaign_form|crispy }}
-					<button type="submit" class="btn btn-submit">Add</button>
-			</div>
-			
-			<a href="{% url 'user_detail' username=mikroact.author %}"><div class="sideCol author">
-				{% if mikroact.author.userprofile.photo %}<img src="{{ mikroact.author.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
-				<h4>{{ mikroact.author }}</h4>
-				<p>{{ mikroact.author.userprofile.twitter }}</p>
-			</div></a>
-		</div>
-		
 	</div>
 </div>
 {% endblock content %}

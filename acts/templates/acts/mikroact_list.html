@@ -23,7 +23,11 @@
 					<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
 				</div>
 				<div class="tileActions">
-					
+					<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
+						{% csrf_token %}
+						{{ campaign_form|crispy }}
+						<button type="submit" class="btn btn-submit">Add</button>
+					</form>
 				</div>
 			</li>
 		{% endfor %}

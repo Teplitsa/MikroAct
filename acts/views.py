@@ -84,7 +84,10 @@ class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):
 
 class MikroActListView(ListView):
     model = MikroAct
-
+    
+    def get_context_data(self, **kwargs):
+        kwargs.setdefault('campaign_form', AddToCampaignForm())
+        return super(MikroActListView, self).get_context_data(**kwargs)
 
 class MikroActCreateView(PermissionRequiredMixin, CreateView):
     model = MikroAct
