@@ -84,35 +84,6 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-=======
-		<div class="span4 mikroactCol">
-			<div class="sideCol actPhoto">
-					{% if mikroact.photo %}
-					<img src="{{ mikroact.photo.url }}" title="{{ mikroact.title }}"/>
-					{% else %}
-					<div class="photoEmpty">{% if "change_mikroact" in mikroact_perms %}<a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
-					{% endif %}
-			</div>
-			<div class="sideCol act">
-				<h1>{{ mikroact.title }}</h1>
-				<p class="location">{{ mikroact.location_address }}</p>
-				<p class="desc">{{ mikroact.description }}</p>
-				<p class="status">Campaigns:</p>
-				<ul>
-					{% for campaign in mikroact.campaigns.all %}
-					<li><a href="{{ campaign.get_absolute_url }}">{{ campaign.name }}</a></li>
-					{% endfor %}
-				</ul>
-				<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
-					{% csrf_token %}
-					{{ campaign_form|crispy }}
-					<button type="submit" class="btn btn-submit">Add</button>
-				</form>
-			</div>
-			{% include "inc/userPane.html" with profile=mikroact.author.userprofile %}
-		</div>
->>>>>>> 96236c8a24140a305ea0de19d409c484e73d532f
 	</div>
 </div>
 {% endblock content %}

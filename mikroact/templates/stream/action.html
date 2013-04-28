@@ -1,0 +1,14 @@
+<a href="{{ action.actor.userprofile.get_absolute_url }}">
+	{{ action.actor }}
+</a> 
+{{ action.get_verb_display }} 
+<a href="{{ action.target.get_absolute_url }}">
+	{{ action.target }}
+</a>
+{% if action.action_object %}
+{% if action.verb == 'added' %}to{% endif %}
+{% if action.verb == 'commented' %}on{% endif %}
+<a href="{{ action.action_object.get_absolute_url }}">
+	{{ action.action_object }}
+</a>
+{% endif %}

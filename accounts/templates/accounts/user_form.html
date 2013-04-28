@@ -20,9 +20,9 @@
 		<div class="span8 offset2">
 			<form  class="createForm" enctype="multipart/form-data" action="." method="post">
 				{% csrf_token %}
-				{{ form|as_bootstrap }}
 				{{ user_form|as_bootstrap }}
 				{{ user_form.errors }}
+				{{ form|as_bootstrap }}
 				{{ form.errors }}
 				<button type="submit">Save</button>
 			</form>

@@ -1,13 +1,14 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
-from django.shortcuts import get_object_or_404
 
 from follow import utils as follow_utils
+from stream.models import Action
 from stream import utils as stream_utils
 from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from guardian.shortcuts import assign
@@ -39,6 +40,8 @@ class CampaignCreateView(PermissionRequiredMixin, CreateView):
 
         self.object = campaign
 
+        stream_utils.action.send(self.request.user, 'created', self.object)
+
         assign("change_campaign", self.request.user, campaign)
         assign("delete_campaign", self.request.user, campaign)
 
@@ -50,9 +53,25 @@ class CampaignUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "acts.change_campaign"
     form_class = CampaignForm
 
+    def form_valid(self, form):
+        campaign = form.save()
+        
+        self.object = campaign
+
+        stream_utils.action.send(self.request.user, 'edited', self.object)
+
+        return HttpResponseRedirect(self.get_success_url())
+
 
 class CampaignDetailView(DetailView):
     model = Campaign
+
+    def get_context_data(self, **kwargs):
+        kwargs['stream'] = Action.objects.filter(
+            Q(target_campaign=self.object) |
+            Q(target_mikroact__in=self.object.mikro_acts.all())
+        ).order_by('-datetime')
+        return super(CampaignDetailView, self).get_context_data(**kwargs)
 
 
 class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):
@@ -62,6 +81,7 @@ class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):
         self.object = self.get_object()
 
         follow_utils.follow(request.user, self.object)
+        stream_utils.action.send(request.user, 'followed', self.object)
 
         return HttpResponseRedirect(reverse("campaign_detail", 
                                     kwargs={"slug": self.object.slug}))
@@ -80,6 +100,16 @@ class CampaignFollowView(LoginRequiredMixin, View, SingleObjectMixin):
                                                                                 
     def put(self, request, *args, **kwargs):                                    
         return self.post(request, *args, **kwargs)    
+
+
+class CampaignUnFollowView(CampaignFollowView):
+    def post(self, request, *args,  **kwargs):
+        self.object = self.get_object()
+
+        follow_utils.unfollow(request.user, self.object)
+
+        return HttpResponseRedirect(reverse("campaign_detail", 
+                                    kwargs={"slug": self.object.slug}))
 
 
 class MikroActListView(ListView):
@@ -107,6 +137,8 @@ class MikroActCreateView(PermissionRequiredMixin, CreateView):
 
         self.object = mikroact
 
+        stream_utils.action.send(self.request.user, 'created', self.object)
+
         # TODO should this be in MikroActForm.save, or even MikroAct.save()?
         assign("change_mikroact", self.request.user, mikroact)
         assign("delete_mikroact", self.request.user, mikroact)
@@ -118,6 +150,13 @@ class MikroActUpdateView(PermissionRequiredMixin, UpdateView):
     model = MikroAct
     form_class = MikroActForm
     permission_required = "acts.change_mikroact"
+
+    def form_valid(self, form):
+        self.object = form.save()
+
+        stream_utils.action.send(self.request.user, 'edited', self.object)
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class MikroActDeleteView(PermissionRequiredMixin, DeleteView):
@@ -150,5 +189,7 @@ class MikroActCampaignView(DetailView, FormView):
 
         campaign = form.cleaned_data.get('campaign')
         campaign.mikro_acts.add(self.object)
+
+        stream_utils.action.send(self.request.user, 'added', self.object, campaign)
 
         return self.get(slug=self.object.slug)

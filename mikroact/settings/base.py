@@ -89,10 +89,12 @@ INSTALLED_APPS = (
 
 STREAM_VERBS = (
     ('default', 'Stream Item'),
-    ('edit', 'Object edited'),
-    ('created','Object created'),
-    ('deleted','Object deleted'),
-    ('followed', 'Object followed'),
+    ('edited', 'edited'),
+    ('created','created'),
+    ('deleted','deleted'),
+    ('followed', 'followed'),
+    ('commented', 'left a comment'),  # ".. on"
+    ('added','added'),  # ".. to"
 )
 
 LOGGING = {

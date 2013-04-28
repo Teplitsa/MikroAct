@@ -1,3 +1,6 @@
+.container {
+	padding-bottom: 40px; /* reserve space for footer */
+}
 
 .sideCol.act{
 	background:#fff;
@@ -30,9 +33,7 @@
 .mainCol.comment{
 	background:#fff;
 	min-height: 200px;
-	margin-bottom: 100px;
 }
-
 
 
 .mainCol .actions ul li{

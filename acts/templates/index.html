@@ -1,22 +1,46 @@
 {% extends "base.html" %}
+{% load stream_tags %}
 
 {% block title %}{{ block.super }}: Home{% endblock title %}
 
 {% block content %}
 
 <div class="container">
-	<div class="mapContainer"></div>
-		<h1>Your MikroActs</h1>
-		<ul>
-			{% for mikroact in user.mikroacts.all %}
-			<li><a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a></li>
-			{% endfor %}
-		</ul>
-		<h1>Your Collectives</h1>
-		<ul>
-			{% for collective in user.collectives.all %}
-			<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
-			{% endfor %}
-		</ul>
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="sideCol">
+				<div class="actions">
+				</div>
+				<h1>Activity</h1>
+				<ul>
+					{% for action in stream %}
+						<li>{% render_action action %}</li>
+					{% endfor %}
+				</ul>
+				<h1>Your Collectives</h1>
+				<ul>
+					{% for collective in user.collectives.all %}
+					<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="span8">
+			<div class="mainCol comment">
+				<ul class="row-fluid tiles">
+					{% for mikroact in user.mikroacts.all %}
+					<li class="span4">
+						<div class="collectiveTile">
+							<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+							<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
+						</div>
+						<div class="tileActions">
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock content %}

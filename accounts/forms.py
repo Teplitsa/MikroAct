@@ -6,14 +6,9 @@ from .models import UserProfile, Collective
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(), 
-                                label="Password", required=False)
-    password2 = forms.CharField(widget=forms.PasswordInput(), 
-                                label="Confirm password", required=False)
-
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'password2')
+        fields = ('email',)
 
     def clean_password2(self):
         password = self.cleaned_data.get("password")
