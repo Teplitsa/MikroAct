@@ -6,6 +6,10 @@ from os.path import join, abspath, dirname
 # into your settings, but ImproperlyConfigured is an exception.
 from django.core.exceptions import ImproperlyConfigured
 
+# .. as, hopefully, is global_settings -- see:
+#   http://blog.madpython.com/2010/04/07/django-context-processors-best-practice/
+import django.conf.global_settings as DEFAULT_SETTINGS
+
 
 def get_env_variable(var_name):
     """ Get the environment variable or return exception """
@@ -58,6 +62,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+)
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'mikroact.context.stream',
 )
 
 SECRET_KEY = get_env_variable("SECRET_KEY")
