@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 {% load bootstrap_toolkit %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,5 +39,8 @@
 	</section>
 
 	{% include "inc/globalFooter.html" %}
+	{% if user.is_authenticated %}
+	{% include "inc/activityPane.html" %}
+	{% endif %}
 </body>
 </html>

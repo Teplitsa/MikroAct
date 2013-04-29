@@ -46,10 +46,33 @@ $(document).ready(function(){
       .click(function(e) {
         e.preventDefault()
       });
-      
-    
-    
+   
+    $('.activityToggle').click(function(){
+    	if($(this).parent('.activityPane').hasClass('closed')){
+	    	$(this).parent('.activityPane').removeClass('closed');
+	    	$(this).parent('.activityPane').addClass('open');
+	    	$(this).children().children('i').removeClass('icon-arrow-left');
+	    	$(this).children().children('i').addClass('icon-arrow-right');
+    	}
+    	else if($(this).parent('.activityPane').hasClass('open')){
+    		$(this).parent('.activityPane').removeClass('open');
+	    	$(this).parent('.activityPane').addClass('closed');
+	    	$(this).children().children('i').removeClass('icon-arrow-right');
+	    	$(this).children().children('i').addClass('icon-arrow-left');
+    	}
+	   
+    });
+    if($('.container.home').length){
+    	$('.activityPane').removeClass('closed');
+	    $('.activityPane').addClass('open');
+    	$('.activityToggle').children().children('i').removeClass('icon-arrow-left');
+    	$('.activityToggle').children().children('i').addClass('icon-arrow-right');
+    }
+     
 });
+
+
+
 
 $(function(){
 	$(".activity li a").click(function(){

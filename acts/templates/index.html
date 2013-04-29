@@ -1,22 +1,14 @@
 {% extends "base.html" %}
-{% load stream_tags %}
+
 
 {% block title %}{{ block.super }}: Home{% endblock title %}
 
 {% block content %}
-
-<div class="container">
+{% if user.is_authenticated %}
+<div class="container home">
 	<div class="row-fluid">
 		<div class="span12">
-			<div class="halfCol activity">
-				<h1>Activity</h1>
-				<ul>
-					{% for action in stream %}
-						<li>{% render_action action %}</li>
-					{% endfor %}
-				</ul>
-				
-			</div>
+			
 		</div>
 			
 			<div class="halfCol">
@@ -48,4 +40,46 @@
 		</div>
 	</div><!-- end row-fluid -->
 </div>
+{% else %}
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<h1>Welcome to MikroAct!</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<div class="fullCol message">
+				<p>MikroAct is an open source, collaborative actions platform for mobilizing and connecting local communities through the DIY actions they perform. The website seeks to facilitate effective mobilization of actions by supporting communities with a set of collaboration and ideation tools. A secondary goal of this platform is to link online and offline public spaces and actions, towards building stronger, more resilient communities.</p>
+				<p>МикроАкт—платформа мобилизации и объединения локальных сообществ активистов с помощью взаимодействия в рамках небольших самоорганизуемых акций. Платформа создана на открытом коде (Open Source) и обладает рядом функций, позволяющих эффективную мобилизацию и синхронизацию акций . Другая цель платформы—соединять онлайн- и оффлайн- пространства и действия, создавая более устойчивые и сильные сообщества.</p>
+			</div>
+		</div>
+		
+	</div>
+	<div class="row">
+		<ul class="tiles">
+		{% for mikroact in mikro_acts %}
+			<li class="span3">
+				<div class="actTile">
+					<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+					
+					<h2>{{ mikroact.title }}</h2>
+					
+					<div class="tileActions">
+						<div class="tileDescription">
+						<p>{{ mikroact.description|truncatewords:30 }}</p>
+						<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+						<ul class="itemAction">
+							<li><i class="icon-plus"></i></li>
+							
+						</ul>
+					</div>
+					
+				</div>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}
 {% endblock content %}

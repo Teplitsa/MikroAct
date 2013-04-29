@@ -13,11 +13,13 @@
 <!-- </a>  -->
 {{ action.get_verb_display }} 
 <!-- <a href="{{ action.target.get_absolute_url }}"> -->
+	<span class="activityTarget">
 	{% if action.target.title %}
 		{{ action.target.title }}
 	{% else %}
 		{{ action.target.name }}
 	{% endif %}
+	</span>
 <!-- </a> -->
 {% if action.action_object %}
 {% if action.verb == 'added' %}to{% endif %}
@@ -32,6 +34,6 @@
 
 {% endif %}
 <span class="activityDate">
-{{ action.datetime|date:"m/d/y - G:i" }}
+{{ action.datetime|date:"D - G:i" }}
 </span>
 </a>

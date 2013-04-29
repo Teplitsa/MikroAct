@@ -2,8 +2,13 @@
 {% load guardian_tags %}
 {% load follow_tags %}
 {% load stream_tags %}
+{% load comments %}
 {% block title %}{{ block.super }}: {{ campaign.name }}{% endblock %}
-
+{% block extra_head %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}fluent_comments/css/ajaxcomments.css" />
+	<script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
+{% endblock %}
 {% block content %}
 {% get_obj_perms user for campaign as "campaign_perms" %}
 <div class="container">
@@ -27,35 +32,7 @@
 			{% endfor %}
 		</div>
 		<div class="span9">
-			<div class="mainCol act">
-				<div class="actions">
-					<ul class="nav nav-tabs" id="actTabs">
-					  <li class="active"><a href="#stream">Stream</a></li>
-					</ul>
-					{% if "change_campaign" in campaign_perms %}
-					<div class="dropdown userAction pull-right">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-							<li><a href="{% url "campaign_edit" slug=campaign.slug %}">Edit</a></li>
-						</ul>
-					</div>
-					{% endif %}
-				</div>
-			</div>
-			<div class="mainCol comment">
-				<div class="tab-content">
-					<div class="tab-pane active" id="stream">
-						<ul>
-							{% for action in stream %}
-							<li>{% render_action action %}</li>
-							{% endfor %}
-						</ul>
-					</div>
-					<div class="tab-pane" id="mikroacts">
-					</div>
-				</div>
-			</div>
-			<ul class="row-fluid tiles">
+			<ul class="row-fluid campTiles">
 				{% for mikroact in campaign.mikro_acts.all %}
 				<li class="span4">
 					<div class="collectiveTile">
@@ -66,6 +43,41 @@
 				</li>
 				{% endfor %}
 			</ul>
+			<div class="mainCol act">
+				<div class="actions">
+					<ul class="nav nav-tabs" id="actTabs">
+					  <li class="active"><a href="#activity">Activity</a></li>
+					  <li><a href="#stream">Comments</a></li>
+					</ul>
+					{% if "change_campaign" in campaign_perms %}
+					<div class="dropdown userAction pull-right">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					    	<li><a href="{% url "campaign_edit" slug=campaign.slug %}">Edit</a></li>
+					    </ul>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="mainCol comment">
+				<div class="tab-content">
+					<div class="tab-pane active" id="activity">
+						<ul>
+							{% for action in stream %}
+							<li>{% render_action action %}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="tab-pane" id="stream">
+						{% render_comment_list for campaign %}
+						{% if user.is_authenticated %}
+						{% render_comment_form for campaign %}
+						{% else %}
+						<a class="userLogin" href="{% url 'user_login' %}">Log in</a> to leave a comment
+						{% endif %}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
