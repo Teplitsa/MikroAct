@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-
 {% load guardian_tags %}
+{% load follow_tags %}
 {% load comments %}
 {% block title %}{{ block.super }}: {{ collective.name }}{% endblock %}
 {% block extra_head %}
@@ -29,6 +29,19 @@
 							{% if collective.email %}<li><a href="mailto:{{ collective.email }}"><i class="icon-envelope"></i>Email</a></li>{% endif %}
 							{% if collective.twitter %}<li><a href="http://twitter.com/{{ collective.twitter }}" target="_blank"><i class="icon-twitter"></i></a></li>{% endif %}	
 						</ul>
+						<h2>{{ collective.follow_collective.count }} Follower{{ collective.follow_collective.count|pluralize }}</h2>
+						<a class="btn btn-inverse" 
+							{% if not user|is_following:collective %}
+							href="{% url 'collective_follow' slug=collective.slug %}">
+							Follow
+							{% else %}
+							href="{% url 'collective_unfollow' slug=collective.slug %}">
+							Unfollow
+							{% endif %}
+						</a>
+						{% for follow in collective.follow_collective.all %}
+							{% include "inc/userPane.html" with profile=follow.user.userprofile %}
+						{% endfor %}
 					</div>
 					<div class="clear"></div>
 				</div>

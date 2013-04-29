@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from guardian.shortcuts import assign
 from stream import utils as stream_utils
+from follow import utils as follow_utils
 
 from .models import Collective, UserProfile
 from .forms import UserForm, UserProfileForm, RegistrationForm, CollectiveForm
@@ -87,6 +88,44 @@ class CollectiveJoinView(LoginRequiredMixin, View, SingleObjectMixin):
                                                                                 
     def put(self, request, *args, **kwargs):                                    
         return self.post(request, *args, **kwargs)    
+
+
+class CollectiveFollowView(LoginRequiredMixin, View, SingleObjectMixin):
+    model = Collective
+
+    def post(self, request, *args,  **kwargs):
+        self.object = self.get_object()
+
+        follow_utils.follow(request.user, self.object)
+        stream_utils.action.send(request.user, 'followed', self.object)
+
+        return HttpResponseRedirect(reverse("collective_detail", 
+                                    kwargs={"slug": self.object.slug}))
+
+    def head(self, request, *args, **kwargs):                                   
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def get(self, request, *args, **kwargs):                                   
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def options(self, request, *args, **kwargs):                                
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def delete(self, request, *args, **kwargs):                                 
+        return self.post(request, *args, **kwargs)                               
+                                                                                
+    def put(self, request, *args, **kwargs):                                    
+        return self.post(request, *args, **kwargs)    
+
+
+class CollectiveUnFollowView(CollectiveFollowView):
+    def post(self, request, *args,  **kwargs):
+        self.object = self.get_object()
+
+        follow_utils.unfollow(request.user, self.object)
+
+        return HttpResponseRedirect(reverse("collective_detail", 
+                                    kwargs={"slug": self.object.slug}))
 
 
 class UserRegisterView(CreateView):

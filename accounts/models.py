@@ -5,8 +5,9 @@ from django.contrib.comments.models import Comment
 from django.db import models
 from django.utils import timezone
 
+from follow import utils as follow_utils
 from follow.models import Follow
-from stream import utils
+from stream import utils as stream_utils
 
 from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
 
@@ -60,8 +61,10 @@ class Collective(models.Model):
         return reverse("collective_detail", kwargs={"slug": self.slug})
 
 
-utils.register_actor(User)
-utils.register_target(Collective)
-utils.register_action_object(Comment)
+stream_utils.register_actor(User)
+stream_utils.register_target(Collective)
+stream_utils.register_action_object(Comment)
+
+follow_utils.register(Collective)
 
 from .signals import *
