@@ -2,7 +2,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, FormView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView
@@ -14,7 +14,8 @@ from stream import utils as stream_utils
 from follow import utils as follow_utils
 
 from .models import Collective, UserProfile
-from .forms import UserForm, UserProfileForm, RegistrationForm, CollectiveForm
+from .forms import UserForm, UserProfileForm, RegistrationForm, CollectiveForm, \
+        CollectiveUserPromotionForm
 
 
 class CollectiveListView(ListView):
@@ -64,30 +65,23 @@ class CollectiveDetailView(DetailView):
     model = Collective
 
 
-class CollectiveJoinView(LoginRequiredMixin, View, SingleObjectMixin):
+class CollectiveUserPromoteView(PermissionRequiredMixin, FormView, SingleObjectMixin):
     model = Collective
+    permission_required = "accounts.change_collective"
+    template_name = "accounts/collective_invite.html"
 
-    def post(self, request, *args,  **kwargs):
+    form_class = CollectiveUserPromotionForm
+    
+    def get_form_kwargs(self, **kwargs):
         self.object = self.get_object()
+        kwargs = super(CollectiveUserPromoteView, self).get_form_kwargs(**kwargs)
+        kwargs.setdefault('collective', self.object)
+        return kwargs
 
-        self.object.members.add(request.user)
-
+    def form_valid(self, form):
+        users = form.save()
+        # TODO use `django.contrib.messages` to add success message
         return HttpResponseRedirect(self.object.get_absolute_url())
-
-    def head(self, request, *args, **kwargs):                                   
-        return self.post(request, *args, **kwargs)                               
-                                                                                
-    def get(self, request, *args, **kwargs):                                   
-        return self.post(request, *args, **kwargs)                               
-                                                                                
-    def options(self, request, *args, **kwargs):                                
-        return self.post(request, *args, **kwargs)                               
-                                                                                
-    def delete(self, request, *args, **kwargs):                                 
-        return self.post(request, *args, **kwargs)                               
-                                                                                
-    def put(self, request, *args, **kwargs):                                    
-        return self.post(request, *args, **kwargs)    
 
 
 class CollectiveFollowView(LoginRequiredMixin, View, SingleObjectMixin):

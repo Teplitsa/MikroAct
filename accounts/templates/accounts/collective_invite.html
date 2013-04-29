@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load bootstrap_toolkit %}
+
+{% block title %}{{ block.super }}: {{ collective.name }}{% endblock %}
+{% block content %}
+
+<div class="container">
+	<div class="row-fluid">
+		<div class="span3 collectiveCol">
+			<div class="sideCol collectivePhoto">
+					{% if collective.photo %}
+					<img src="{{ collective.photo.url }}" height="220" title="{{ collective.name }}"/>
+					{% else %}
+					{% endif %}
+			</div>
+			<div class="sideCol collective">
+				<div class="collectiveTitle">	
+					<div class="collectiveInfo">
+						<h2>{{ collective.name }}</h2>
+						<ul>
+							{% if collective.email %}<li><a href="mailto:{{ collective.email }}"><i class="icon-envelope"></i>Email</a></li>{% endif %}
+							{% if collective.twitter %}<li><a href="http://twitter.com/{{ collective.twitter }}" target="_blank"><i class="icon-twitter"></i></a></li>{% endif %}	
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<h4>Location</h4>
+				<p>{{ collective.location_address }}</p>
+				<h4>About</h4>
+				<p>{{ collective.description }}</p>
+			</div>
+			{% for member in collective.members.all %}
+				{% include "inc/userPane.html" with profile=member.userprofile %}
+			{% endfor %}
+		</div>
+		<div class="span9">
+
+			<div class="mainCol">
+				<form action="." method="POST">
+					{% csrf_token %}
+					{{ form|as_bootstrap }}
+					<button type="submit">Add as members</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -47,7 +47,31 @@ class CollectiveForm(forms.ModelForm):
     class Meta:
         model = Collective
         fields = ('name', 'slug', 'description', 'location_address', 'twitter',
-                  'email', 'photo', 'members')
+                  'email', 'photo')
         widgets = {
             "slug": forms.TextInput(attrs={"data-slug-from": "name"}),
         }
+
+
+class CollectiveUserPromotionForm(forms.Form):
+    users = forms.ModelMultipleChoiceField(
+        queryset=User.objects.none(),
+        widget=forms.CheckboxSelectMultiple
+    )
+
+    def __init__(self, *args, **kwargs):
+        self.collective = kwargs.pop('collective', False)
+
+        if self.collective:
+            self.base_fields['users'].queryset = User.objects.filter(
+                following__target_collective=self.collective
+            ).exclude(collectives=self.collective)
+
+        return super(CollectiveUserPromotionForm, self).__init__(*args, **kwargs)
+    
+    def save(self):
+        data = self.cleaned_data
+
+        self.collective.members.add(*data['users'])
+
+        return data['users']
