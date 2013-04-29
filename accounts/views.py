@@ -50,6 +50,7 @@ class CollectiveCreateView(PermissionRequiredMixin, CreateView):
 class CollectiveUpdateView(UpdateView):
     permission_required = "accounts.change_collective"
     model = Collective
+    form_class = CollectiveForm
 
     def form_valid(self, form):
         collective = form.save()
