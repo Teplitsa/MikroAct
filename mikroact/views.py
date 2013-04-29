@@ -17,13 +17,25 @@ def home(request):
 
     if request.user.is_authenticated():
         following = Follow.objects.filter(user=request.user)
-        stream = Action.objects.filter(
+        stream = list(Action.objects.filter(
             Q(target_campaign_id__in=following.values_list('target_campaign'))
+            | Q(target_collective_id__in=following.values_list('target_collective'))
             | Q(actor_user=request.user)
-        ).order_by('-datetime')[0:20]
+        ).order_by('-datetime')[:30])
+
+        # sqlite doesn't support DISTINCT ON (..), so we make our own in Python
+        stream_keys = []
+        stream_list = []
+        while len(stream_keys) < 20 and len(stream) > 0:
+            o = stream.pop()
+            keys = (o.target_mikroact, o.target_campaign, o.target_collective,
+                    o.actor_user, o.verb)
+            if keys not in stream_keys:
+                stream_keys.append(keys)
+                stream_list.append(o)
 
     return render(request, 'index.html', {
         'mikro_acts': mikro_acts,
         'following': following,
-        'stream': stream,
+        'stream': stream_list,
     })
