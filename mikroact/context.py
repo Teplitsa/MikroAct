@@ -6,7 +6,7 @@ from stream.models import Action
 
 def stream(request):
     if not request.user.is_authenticated():
-        return
+        return {}
 
     following = Follow.objects.filter(user=request.user)
 
