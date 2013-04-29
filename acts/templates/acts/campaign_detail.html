@@ -63,7 +63,7 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="activity">
 						<ul>
-							{% for action in stream %}
+							{% for action in object_stream %}
 							<li>{% render_action action %}</li>
 							{% endfor %}
 						</ul>

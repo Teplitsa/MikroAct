@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load guardian_tags %}
 {% load follow_tags %}
+{% load stream_tags %}
 {% load comments %}
 {% block title %}{{ block.super }}: {{ collective.name }}{% endblock %}
 {% block extra_head %}
@@ -77,16 +78,28 @@
 									<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
 									<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
 								</div>
-								
 							</li>
 							{% endfor %}
-						
 				{% endfor %}
 			</ul>
-			
+			<div class="mainCol act">
+				<div class="actions">
+					<ul class="nav nav-tabs" id="actTabs">
+					  <li class="active"><a href="#activity">Activity</a></li>
+					  <li><a href="#comments">Comments</a></li>
+					</ul>
+				</div>
+			</div>
 			<div class="mainCol comment">
 				<div class="tab-content">
-				  <div class="tab-pane active" id="stream">
+					<div class="tab-pane active" id="activity">
+						<ul>
+							{% for action in object_stream %}
+							<li>{% render_action action %}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				  <div class="tab-pane" id="comments">
 					  	{% render_comment_list for collective %}
 						{% if user.is_authenticated %}
 						{% render_comment_form for collective %}
@@ -94,11 +107,7 @@
 						<a class="userLogin" href="{% url 'user_login' %}">Log in</a> to leave a comment
 						{% endif %}
 				  </div>
-				  <div class="tab-pane" id="instruction">
-					  {{ mikroact.description }}
-				  </div>
 				</div>
-				
 			</div>
 		</div>
 	</div>

@@ -67,7 +67,7 @@ class CampaignDetailView(DetailView):
     model = Campaign
 
     def get_context_data(self, **kwargs):
-        kwargs['stream'] = Action.objects.filter(
+        kwargs['object_stream'] = Action.objects.filter(
             Q(target_campaign=self.object) |
             Q(target_mikroact__in=self.object.mikro_acts.all())
         ).order_by('-datetime')

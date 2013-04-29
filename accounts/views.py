@@ -1,6 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.views.generic import View, TemplateView, FormView
 from django.views.generic.list import ListView
@@ -10,6 +11,7 @@ from django.core.urlresolvers import reverse
 
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from guardian.shortcuts import assign
+from stream.models import Action
 from stream import utils as stream_utils
 from follow import utils as follow_utils
 
@@ -64,6 +66,13 @@ class CollectiveUpdateView(UpdateView):
 
 class CollectiveDetailView(DetailView):
     model = Collective
+
+    def get_context_data(self, **kwargs):
+        kwargs['object_stream'] = Action.objects.filter(
+            Q(target_collective=self.object) |
+            Q(actor_user__in=self.object.members.all())
+            ).order_by('-datetime')[:20]
+        return super(CollectiveDetailView, self).get_context_data(**kwargs)
 
 
 class CollectiveUserPromoteView(PermissionRequiredMixin, FormView, SingleObjectMixin):
