@@ -57,7 +57,7 @@ class CollectiveUpdateView(UpdateView):
 
         self.object = collective
 
-        stream_utils.action.send(self.request.user, 'created', self.object)
+        stream_utils.action.send(self.request.user, 'edited', self.object)
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -81,6 +81,9 @@ class CollectiveUserPromoteView(PermissionRequiredMixin, FormView, SingleObjectM
 
     def form_valid(self, form):
         users = form.save()
+        # TODO requires a database change
+        # for user in users:
+        #     stream_utils.action.send(self.request.user, 'added', user, self.object)
         # TODO use `django.contrib.messages` to add success message
         return HttpResponseRedirect(self.object.get_absolute_url())
 
