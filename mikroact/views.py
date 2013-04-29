@@ -7,7 +7,7 @@ from acts.models import MikroAct
 
 def home(request):
     mikro_acts = MikroAct.objects.filter(is_published=True)
-
+    
     following = []
 
     return render(request, 'index.html', {

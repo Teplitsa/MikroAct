@@ -25,6 +25,21 @@ section.panel .userNav ul li{
 	margin-left: 20px;
 	list-style: none;
 }
+section.panel .userNav ul li.dropdown a img{
+	margin-top: -2px;
+	border: 2px solid #202020;
+	
+}
+section.panel .userNav ul li.dropdown a:hover img{
+	margin-top: -2px;
+	border: 2px solid #009999;
+	transition: all .1s ease-in-out;
+	-webkit-transition:all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+	-o-transition: all .1s ease-in-out;
+	-ms-transition:all .1s ease-in-out;
+	
+}
 section.panel .userNav ul ul.dropdown-menu{
 	border-radius:0px;
 	margin-top:12px;
@@ -164,6 +179,109 @@ section.panel .loginLink.open {
 	background:#fff;
 }
 
+/********          *********************/
+/******** ACTIVITY **********************/
+/********          ********************/
+.activityPane{
+	height:100%;
+	position:fixed;
+	
+	width: 325px;
+	/* background:rgba(255,255,255,0.95); */
+	background:#fff;
+	border-right:1px solid #ccc;
+	top:0;
+	overflow:hidden;
+	overflow-y:scroll;
+	-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+}
+.activityPane.closed{
+	right:-325px;
+	
+}
+.activityPane.open{
+	right:0;
+}
+.activityPane.closed .activityToggle{
+	right:0;
+}
+.activityPane.open .activityToggle{
+	right:325px;
+}
+
+.activityWrapper{
+	
+}
+
+.activityWrapper h1{
+	font-size: 18px;
+	padding-left:15px;
+}
+.activityWrapper ul{
+	margin:15px 0;
+	font-size:11px;
+	
+}
+.activityWrapper ul li {
+	list-style:none;
+	
+	
+}
+.activityWrapper ul li a{
+	border-top: 1px solid #e3e3e3;
+	line-height: 24px;
+	padding: 10px 15px;
+	display:block;
+}
+.activityWrapper i{
+	color:#009999;
+}
+.activityWrapper li a:hover{
+	background:#f4f4f4;
+}
+.activityWrapper li:nth-child(n+10) a{
+	/* background:#f4f4f4; */
+}
+.activityWrapper .activityDate{
+
+	padding-right:10px;
+	position:absolute;
+	right:0;
+	color:#ccc;
+	font-size:10px;
+}
+.activityWrapper .activityTarget{
+	color:#009999;
+}
+.activityToggle{
+	height:100%;
+	-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+	position:fixed;
+	width: 40px;
+	top:0;
+	background:#f4f4f4;
+	border-left:1px solid #ccc;
+	border-right: 1px solid #ccc;
+	text-align:center;
+}
+.activityToggle:hover{
+	background:#fff;
+}
+.activityToggle .trigger{
+	top: 45%;
+	width:40px;
+	position:absolute;
+	
+}
+
 
 /********        **********************/
 /******** HEADER **********************/
@@ -247,51 +365,20 @@ section.header .logo h1{
 /********          **********************/
 
 /******** sidecol ***********/
-.halfCol.activity{
-	background:#fff;
-	
-}
-.halfCol.activity h1{
-	font-size: 24px;
-	padding-left:15px;
-}
-.activity ul{
-	margin:15px 0;
-	font-size:12px;
-	max-height: 220px;
-	overflow:hidden;
-	overflow-y:scroll;
-	
-}
-.activity ul li {
-	list-style:none;
-	
-	
-}
-.activity ul li a{
-	border-top: 1px solid #e3e3e3;
-	line-height: 24px;
-	padding: 10px 15px;
-	display:block;
-}
-.activity i{
-	color:#009999;
-}
-.activity li a:hover{
-	background:#f4f4f4;
-}
-.activity li:nth-child(n+10) a{
-	/* background:#f4f4f4; */
-}
-.activity .activityDate{
-	float:right;
-	color:#ccc;
-}
+
 
 
 
 .dashTiles .tiles li:nth-child(2n+1){
 	margin-left:0;
+}
+
+.fullCol.message{
+	background:#fff;
+	padding: 15px;
+	font-size: 13px;
+	line-height: 20px;
+	
 }
 /********          **********************/
 /******** MIKROACT **********************/
@@ -441,6 +528,27 @@ section.header .logo h1{
 
 .campaignCount{
 	float:right;
+}
+.campTiles li:nth-child(3n+1){
+	margin-left:0;
+}
+.campTiles{
+	margin:0 0 15px;
+	padding:0;
+}
+.campTiles li{
+	list-style:none;
+	
+	margin-top: 10px;
+}
+
+.campTiles li img{
+	
+}
+.campTiles li .tilePhoto{
+	max-height: 160px;
+	overflow:hidden;
+	
 }
 
 
