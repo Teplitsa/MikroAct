@@ -119,6 +119,7 @@ class MikroActListView(ListView):
         kwargs.setdefault('campaign_form', AddToCampaignForm())
         return super(MikroActListView, self).get_context_data(**kwargs)
 
+
 class MikroActCreateView(PermissionRequiredMixin, CreateView):
     model = MikroAct
     form_class = MikroActForm
@@ -171,13 +172,14 @@ class MikroActDetailView(DetailView):
     model = MikroAct
 
     def get_context_data(self, **kwargs):
-        kwargs.setdefault('campaign_form', AddToCampaignForm())
+        kwargs.setdefault('campaign_form', AddToCampaignForm(user=self.request.user))
         return super(MikroActDetailView, self).get_context_data(**kwargs)
 
 
-class MikroActCampaignView(DetailView, FormView):
+class MikroActCampaignView(PermissionRequiredMixin, DetailView, FormView):
     model = MikroAct
     form_class = AddToCampaignForm
+    permission_required = 'acts.change_campaign'
 
     def get(self, *args, **kwargs):
         return HttpResponseRedirect(reverse('mikroact_detail', kwargs={
