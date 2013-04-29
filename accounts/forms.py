@@ -10,6 +10,16 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('email',)
 
+
+class RegistrationForm(UserForm):
+    password = forms.CharField(widget=forms.PasswordInput(), label="Password")
+    password2 = forms.CharField(widget=forms.PasswordInput(), 
+                                label="Confirm password")
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'password2')
+
     def clean_password2(self):
         password = self.cleaned_data.get("password")
         password2 = self.cleaned_data.get("password2")
@@ -25,14 +35,6 @@ class UserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-
-class RegistrationForm(UserForm):
-    def __init__(self, *args, **kwargs):
-        self.base_fields['password'].required = True
-        self.base_fields['password2'].required = True
-
-        return super(RegistrationForm, self).__init__(*args, **kwargs)
 
 
 class UserProfileForm(forms.ModelForm):

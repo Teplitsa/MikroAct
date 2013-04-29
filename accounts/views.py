@@ -108,6 +108,9 @@ class UserRegisterView(CreateView):
         user_profile = UserProfile(user=user)
         user_profile.save()
 
+        assign("change_userprofile", user, user_profile)
+        assign("delete_userprofile", user, user_profile)
+
         user.backend='django.contrib.auth.backends.ModelBackend'
         login(self.request, user)
 
