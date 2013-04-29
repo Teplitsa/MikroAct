@@ -28,7 +28,8 @@ section.panel .userNav ul li{
 section.panel .userNav ul li.dropdown a img{
 	margin-top: -2px;
 	border: 2px solid #202020;
-	
+	height:32px;
+	overflow:hidden;
 }
 section.panel .userNav ul li.dropdown a:hover img{
 	margin-top: -2px;
