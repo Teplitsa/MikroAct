@@ -187,10 +187,9 @@ section.panel .loginLink.open {
 	position:fixed;
 	
 	width: 325px;
-	/* background:rgba(255,255,255,0.95); */
 	background:#fff;
 	border-right:1px solid #ccc;
-	top:0;
+	top:40px;
 	overflow:hidden;
 	overflow-y:scroll;
 	-webkit-transition: all .2s ease-in-out;
@@ -214,6 +213,7 @@ section.panel .loginLink.open {
 }
 
 .activityWrapper{
+	
 	
 }
 
@@ -266,7 +266,7 @@ section.panel .loginLink.open {
 		transition: all .2s ease-in-out;
 	position:fixed;
 	width: 40px;
-	top:0;
+	top:40px;
 	background:#f4f4f4;
 	border-left:1px solid #ccc;
 	border-right: 1px solid #ccc;
