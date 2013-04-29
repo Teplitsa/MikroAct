@@ -33,7 +33,9 @@
 <body>
 	{% include "inc/globalHeader.html" %}
 	
-		{% block content %}{% endblock content %}
+	<section class="mainContent">
+	{% block content %}{% endblock content %}
+	</section>
 
 	{% include "inc/globalFooter.html" %}
 </body>

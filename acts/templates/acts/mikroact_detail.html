@@ -16,39 +16,75 @@
 
 <div class="container">
 	<div class="row">
-		<div class="span4 mikroactCol">
-			<div class="sideCol actPhoto">
-					{% if mikroact.photo %}
-					<img src="{{ mikroact.photo.url }}" title="{{ mikroact.title }}"/>
-					{% else %}
-					<div class="photoEmpty">{% if "change_mikroact" in mikroact_perms %}<a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
-					{% endif %}
-			</div>
+		<div class="span4">
+		
+			
 			<div class="sideCol act">
-				
 				<h1>{{ mikroact.title }}</h1>
 				<p class="location">{{ mikroact.location_address }}</p>
 				<p class="desc">{{ mikroact.description }}</p>
-				<p class="status">Campaigns:</p>
-				<ul>
-					{% for campaign in mikroact.campaigns.all %}
-					<li><a href="{{ campaign.get_absolute_url }}">{{ campaign.name }}</a></li>
-					{% endfor %}
-				</ul>
-				<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
-					{% csrf_token %}
-					{{ campaign_form|crispy }}
-					<button type="submit" class="btn btn-submit">Add</button>
-				</form>
 			</div>
 			
+			<div class="sideCol campaignList">
+				<div class="accordion" id="campaignList">
+					
+					<div class="accordion-group">
+				    	<div class="accordion-heading">
+					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignList" href="#collapseList">
+						    	Campaigns
+						    </a>
+						</div>
+						<div id="collapseList" class="accordion-body collapse in">
+							<div class="accordion-inner">
+							{% if mikroact.campaigns.all %}
+							<ul>
+								{% for campaign in mikroact.campaigns.all %}
+								<li><a href="{{ campaign.get_absolute_url }}"><i class="icon-sitemap"></i> {{ campaign.name }}</a></li>
+								{% endfor %}
+							</ul>	
+							{% else %}
+							<p>This MikroAct is not associated with any campaigns.</p>
+							{% endif %}
+							</div>
+						</div>
+					</div>
+					<div class="accordion-group">
+				    	<div class="accordion-heading">
+					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignList" href="#collapseListAdd">
+						    	<i class="icon-plus"></i> Add to Campaign
+						    </a>
+						</div>
+						<div id="collapseListAdd" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
+									{% csrf_token %}
+									{{ campaign_form|crispy }}
+									<button type="submit" class="btn btn-submit">Add</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+				</div><!-- end accordion -->
+				
+			</div>
 			<a href="{% url 'user_detail' username=mikroact.author %}"><div class="sideCol author">
 				{% if mikroact.author.userprofile.photo %}<img src="{{ mikroact.author.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
 				<h4>{{ mikroact.author }}</h4>
 				<p>{{ mikroact.author.userprofile.twitter }}</p>
 			</div></a>
-		</div>
+			
+			
+		</div><!-- end span4 -->
 		<div class="span8">
+		
+			<div class="mainCol feature">
+				{% if mikroact.photo %}
+					<img src="{{ mikroact.photo.url }}" title="{{ mikroact.title }}"/>
+					{% else %}
+					<div class="featureEmpty">{% if "change_mikroact" in mikroact_perms %}<a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
+				{% endif %}
+			</div>
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
@@ -79,40 +115,16 @@
 						{% endif %}
 					</div>
 					<div class="tab-pane" id="instruction">
-						{{ mikroact.description }}
+						{% if mikroact.purpose %}
+							<p>{{ mikroact.purpose }}</p>
+						{% else %}
+							<p>There are currently no instructions for this MikroAct.</p>
+						{% endif %}
 					</div>
 				</div>
 			</div>
-		</div>
-<<<<<<< HEAD
-=======
-		<div class="span4 mikroactCol">
-			<div class="sideCol actPhoto">
-					{% if mikroact.photo %}
-					<img src="{{ mikroact.photo.url }}" title="{{ mikroact.title }}"/>
-					{% else %}
-					<div class="photoEmpty">{% if "change_mikroact" in mikroact_perms %}<a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-plus icon-3x"></i></a>{% endif %}</div>
-					{% endif %}
-			</div>
-			<div class="sideCol act">
-				<h1>{{ mikroact.title }}</h1>
-				<p class="location">{{ mikroact.location_address }}</p>
-				<p class="desc">{{ mikroact.description }}</p>
-				<p class="status">Campaigns:</p>
-				<ul>
-					{% for campaign in mikroact.campaigns.all %}
-					<li><a href="{{ campaign.get_absolute_url }}">{{ campaign.name }}</a></li>
-					{% endfor %}
-				</ul>
-				<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
-					{% csrf_token %}
-					{{ campaign_form|crispy }}
-					<button type="submit" class="btn btn-submit">Add</button>
-				</form>
-			</div>
-			{% include "inc/userPane.html" with profile=mikroact.author.userprofile %}
-		</div>
->>>>>>> 96236c8a24140a305ea0de19d409c484e73d532f
-	</div>
-</div>
+		
+		</div><!-- end span8 -->
+	</div><!-- end row -->
+</div><!-- end container -->
 {% endblock content %}

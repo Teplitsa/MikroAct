@@ -32,3 +32,27 @@ function createSlugs(){
 $(function () {
     $('#actTab a:last').tab('show');
   })
+  
+  
+$(document).ready(function(){
+	$('.feature img').css('opacity','1');
+	
+	$("a[data-toggle=popover]").popover({ 
+		html : true,
+		content : function() {
+	      return $('#popover_content_wrapper').html();
+	    }	
+	})
+      .click(function(e) {
+        e.preventDefault()
+      });
+      
+    
+    
+});
+
+$(function(){
+	$(".activity li a").click(function(){
+	    $(this).addClass('visited');
+    });
+})

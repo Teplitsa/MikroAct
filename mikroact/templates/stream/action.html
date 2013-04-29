@@ -1,14 +1,37 @@
-<a href="{{ action.actor.userprofile.get_absolute_url }}">
-	{{ action.actor }}
-</a> 
-{{ action.get_verb_display }} 
+
 <a href="{{ action.target.get_absolute_url }}">
-	{{ action.target }}
-</a>
+<span class="actionIcon">
+		{% if action.verb == 'added' %}<i class="icon-sitemap"></i>{% endif %}
+		{% if action.verb == 'created' %}<i class="icon-plus"></i>{% endif %}
+		{% if action.verb == 'commented' %}<i class="icon-comments"></i>{% endif %}
+		{% if action.verb == 'edited' %}<i class="icon-edit"></i>{% endif %}
+		{% if action.verb == 'followed' %}<i class="icon-share-alt"></i>{% endif %}
+	
+</span>&nbsp;
+<!-- <a href="{{ action.actor.userprofile.get_absolute_url }}"> -->
+	{{ action.actor }}
+<!-- </a>  -->
+{{ action.get_verb_display }} 
+<!-- <a href="{{ action.target.get_absolute_url }}"> -->
+	{% if action.target.title %}
+		{{ action.target.title }}
+	{% else %}
+		{{ action.target.name }}
+	{% endif %}
+<!-- </a> -->
 {% if action.action_object %}
 {% if action.verb == 'added' %}to{% endif %}
 {% if action.verb == 'commented' %}on{% endif %}
-<a href="{{ action.action_object.get_absolute_url }}">
-	{{ action.action_object }}
-</a>
+<!-- <a href="{{ action.action_object.get_absolute_url }}"> -->
+	{% if action.action_object.title %}
+		{{ action.action_object.title }}
+	{% else %}
+		{{ action.action_object.name }}
+	{% endif %}
+	
+
 {% endif %}
+<span class="activityDate">
+{{ action.datetime|date:"m/d/y - G:i" }}
+</span>
+</a>

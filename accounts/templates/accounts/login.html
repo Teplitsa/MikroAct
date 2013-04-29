@@ -11,7 +11,7 @@
 					<div class="alert alert-error">Your username and password didn't match. Please try again.</div>
 				{% endif %}
 
-				<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+				<form method="post" autocomplete="off" action="{% url 'django.contrib.auth.views.login' %}">
 					{% csrf_token %}
 					<p>
 						<input name="username" id="id_username" type="text" class="span2" placeholder="Username">

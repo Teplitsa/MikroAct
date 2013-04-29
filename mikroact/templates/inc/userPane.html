@@ -1,7 +1,13 @@
-<div class="sideCol author"><a href="{% url 'user_detail' username=profile.user.username %}">
-	{% if profile.photo %}<img src="{{ profile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
+<div class="sideCol author">
+	<a href="{% url 'user_detail' username=profile.user.username %}">
+	{% if profile.photo %}
+		<img src="{{ profile.photo.url }}" width="75" />
+	{% else %}
+	<div class="noPhoto"><i class="icon-user icon-large"></i></div>
+	{% endif %}
 	<h4>{{ profile.user }}</h4>
 	{% if profile.twitter %}<p><a href="http://twitter.com/{{ profile.twitter }}">
 		{{ profile.twitter }}
 </a></p>{% endif %}
-</a></div>
+</a>
+</div>

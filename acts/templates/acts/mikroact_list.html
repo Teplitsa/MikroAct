@@ -18,16 +18,31 @@
 		<ul class="tiles">
 		{% for mikroact in mikroact_list %}
 			<li class="span3">
-				<div class="collectiveTile">
+				<div class="actTile">
 					<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
-					<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
-				</div>
-				<div class="tileActions">
-					<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
-						{% csrf_token %}
-						{{ campaign_form|crispy }}
-						<button type="submit" class="btn btn-submit">Add</button>
-					</form>
+					
+					<h2>{{ mikroact.title }}</h2>
+					
+					<div class="tileActions">
+						<div class="tileDescription">
+						<p>{{ mikroact.description|truncatewords:30 }}</p>
+						<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+						<ul class="itemAction">
+							<li><i class="icon-plus"></i></li>
+							<li><a href="#" title="Add to Campaign" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
+							<div id="popover_content_wrapper" style="display: none;">
+								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
+								
+									{% csrf_token %}
+									{{ campaign_form|crispy }}
+									<button type="submit" class="btn btn-submit">Add</button>
+								</form>
+							</div>
+							</li>
+							
+						</ul>
+					</div>
+					
 				</div>
 			</li>
 		{% endfor %}

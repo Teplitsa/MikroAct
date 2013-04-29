@@ -9,7 +9,7 @@
 			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
-						<li><a href="{% url "collective_add" %}"><i class="icon-group icon-large"></i> Create Collective</a></li>
+						<li><a href="{% url "collective_add" %}"><i class="icon-plus"></i> Create Collective</a></li>
 					</ul>
 				</div>
 			</div>
@@ -19,7 +19,7 @@
 			<li class="span3">
 				<div class="collectiveTile">
 					<div class="tilePhoto">{% if collective.photo %}<img src="{{ collective.photo.url }}" height="160"/>{% endif %}</div>
-					<a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a>
+					<a href="{{ collective.get_absolute_url }}"><i class="icon-group"></i> {{ collective.name }}</a>
 				</div>
 			</li>
 		{% endfor %}

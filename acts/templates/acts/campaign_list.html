@@ -5,12 +5,8 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="span4">
-			<div class="sideCol">
-				
-			</div>
-		</div>
-		<div class="span8">
+		<div class="span12">
+			
 			<div class="mainCol campaigns">
 				<div class="actions">
 					<ul>
@@ -18,13 +14,19 @@
 					</ul>
 				</div>
 			</div>
-			
-			<ul>
-				{% for campaign in campaign_list %}
-				<li><a href="{{ campaign.get_absolute_url }}">{{ campaign }}</a></li>
-				{% endfor %}
-			</ul>
 		</div>
+		<ul class="tiles">
+		{% for campaign in campaign_list %}
+			<li class="span3">
+				<a href="{{ campaign.get_absolute_url }}"><div class="campaignTile">
+					{{ campaign.name }}<span class="campaignCount">{{ campaign.mikro_acts.count }} MikroActs</span>
+				</div>
+				</a>
+			</li>
+		{% endfor %}
+		</ul>
+		
+		
 	</div>
 </div>
 {% endblock content %}
