@@ -116,7 +116,7 @@ class MikroActListView(ListView):
     model = MikroAct
     
     def get_context_data(self, **kwargs):
-        kwargs.setdefault('campaign_form', AddToCampaignForm())
+        kwargs.setdefault('campaign_form', AddToCampaignForm(user=self.request.user))
         return super(MikroActListView, self).get_context_data(**kwargs)
 
 
