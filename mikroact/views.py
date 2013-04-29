@@ -20,7 +20,7 @@ def home(request):
         stream = Action.objects.filter(
             Q(target_campaign_id__in=following.values_list('target_campaign'))
             | Q(actor_user=request.user)
-        ).order_by('-datetime')
+        ).order_by('-datetime')[0:20]
 
     return render(request, 'index.html', {
         'mikro_acts': mikro_acts,
