@@ -6,7 +6,7 @@
 <div class="container">
 	<div class="row">
 		<div class="span8 offset2">
-			<form class="createForm" action="." method="post">
+			<form autocomplete="off" class="createForm" action="." method="post">
 				{% csrf_token %}
 				{{ form.as_p }}
 				{{ profile_form.as_p }}
@@ -14,5 +14,6 @@
 			</form>
 		</div>
 	</div>
+	
 </div>
 {% endblock content %}

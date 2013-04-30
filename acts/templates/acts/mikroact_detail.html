@@ -27,7 +27,24 @@
 			
 			<div class="sideCol campaignList">
 				<div class="accordion" id="campaignList">
-					
+					{% if user.is_authenticated %}
+					<div class="accordion-group dark">
+				    	<div class="accordion-heading">
+					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignList" href="#collapseListAdd">
+						    	<i class="icon-plus"></i> Add to Campaign
+						    </a>
+						</div>
+						<div id="collapseListAdd" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
+									{% csrf_token %}
+									{{ campaign_form|crispy }}
+									<button type="submit" class="btn btn-inverse">Add</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					{% endif %}
 					<div class="accordion-group">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignList" href="#collapseList">
@@ -48,31 +65,25 @@
 							</div>
 						</div>
 					</div>
-					<div class="accordion-group">
-				    	<div class="accordion-heading">
-					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignList" href="#collapseListAdd">
-						    	<i class="icon-plus"></i> Add to Campaign
-						    </a>
-						</div>
-						<div id="collapseListAdd" class="accordion-body collapse">
-							<div class="accordion-inner">
-								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
-									{% csrf_token %}
-									{{ campaign_form|crispy }}
-									<button type="submit" class="btn btn-submit">Add</button>
-								</form>
-							</div>
-						</div>
-					</div>
 					
 				</div><!-- end accordion -->
 				
 			</div>
-			<a href="{% url 'user_detail' username=mikroact.author %}"><div class="sideCol author">
-				{% if mikroact.author.userprofile.photo %}<img src="{{ mikroact.author.userprofile.photo.url }}" width="75" />{% else %}<div class="noPhoto"><i class="icon-user icon-large"></i></div>{% endif %}
-				<h4>{{ mikroact.author }}</h4>
-				<p>{{ mikroact.author.userprofile.twitter }}</p>
-			</div></a>
+			<div class="sideCol author">
+				<a href="{% url 'user_detail' username=mikroact.author %}">
+					<div class="authorImg">
+					{% if mikroact.author.userprofile.photo %}
+						<img src="{{ mikroact.author.userprofile.photo.url }}" width="50" />
+					{% else %}
+					<i class="icon-user icon-large"></i>
+					{% endif %}
+					</div>
+					<h4>{{ mikroact.author.userprofile.user }}</h4>
+					{% if mikroact.author.userprofile.twitter %}<p><a href="http://twitter.com/{{ mikroact.author.userprofile.twitter }}"><i class="icon-twitter"></i>
+						{{ mikroact.author.userprofile.twitter }}
+					</a></p>{% endif %}
+				</a>
+			</div>
 			
 			
 		</div><!-- end span4 -->

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load follow_tags %}
 {% block title %}{{ block.super }}: Collectives {% endblock %}
 
 {% block content %}
@@ -10,22 +10,65 @@
 				<div class="actions">
 					<ul>
 						<li><a href="{% url "collective_add" %}"><i class="icon-plus"></i> Create Collective</a></li>
+						<li class="pull-right"><a href="#collectiveHelp" data-toggle="modal"><i class="icon-question-sign icon-large"></i></a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
+		
 		<ul class="tiles">
 		{% for collective in collective_list %}
 			<li class="span3">
 				<div class="collectiveTile">
-					<div class="tilePhoto">{% if collective.photo %}<img src="{{ collective.photo.url }}" height="160"/>{% endif %}</div>
-					<a href="{{ collective.get_absolute_url }}"><i class="icon-group"></i> {{ collective.name }}</a>
+					<div class="tilePhoto">
+						{% if collective.members %}
+						<ul class="mosaic">
+							{% for member in collective.members.all|slice:":4" %}
+							<li class="mosaicItem">{% if member.userprofile.photo %}<img src="{{ member.userprofile.photo.url }}" />{% endif %}</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+					</div>
+					
+					<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+					<div class="tileActions">
+						<div class="tileDescription">
+						<p>{{ collective.description|truncatewords:30 }}</p>
+						<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+						<ul class="itemAction">
+							<li><i class="icon-plus"></i></li>
+							<li>
+								<a data-toggle="tooltip" data-placement="top" {% if not user|is_following:collective %}
+					href="{% url 'collective_follow' slug=collective.slug %}" title="Follow">
+					<i class="icon-share-alt"></i>
+					{% else %}
+					href="{% url 'collective_unfollow' slug=collective.slug %}" title="Unfollow">
+					<i class="icon-remove"></i>
+					{% endif %}
+			</a>
+							</li>
+						</ul>
+					</div>
+					
 				</div>
 			</li>
 		{% endfor %}
-		</ul>
+		</ul>	
 			
-			
+	</div>
+</div>
+<div id="collectiveHelp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    	<h1>What's a Collective?</h1>
+    </div>
+    <div class="modal-body">
+    	<p>
+	    Aliquip etsy fixie ethnic. Polaroid gentrify fugiat pug, 90's occaecat velit. Vegan mollit scenester craft beer intelligentsia. Tumblr proident banksy ethical, authentic echo park umami fixie do. Kogi in accusamus, nihil reprehenderit photo booth mlkshk williamsburg cillum whatever eu brooklyn bespoke post-ironic magna. 8-bit meh irure gluten-free brunch church-key culpa plaid leggings. Velit pariatur banksy magna, nisi lomo vice seitan retro pop-up single-origin coffee eiusmod ad.
+    	</p>
+	</div>
+	<div class="modal-footer">
+		
 	</div>
 </div>
 {% endblock content %}

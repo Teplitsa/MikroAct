@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 
 {% block title %}{{ block.super }}: Home{% endblock title %}
@@ -8,77 +9,174 @@
 <div class="container home">
 	<div class="row-fluid">
 		<div class="span12">
+			<div class="row-fluid">
 			
-		</div>
 			
-			<div class="halfCol">
-				<h2>My MikroActs</h2>
-				<ul class="row-fluid tiles">
-					{% for mikroact in user.mikroacts.all %}
+				<div class="rowHeader">
+					<h2>My MikroActs</h2>
+				</div>
+				<ul class="tiles">
+				{% for mikroact in user.mikroacts.all %}
 					<li class="span3">
-						<div class="dashTile">
+						<div class="actTile">
 							<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
-							<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
+							
+							<div class="tileTitle">{{ mikroact.title }}</div>
+							
+							<div class="tileActions">
+								<div class="tileDescription">
+								<p>{{ mikroact.description|truncatewords:30 }}</p>
+								<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+								<ul class="itemAction">
+									<li><i class="icon-plus"></i></li>
+									<li><a href="#" title="Add to Campaign" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
+									<div id="popover_content_wrapper" style="display: none;">
+										<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
+										
+											{% csrf_token %}
+											{{ campaign_form|crispy }}
+											<button type="submit" class="btn btn-submit">Add</button>
+										</form>
+									</div>
+									</li>
+									
+								</ul>
+							</div>
+							
 						</div>
 					</li>
-					{% endfor %}
+				{% endfor %}
 				</ul>
 			</div>
-			<div class="halfCol">
-				<h2>My Collectives</h2>
-				<ul class="row-fluid tiles">
-					{% for collective in user.collectives.all %}
+			<div class="row-fluid">
+				<div class="rowHeader">
+					<h2>My Collectives</h2>
+				</div>
+				<ul class="tiles">
+				{% for collective in user.collectives.all %}
 					<li class="span3">
-						<div class="dashTile">
-							<div class="tilePhoto">{% if collective.photo %}<img src="{{ collective.photo.url }}" height="160"/>{% endif %}</div>
-							<a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a>
+						<div class="collectiveTile">
+							<div class="tilePhoto">
+								{% if collective.members %}
+								<ul class="mosaic">
+									{% for member in collective.members.all|slice:":4" %}
+									<li class="mosaicItem">{% if member.userprofile.photo %}<img src="{{ member.userprofile.photo.url }}" />{% endif %}</li>
+									{% endfor %}
+								</ul>
+								{% endif %}
+							</div>
+							
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+							<div class="tileActions">
+								<div class="tileDescription">
+								<p>{{ collective.description|truncatewords:30 }}</p>
+								<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+								<ul class="itemAction">
+									<li><i class="icon-plus"></i></li>
+								</ul>
+							</div>
+							
 						</div>
 					</li>
-					{% endfor %}
-				</ul>
+				{% endfor %}
+				</ul>	
 			</div>
 		</div>
 	</div><!-- end row-fluid -->
 </div>
 {% else %}
+
+<div class="fullCol message">
+	<div class="container">
+		<h1 class="welcome">Welcome to MikroAct</h1>
+				<p><strong>MikroAct is an open source, collaborative actions platform for mobilizing and connecting local communities through the DIY actions they perform. </strong><br />The website seeks to facilitate effective mobilization of actions by supporting communities with a set of collaboration and ideation tools. A secondary goal of this platform is to link online and offline public spaces and actions, towards building stronger, more resilient communities.</p>
+				<p>МикроАкт—платформа мобилизации и объединения локальных сообществ активистов с помощью взаимодействия в рамках небольших самоорганизуемых акций. Платформа создана на открытом коде (Open Source) и обладает рядом функций, позволяющих эффективную мобилизацию и синхронизацию акций . Другая цель платформы—соединять онлайн- и оффлайн- пространства и действия, создавая более устойчивые и сильные сообщества.</p>
+				<a href="{% url "user_register" %}" style="margin-top: 15px; font-size:12px;" class="btn btn-inverse">Register Now</a>
+	</div>
+</div>
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			<h1>Welcome to MikroAct!</h1>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12">
-			<div class="fullCol message">
-				<p>MikroAct is an open source, collaborative actions platform for mobilizing and connecting local communities through the DIY actions they perform. The website seeks to facilitate effective mobilization of actions by supporting communities with a set of collaboration and ideation tools. A secondary goal of this platform is to link online and offline public spaces and actions, towards building stronger, more resilient communities.</p>
-				<p>МикроАкт—платформа мобилизации и объединения локальных сообществ активистов с помощью взаимодействия в рамках небольших самоорганизуемых акций. Платформа создана на открытом коде (Open Source) и обладает рядом функций, позволяющих эффективную мобилизацию и синхронизацию акций . Другая цель платформы—соединять онлайн- и оффлайн- пространства и действия, создавая более устойчивые и сильные сообщества.</p>
-			</div>
+			
 		</div>
 		
 	</div>
-	<div class="row">
-		<ul class="tiles">
-		{% for mikroact in mikro_acts %}
-			<li class="span3">
-				<div class="actTile">
-					<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
-					
-					<h2>{{ mikroact.title }}</h2>
-					
-					<div class="tileActions">
-						<div class="tileDescription">
-						<p>{{ mikroact.description|truncatewords:30 }}</p>
-						<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
-						<ul class="itemAction">
-							<li><i class="icon-plus"></i></li>
-							
-						</ul>
-					</div>
-					
+	<div class="row-fluid">
+		<div class="span6">
+			<div class="row-fluid">
+				<div class="rowHeader">
+					<h2>Collectives</h2>
 				</div>
-			</li>
-		{% endfor %}
-		</ul>
+				<ul class="tiles indexTiles">
+				{% for collective in collectives %}
+					<li class="span6">
+						<div class="collectiveTile">
+							<div class="tilePhoto">
+								{% if collective.members %}
+								<ul class="mosaic">
+									{% for member in collective.members.all|slice:":4" %}
+									<li class="mosaicItem">{% if member.userprofile.photo %}<img src="{{ member.userprofile.photo.url }}" />{% endif %}</li>
+									{% endfor %}
+								</ul>
+								{% endif %}
+							</div>
+							
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+							<div class="tileActions">
+								<div class="tileDescription">
+								<p>{{ collective.description|truncatewords:30 }}</p>
+								<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+								<ul class="itemAction">
+									<li><i class="icon-plus"></i></li>
+								</ul>
+							</div>
+							
+						</div>
+					</li>
+				{% endfor %}
+				</ul>	
+				
+			</div>
+		</div>
+		<div class="span6">
+			<div class="row-fluid">
+				<div class="rowHeader">
+					<h2>Campaigns</h2>
+				</div>
+				<ul class="tiles indexTiles">
+				{% for campaign in campaigns %}
+					<li class="span6">
+						<div class="campaignTile">
+						
+							<div class="tilePhoto">
+								{% if campaign.mikro_acts %}
+								<ul class="mosaic">
+								{% for act in campaign.mikro_acts.all|slice:":4" %}
+									<li class="mosaicItem"><img src="{{ act.photo.url }}" /></li>
+								{% endfor %}
+								</ul>
+								{% endif %}
+							</div>
+							
+							<div class="tileTitle">{{ campaign.name }}<span class="campaignCount">{{ campaign.mikro_acts.count }} MikroActs</span></div>
+							
+							<div class="tileActions">
+								<div class="tileDescription">
+								<p>{{ campaign.description|truncatewords:30 }}</p>
+								<p><a href="{{ campaign.get_absolute_url }}">Visit Campaign</a></p></div>
+								<ul class="itemAction">
+									<li><i class="icon-plus"></i></li>
+								</ul>
+							</div>
+						
+						</div>
+					</li>
+				{% endfor %}
+				</ul>
+				
+			</div>
+		</div>
+		
 	</div>
 </div>
 {% endif %}

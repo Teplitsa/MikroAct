@@ -21,15 +21,6 @@
 				<h1>{{ userprofile.user }}</h1>
 				<p><i class="icon-twitter"></i> {{ userprofile.twitter }}</p>
 			</div>
-			<div class="sideCol members">
-				<ul>
-					{% for collective in userprofile.user.collectives.all %}
-					<li><a href="{{ collective.get_absolute_url }}">{{ collective.name }}</a></li>
-					{% endfor %}
-				</ul>
-			</div>
-			<div class="sideCol author">
-			</div>
 		</div>
 		<div class="span9">
 			{% if "change_userprofile" in userprofile_perms %}
@@ -45,19 +36,60 @@
 				</div>
 			</div>
 			{% endif %}
-			<ul class="row-fluid tiles">
+			<div class="row-fluid">
+				<ul class="tiles">
 				{% for mikroact in userprofile.user.mikroacts.all %}
-				<li class="span4">
-					<div class="collectiveTile">
-						<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
-						<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
-					</div>
-					<div class="tileActions">
-						
-					</div>
-				</li>
+					<li class="span4">
+						<div class="actTile">
+							<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+							
+							<div class="tileTitle">{{ mikroact.title }}</div>
+							
+							<div class="tileActions">
+								<div class="tileDescription">
+								<p>{{ mikroact.description|truncatewords:30 }}</p>
+								<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+								<ul class="itemAction">
+									<li><i class="icon-plus"></i></li>
+									
+								</ul>
+							</div>
+							
+						</div>
+					</li>
 				{% endfor %}
-			</ul>
+				</ul>
+			</div>
+			<div class="row-fluid">
+				<ul class="tiles">
+				{% for collective in userprofile.user.collectives.all %}
+					<li class="span4">
+						<div class="collectiveTile">
+							<div class="tilePhoto">
+								{% if collective.members %}
+								<ul class="mosaic">
+									{% for member in collective.members.all|slice:":4" %}
+									<li class="mosaicItem">{% if member.userprofile.photo %}<img src="{{ member.userprofile.photo.url }}" />{% endif %}</li>
+									{% endfor %}
+								</ul>
+								{% endif %}
+							</div>
+							
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+							<div class="tileActions">
+								<div class="tileDescription">
+								<p>{{ collective.description|truncatewords:30 }}</p>
+								<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+								<ul class="itemAction">
+									<li><i class="icon-plus"></i></li>
+								</ul>
+							</div>
+							
+						</div>
+					</li>
+				{% endfor %}
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>

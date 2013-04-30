@@ -1,6 +1,6 @@
 {% load stream_tags %}
 <div class="activityPane closed">
-	<div class="activityWrapper">
+	<div class="activityWrapper sticky">
 		<h1>Activity</h1>
 		<ul>
 			{% for action in stream %}
@@ -8,9 +8,9 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<a href="#" class="activityToggle" data-toggle="tooltip" data-placement="right" title="Close Activity Panel">
-		<div class="trigger">
-			<i class="icon-arrow-left"></i>
-		</div>
+	<a href="#" class="activityToggle">
+			<div class="trigger">
+				<i class="icon-arrow-left"></i>
+			</div>
 	</a>
 </div>

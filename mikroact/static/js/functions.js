@@ -36,6 +36,9 @@ $(function () {
   
 $(document).ready(function(){
 	$('.feature img').css('opacity','1');
+	$('.tileActions li').tooltip({
+		selector : 'a[data-toggle=tooltip]',
+	});
 	
 	$("a[data-toggle=popover]").popover({ 
 		html : true,
@@ -78,4 +81,33 @@ $(function(){
 	$(".activity li a").click(function(){
 	    $(this).addClass('visited');
     });
-})
+});
+$(function(){ // document ready
+
+  if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+
+    var stickyTop = $('.sticky').offset().top-120; // returns number 
+
+    $(window).scroll(function(){ // scroll event
+
+      var windowTop = $(window).scrollTop(); // returns number 
+
+      if (stickyTop < windowTop){
+      	$('.activityPane').css('z-index', '8');
+        $('.sticky').css({ position: 'fixed', top: -1 });
+        $('.activityToggle').css('top', '0');
+        $('.activityToggle .trigger').css('top', '45%');
+      }
+      else {
+      	$('.activityPane').css('z-index', '1');
+        $('.sticky').css('position','absolute');
+        $('.sticky').css('top','130px');
+        $('.activityToggle').css('top', '130px');
+        $('.activityToggle .trigger').css('top', '35%');
+      }
+
+    });
+
+  }
+
+});

@@ -38,6 +38,7 @@ section.mainContent{
 }
 .mainCol.act{
 	background:#fff;
+	margin-top: 15px;
 }
 .mainCol.comment{
 	background:#fff;
@@ -55,35 +56,51 @@ section.mainContent{
 	padding: 10px;
 	color:;
 	font-size: 12px;
-	color:#353535;
+	color:#009999;
 }
 .actions a:hover{
 	
-	color:#6fcbd7;
+	color:#2f337b;
 }
 .mikroactCol, .collectiveCol{
 	margin-bottom: 60px;
 }
-.sideCol.author{
-	background:#fff;
-	margin: 15px 0;
-	height: 75px;
+.authorImg{
+	float:left;
+	height:50px;
 	overflow:hidden;
 }
-.sideCol.author img{
-	float:left;
+.sideCol.author{
+	background:#f4f4f4;
+	border-bottom:1px solid #ccc;
+	height: 50px;
+	overflow:hidden;
+	padding:5px;
+}
+.sideCol.author h4{
+	font-size:14px;
+	color:#666;
+	font-weight:normal;
+	margin:0;
+	padding:0;
+}
+.sideCol.author p{
+	margin:0;
+	font-size:12px;
+}
+.authorImg img{
 	margin-right:10px;
 }
 .sideCol.author:hover{
-	background:#f4f4f4;
+	background:#fff;
 }
 .sideCol.author .noPhoto{
 	float:left;
-	width: 75px;
-	background:#353535;
-	height:75px;
+	width: 50px;
+	background:#ccc;
+	height:50px;
 	margin-right:10px;
-	line-height:75px;
+	line-height:50px;
 	text-align:center;
 }
 .noPhoto i{
@@ -91,7 +108,7 @@ section.mainContent{
 }
 .sideCol.collective{
 	background:#fff;
-	padding: 15px;
+	padding: 10px;
 }
 .sideCol.collective h4{
 	font-size: 14px;
@@ -106,17 +123,19 @@ section.mainContent{
 }
 
 .collectiveTitle{
-	border-bottom: 1px solid #ccc;
+	
 	margin-bottom: 10px;
 	padding-bottom: 10px;
 }
 .collectiveInfo{
 }
 .collectiveInfo h2{
+	font-weight:normal;
 	color:#009999;
 	margin:0;
 	padding: 0;
 	font-size:24px;
+	
 }
 .collectiveTitle ul{
 	margin:0;
@@ -132,7 +151,7 @@ section.mainContent{
 /*ACTIONS */
 
 .mainCol .actions{
-	background:#fff;
+	background:#f4f4f4;
 	line-height:40px;
 	height:40px;
 }
@@ -148,13 +167,17 @@ section.mainContent{
 .actions .nav .active{
 	
 }
+.collectiveAll .actions .pull-right a {
+	line-height:40px;
+}
 .actions .nav a{
 	border:none;
 	line-height:40px;
 	border-radius:0;
 	margin:0;
+	outline:none;
 	padding:0 20px;
-	
+	color:#999;
 	transition: all 1s ease-in-out;
 	-webkit-transition:all .1s ease-in-out;
 	-moz-transition: all .1s ease-in-out;
@@ -173,7 +196,7 @@ section.mainContent{
 .actions .nav a:hover{
 	border-radius:0;
 	border:none;
-	background:#f4f4f4;
+	background:#fff;
 }
 /*INSTRUCTIONS */
 #instruction{
@@ -182,34 +205,49 @@ section.mainContent{
 	line-height: 20px;
 	font-size:13px;
 }
+#description{
+	padding: 15px;
+	color:#666;
+	line-height: 20px;
+	font-size:13px;
+}
+#description h4{
+	font-size:14px;
+}
 /*COMMENTS */
 .mainCol.comment{
 	border-top: 1px solid #ccc;
 }
-#comments{
-	padding: 20px;
-}
+
 .comment .tab-content{width:100%;}
 .comment-item{
-	margin-top: 10px;
-	
-	padding: 10px;
+	padding: 15px;
+	background:#fff;
+	border-bottom: 1px solid #ccc;
+}
+.comment-item:hover{
 	background:#f4f4f4;
-	border: 1px solid #e3e3e3;
+}
+.commentUser{
 	
 }
-#comments h4{
-	margin:0;
-	padding: 0;
-	font-size:14px;
+.commentUser a{
+	color:#009999;
+}
+.commentUser img{
+	float:left;
+	margin-right:15px;
 }
 .comment-date{
 	font-style:italic;
 	color:#999;
-	font-size:12px;
+	font-size:11px;
 }
 .comment-text{
 	margin-top: 10px;
+	font-size:12px;
+	color:#666;
+	margin-left: 60px;
 }
 .comment-item h3{
 	font-size:16px;
@@ -320,13 +358,13 @@ section.mainContent{
 }
 
 .tiles{
-	margin:0 0 15px;
+	margin:0 0 0;
 	padding:0;
 }
 .tiles li{
 	list-style:none;
 	
-	margin-top: 10px;
+	
 }
 
 .tiles li img{
@@ -337,8 +375,4 @@ section.mainContent{
 	overflow:hidden;
 	
 }
-.collectiveTile a{
-	padding: 15px 10px;
-	background:#fff;
-	display:block;
-}
+

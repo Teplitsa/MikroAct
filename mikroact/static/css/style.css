@@ -5,6 +5,62 @@ body{
 	background:#e3e3e3;
 }
 
+
+h1.welcome{
+	font-weight:normal;
+	font-size: 32px;
+	color:#fff;
+}
+.fullCol.message{
+	padding: 15px 0 30px;
+	font-size: 13px;
+	line-height: 22px;
+	margin-bottom: 10px;
+	color:#f4f4f4;
+	background:#009999;
+}
+.fullCol.message strong{
+	line-height:32px;
+	font-size: 14px;
+	color:#fff;
+}
+
+.registerNotice{
+	background:#009999;
+	color:#f4f4f4;
+	font-size:18px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	line-height:46px;
+}
+.registerNotice a.close{
+	margin-top:15px;
+}
+.callAction{
+	text-align:center;
+	background:#fff;
+	margin-top: 15px;
+	padding: 15px;
+}
+.callAction h2{
+	font-size:18px;
+	font-weight:normal;
+	color:#009999;
+}
+.callAction p{
+	font-size:13px;
+	line-height:20px;
+	color:#999;
+}
+.callAction i{
+	color:#ccc;
+}
+
+
+
+
+.tiles{
+	margin-bottom: 15px;
+}
 /********        **********************/
 /******** PANEL  **********************/
 /********        **********************/
@@ -18,6 +74,8 @@ section.panel .userNav {
 	font-weight: 300;
 	color:#fff;
 	height:40px;
+	position:relative;
+	z-index:5;
 }
 section.panel .userNav ul li{
 	display: inline;
@@ -74,7 +132,7 @@ section.panel .userNav li.dropdown li a:hover{
 
 section.panel .userNav a{
 	color:#fff;
-	
+	outline: 0;
 	transition: all .1s ease-in-out;
 	-webkit-transition:all .1s ease-in-out;
 	-moz-transition: all .1s ease-in-out;
@@ -128,7 +186,7 @@ section.panel .loginLink.open {
 #loginModal.modal{
 	width: 450px;
 	margin-left: -225px;
-	background: #388787; /* Old browsers */
+	background: #009999; /* Old browsers */
 	
 }
 .modal-header{
@@ -180,25 +238,21 @@ section.panel .loginLink.open {
 	background:#fff;
 }
 
-/********          *********************/
+/********          **********************/
 /******** ACTIVITY **********************/
-/********          ********************/
+/********          **********************/
+
 .activityPane{
 	height:100%;
 	position:fixed;
-	
 	width: 325px;
-	background:#fff;
-	border-right:1px solid #ccc;
-	top:130px;
-	overflow:hidden;
-	overflow-y:scroll;
-	-webkit-transition: all .2s ease-in-out;
-		-moz-transition: all .2s ease-in-out;
-        -ms-transition: all .2s ease-in-out;
-        -o-transition: all .2s ease-in-out;
-		transition: all .2s ease-in-out;
-		border-top: 1px solid #ccc;
+	top:0;
+	-webkit-transition: all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
+	z-index:1;
 }
 .activityPane.closed{
 	right:-325px;
@@ -208,19 +262,29 @@ section.panel .loginLink.open {
 	right:0;
 }
 .activityPane.closed .activityToggle{
-	right:0;
+	right:-1px;
+	background:#fff;
+	
 }
 .activityPane.open .activityToggle{
 	right:325px;
+	background:#fff;
 }
 
 .activityWrapper{
-	
-	padding-bottom:30px;
+	width:100%;
+	top:130px;
+	position:absolute;
+	overflow-y:scroll;
+	background:#f4f4f4;
+	height:100%;
+	border-top:1px solid #ccc;
 }
 
 .activityWrapper h1{
 	font-size: 18px;
+	color:#ccc;
+	font-weight:normal;
 	padding-left:15px;
 }
 .activityWrapper ul{
@@ -230,7 +294,7 @@ section.panel .loginLink.open {
 }
 .activityWrapper ul li {
 	list-style:none;
-	
+	background:#f4f4f4;
 	
 }
 .activityWrapper ul li a{
@@ -243,7 +307,7 @@ section.panel .loginLink.open {
 	color:#009999;
 }
 .activityWrapper li a:hover{
-	background:#f4f4f4;
+	background:#fff;
 }
 .activityWrapper li:nth-child(n+10) a{
 	/* background:#f4f4f4; */
@@ -261,30 +325,33 @@ section.panel .loginLink.open {
 }
 .activityToggle{
 	height:100%;
-	-webkit-transition: all .2s ease-in-out;
-		-moz-transition: all .2s ease-in-out;
-        -ms-transition: all .2s ease-in-out;
-        -o-transition: all .2s ease-in-out;
-		transition: all .2s ease-in-out;
+	-webkit-transition: all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
 	position:fixed;
 	width: 40px;
 	top:130px;
-	background:#f4f4f4;
-	border-left:1px solid #ccc;
-	border-right: 1px solid #ccc;
+	background:#fff;
 	text-align:center;
-	border-top: 1px solid #ccc;
+	z-index:2;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
 }
 .activityToggle:hover{
-	background:#fff;
+	background:#f4f4f4;
 }
+
 .activityToggle .trigger{
-	top: 35%;
+	top: 30%;
 	width:40px;
 	position:absolute;
 	
 }
-
+.activityToggle .trigger i{
+	color:#009999;
+}
 
 /********        **********************/
 /******** HEADER **********************/
@@ -295,7 +362,6 @@ section.header{
 	height: auto;
 	margin-bottom: 10px;
 	padding-bottom:10px;
-	z-index: 1000;
 }
 
 section.header .navbar-search{
@@ -368,20 +434,32 @@ section.header .logo h1{
 /********          **********************/
 
 /******** sidecol ***********/
-
-
+.row-fluid{
+	margin-bottom:10px;
+}
+.rowHeader{
+	background:#fff;
+	height:40px;
+}
+.rowHeader h2{
+	font-size: 14px;
+	font-weight: normal;
+	color:#009999;
+	margin:0;
+	padding: 0 15px;
+}
 
 
 .dashTiles .tiles li:nth-child(2n+1){
 	margin-left:0;
 }
 
-.fullCol.message{
-	background:#fff;
-	padding: 15px;
-	font-size: 13px;
-	line-height: 20px;
-	
+
+.indexTiles li{
+	margin-bottom: 15px;
+}
+.indexTiles li:nth-child(2n+1){
+	margin-left:0px;
 }
 /********          **********************/
 /******** MIKROACT **********************/
@@ -390,21 +468,15 @@ section.header .logo h1{
 /******** list ***********/
 .actTile{
 	position:relative;
-	min-height:200px;
+	min-height:180px;
+	margin-top: 10px;
 	background:#353535;
 }
-.actTile h2{
-	font-size: 18px;
-	margin:0;
-	color:#e3e3e3;
-	font-weight:normal;
-	padding: 0 10px;
-}
-.tilePhoto{
+.actTile .tilePhoto{
 	height:160px;
 	background:#000;
 }
-.tileActions{
+.actTile .tileActions{
 	position:absolute;
 	top:0;
 	background:rgba(35,35,35,.8);
@@ -418,19 +490,19 @@ section.header .logo h1{
     -o-transition: opacity .3s ease-in-out;
 	transition: opacity .3s ease-in-out;
 }
-.tileActions a{
+.actTile .tileActions a{
 	color:#6fcbd7;
 }
-.tileActions .tileDescription{
+.actTile .tileActions .tileDescription{
 	font-size:11px;
 	padding: 10px;
 	color:#e3e3e3;
 	
 }
-.tileActions .tileDescription a{
+.actTile .tileActions .tileDescription a{
 	font-size: 18px;
 }
-.tileActions form{
+.actTile .tileActions form{
 	margin:0;
 }
 .actTile:hover .tileActions{
@@ -442,11 +514,11 @@ section.header .logo h1{
 	margin-right:10px;
 	bottom: 0;
 	position:absolute;
-	height:40px;
+	height:30px;
 }
 .itemAction li{
 	list-style:none;
-	line-height:40px;
+	line-height:30px;
 	display:inline;
 }
 
@@ -495,6 +567,12 @@ section.header .logo h1{
 	font-size:12px;
 	color:#999;
 }
+.sideCol.campaignList .accordion-toggle{
+	color:#009999;
+}
+.sideCol.campaignList .accordion-toggle:hover{
+	color:#009999;
+}
 .sideCol.campaignList ul{
 	margin:0;
 }
@@ -506,9 +584,15 @@ section.header .logo h1{
 	display:block;
 	padding: 10px 15px;
 	line-height:24px;
+	background:#f4f4f4;
+	font-size:12px;
+	color:#666;
+}
+.sideCol.campaignList ul li a i{
+	color:#009999;
 }
 .sideCol.campaignList ul li a:hover{
-	background:#f4f4f4;
+	background:#fff;
 }
 .sideCol.campaignList ul li:last-child{
 	border-bottom: 1px solid #ccc;
@@ -520,17 +604,279 @@ section.header .logo h1{
 	padding:0;
 	border:none;
 }
+.accordion-group.dark{
+	background:#353535;
+	border-radius:0;
+	border:none;
+	
+}
+.accordion-group.dark .accordion-toggle{
+	color:#fff;
+	font-size:12px;
+}
+.accordion-group.dark .accordion-toggle.active{
+	color:#6fcbd7;
+	font-size:12px;
+}
+.accordion-group.dark .accordion-toggle:hover{
+	color:#6fcbd7;
+}
+
+.accordion-group.dark .accordion-inner label{
+	color:#f4f4f4;
+	font-size:12px;
+	padding-left: 15px;
+}
+
+.accordion-group.dark .accordion-inner select{
+	margin-left:15px;
+	float:left;
+	height:35px;
+	margin-bottom: 20px;
+}
+.accordion-group.dark .accordion-inner button{
+	margin-left:10px;
+	height:35px;
+	float:left;
+	margin-top:-5px;
+}
+/********            **********************/
+/******** COLLECTIVE **********************/
+/********            **********************/
+#collectiveMembers{
+	background:#fff;
+}
+#collectiveMembers .accordion-group{
+	border:none;
+	margin:0;
+	border-radius:0;
+}
+#collectiveMembers .accordion-toggle{
+	color:#009999;
+	line-height:24px;
+	padding: 10px;
+}
+#collectiveMembers .accordion-inner{
+	padding:0;
+	
+}
+.actionsCollective{
+	display:block;
+	background:#353535;
+	padding: 10px;
+	font-weight:normal;
+	color:#fff;
+	font-size:12px;
+}
+.actionsCollective:hover{
+	color:#6fcbd7;
+}
+
+.followerCount{
+	float:right;
+	color:#999;
+	font-size:12px;
+}
+.collectiveTile{
+	background:#fff;
+	position:relative;
+	margin-top: 10px;
+}
+.collectiveTile .tilePhoto{
+	height:160px;
+	
+}
+.collectiveTile .tileActions{
+	position:absolute;
+	top:0;
+	background:rgba(255,255,255,.9);
+	z-index:10;
+	width:100%;
+	opacity:0;
+	height:100%;
+	-webkit-transition: opacity .3s ease-in-out;
+	-moz-transition: opacity .3s ease-in-out;
+    -ms-transition: opacity .3s ease-in-out;
+    -o-transition: opacity .3s ease-in-out;
+	transition: opacity .3s ease-in-out;
+}
+.collectiveTile .tileActions a{
+	color:#009999;
+}
+.collectiveTile .tileActions .tileDescription{
+	font-size:11px;
+	padding: 10px;
+	color:#666;
+	
+}
+.collectiveTile .tileActions .tileDescription a{
+	font-size: 18px;
+}
+.collectiveTile .tileActions form{
+	margin:0;
+}
+.collectiveTile:hover .tileActions{
+	opacity:1;
+}
+.collectiveTile .tileTitle{
+	background:#fff;
+	font-size:12px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	padding: 5px 10px;
+	font-weight:normal;
+	color:#666;
+}
+.collectiveTile .tileTitle .count{
+	float:right;
+	font-size:10px;
+	color:#999;
+}
+.collectiveTile .mosaic{
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	min-height:160px;
+	background:#fff url(../img/tileDarkBG.jpg);
+}
+.activityCollective {
+	position:relative;
+	width:100%;
+}
+.activityCollective ul{
+	margin:0;
+	font-size:12px;
+	
+}
+.activityCollective ul li {
+	list-style:none;
+	background:#fff;
+	
+}
+.activityCollective ul li a{
+	border-bottom: 1px solid #e3e3e3;
+	line-height: 24px;
+	padding: 10px 15px;
+	display:block;
+}
+.activityCollective i{
+	color:#009999;
+}
+.activityCollective li a:hover{
+	background:#f4f4f4;
+}
+.activityCollective li:nth-child(n+10) a{
+	/* background:#f4f4f4; */
+}
+.activityCollective .activityDate{
+
+	padding-right:10px;
+	position:absolute;
+	right:0;
+	color:#ccc;
+	font-size:10px;
+}
+.activityCollective .activityTarget{
+	color:#009999;
+}
 
 /********          **********************/
 /******** CAMPAIGN **********************/
 /********          **********************/
+#campaignFollowers{
+	background:#fff;
+}
+#campaignFollowers .accordion-group{
+	border:none;
+	margin:0;
+	border-radius:0;
+}
+#campaignFollowers .accordion-toggle{
+	color:#009999;
+	line-height:24px;
+	padding: 10px;
+}
+#campaignFollowers .accordion-inner{
+	padding:0;
+	
+}
+.actionsCampaign{
+	display:block;
+	background:#353535;
+	padding: 10px;
+	font-weight:normal;
+	color:#fff;
+	font-size:12px;
+}
+.actionsCampaign:hover{
+	color:#6fcbd7;
+}
+
 
 .campaignTile{
 	background:#fff;
+	position:relative;
+	margin-top: 10px;
+}
+.campaignTile .tilePhoto{
+	height:160px;
+	
+}
+.campaignTile .tileActions{
+	position:absolute;
+	top:0;
+	background:rgba(255,255,255,.9);
+	z-index:10;
+	width:100%;
+	opacity:0;
+	height:100%;
+	-webkit-transition: opacity .3s ease-in-out;
+	-moz-transition: opacity .3s ease-in-out;
+    -ms-transition: opacity .3s ease-in-out;
+    -o-transition: opacity .3s ease-in-out;
+	transition: opacity .3s ease-in-out;
+}
+.campaignTile .tileActions a{
+	color:#6fcbd7;
+}
+.campaignTile .tileActions .tileDescription{
+	font-size:11px;
+	padding: 10px;
+	color:#999;
+	
+}
+.campaignTile .tileActions .tileDescription a{
+	font-size: 18px;
+}
+.campaignTile .tileActions form{
+	margin:0;
+}
+.campaignTile:hover .tileActions{
+	opacity:1;
+}
+.campaignTile .tileTitle{
+	background:#fff;
+	color:#666;
+	font-size:12px;
+	padding:5px 10px;
+	
+}
+.campaignTile .tileTitle .count{
+	float:right;
+	font-size:10px;
+	color:#666;
+}
+.campaignTile .mosaic{
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	min-height:160px;
+	background:#fff url(../img/tileBG.jpg);
 }
 
 .campaignCount{
 	float:right;
+	font-size:12px;
+	color:#666;
 }
 .campTiles li:nth-child(3n+1){
 	margin-left:0;
@@ -555,16 +901,85 @@ section.header .logo h1{
 }
 
 
+.mosaic{
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	min-height:160px;
+	background:#fff url(../img/tileBG.jpg);
+}
+li.mosaicItem{
+	width:50%;
+	float:left;
+	margin:0!important;
+	height:80px;
+	overflow:hidden;
+	opacity:1;
+	transition: opacity .1s ease-in-out;
+   -moz-transition: opacity .1s ease-in-out;
+   -webkit-transition: opacity .1s ease-in-out;
+}
+li.mosaicItem:hover{
+	opacity:.95;
+}
+.tileTitle{
+	background:#353535;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	padding: 5px 10px;
+	font-weight:normal;
+	color:#fff;
+	font-size:12px;
+}
+
+.tileTitle .count{
+	float:right;
+	font-size:10px;
+	color:#f4f4f4;
+}
 
 
 
-/**********************/
-/***     PANEL      ***/
-/**********************/
+.activityCampaign {
+	position:relative;
+	width:100%;
+}
+.activityCampaign ul{
+	margin:0;
+	font-size:12px;
+	
+}
+.activityCampaign ul li {
+	list-style:none;
+	background:#fff;
+	
+}
+.activityCampaign ul li a{
+	border-bottom: 1px solid #e3e3e3;
+	line-height: 24px;
+	padding: 10px 15px;
+	display:block;
+}
+.activityCampaign i{
+	color:#009999;
+}
+.activityCampaign li a:hover{
+	background:#f4f4f4;
+}
+.activityCampaign li:nth-child(n+10) a{
+	/* background:#f4f4f4; */
+}
+.activityCampaign .activityDate{
 
-/**********************/
-/***    HEADER      ***/
-/**********************/
+	padding-right:10px;
+	position:absolute;
+	right:0;
+	color:#ccc;
+	font-size:10px;
+}
+.activityCampaign .activityTarget{
+	color:#009999;
+}
+
 
 
 
@@ -899,3 +1314,92 @@ form .errorlist li{
 }
 
 
+/********          **********************/
+/******** MODALS   **********************/
+/********          **********************/
+
+
+#mikroActHelp.modal{
+	border-radius:0;
+}
+#mikroActHelp.modal h1{
+	margin: 0;
+	padding:0;
+	font-size: 24px;
+	font-weight:normal;
+	color:#009999;
+}
+#mikroActHelp.modal .modal-body{
+	background:#f4f4f4;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	font-size: 13px;
+	line-height: 20px;
+	color:#666;
+}
+#mikroActHelp.modal .modal-footer{
+	border: none;
+	background:#fff;
+}
+
+
+
+#collectiveHelp.modal{
+	border-radius:0;
+}
+#collectiveHelp.modal h1{
+	margin: 0;
+	padding:0;
+	font-size: 24px;
+	font-weight:normal;
+	color:#009999;
+}
+#collectiveHelp.modal .modal-body{
+	background:#f4f4f4;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	font-size: 13px;
+	line-height: 20px;
+	color:#666;
+}
+#collectiveHelp.modal .modal-footer{
+	border: none;
+	background:#fff;
+}
+
+
+
+#campaignHelp.modal{
+	border-radius:0;
+}
+#campaignHelp.modal h1{
+	margin: 0;
+	padding:0;
+	font-size: 24px;
+	font-weight:normal;
+	color:#009999;
+}
+#campaignHelp.modal .modal-body{
+	background:#f4f4f4;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	font-size: 13px;
+	line-height: 20px;
+	color:#666;
+}
+#campaignHelp.modal .modal-footer{
+	border: none;
+	background:#fff;
+}
+
+
+#loginModal{
+	border-radius:0;
+	border:none;
+}
+#loginModal .modal-footer{
+	border-radius:0;
+}
+#loginModal input{
+	height:25px;
+}

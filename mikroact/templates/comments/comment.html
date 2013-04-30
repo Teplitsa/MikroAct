@@ -21,13 +21,24 @@
         <div{% if preview %} id="comment-preview"{% else %} id="c{{ comment.id }}"{% endif %} class="comment-item">
           {% if preview %}<h3>{% trans "Preview of your comment" %}</h3>{% endif %}
           {% spaceless %}
-            <h4>
-              {% if comment.user %}<a href="{% url 'user_detail' username=comment.user.username %}">{% endif %}
-              {% if comment.name %}{{ comment.name }}{% else %}{% trans "Anonymous" %}{% endif %}
-              {% if comment.user %}</a>{% endif %}
-            </h4>
+            <div class="commentUser">
+              {% if comment.user %}
+              	<a href="{% url 'user_detail' username=comment.user.username %}">
+              		{% if comment.user.userprofile.photo %}<img src="{{ comment.user.userprofile.photo.url }}" width="45" />{% endif %}
+              {% endif %}
+              {% if comment.name %}
+             	 {{ comment.name }}
+              {% else %}
+              	{% trans "Anonymous" %}
+              {% endif %}
+              
+              {% if comment.user %}</a>
+              {% endif %}
+              <span class="comment-date">{% blocktrans with submit_date=comment.submit_date %}on {{ submit_date }}{% endblocktrans %}</span>
+            </div>
+            
+            
             {% endspaceless %}
-            <span class="comment-date">{% blocktrans with submit_date=comment.submit_date %}on {{ submit_date }}{% endblocktrans %}</span>
             {% if not comment.is_public %}<span class="comment-moderated-flag">({% trans "moderated" %})</span>{% endif %}
 
             <div class="comment-text">{{ comment.comment|linebreaks|oembed_html:"300x300" }}</div>

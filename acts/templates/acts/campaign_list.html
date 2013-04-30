@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load follow_tags %}
 {% block title %}{{ block.super }}: Campaigns{% endblock %}
 
 {% block content %}
@@ -7,10 +8,11 @@
 	<div class="row">
 		<div class="span12">
 			
-			<div class="mainCol campaigns">
+			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
 						<li><a href="{% url "campaign_add" %}"><i class="icon-sitemap icon-large"></i> Create Campaign</a></li>
+						<li class="pull-right"><a href="#campaignHelp" data-toggle="modal"><i class="icon-question-sign icon-large"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -18,14 +20,58 @@
 		<ul class="tiles">
 		{% for campaign in campaign_list %}
 			<li class="span3">
-				<a href="{{ campaign.get_absolute_url }}"><div class="campaignTile">
-					{{ campaign.name }}<span class="campaignCount">{{ campaign.mikro_acts.count }} MikroActs</span>
+				<div class="campaignTile">
+				
+					<div class="tilePhoto">
+						{% if campaign.mikro_acts %}
+						<ul class="mosaic">
+						{% for act in campaign.mikro_acts.all|slice:":4" %}
+							<li class="mosaicItem"><img src="{{ act.photo.url }}" /></li>
+						{% endfor %}
+						</ul>
+						{% endif %}
+					</div>
+					
+					<div class="tileTitle">{{ campaign.name }}<span class="campaignCount">{{ campaign.mikro_acts.count }} MikroActs</span></div>
+					
+					<div class="tileActions">
+						<div class="tileDescription">
+						<p>{{ campaign.description|truncatewords:30 }}</p>
+						<p><a href="{{ campaign.get_absolute_url }}">Visit Campaign</a></p></div>
+						<ul class="itemAction">
+							<li><i class="icon-plus"></i></li>
+							<li>
+								<a data-toggle="tooltip" data-placement="top" {% if not user|is_following:campaign %}
+					href="{% url 'campaign_follow' slug=campaign.slug %}" title="Follow">
+					<i class="icon-share-alt"></i>
+					{% else %}
+					href="{% url 'campaign_unfollow' slug=campaign.slug %}" title="Unfollow">
+					<i class="icon-remove"></i>
+					{% endif %}
+			</a>
+							</li>
+						</ul>
+					</div>
+				
 				</div>
-				</a>
 			</li>
 		{% endfor %}
 		</ul>
 		
+		
+	</div>
+</div>
+<div id="campaignHelp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    	<h1>What's a Campaign?</h1>
+    </div>
+    <div class="modal-body">
+    	<p>
+	    Aliquip etsy fixie ethnic. Polaroid gentrify fugiat pug, 90's occaecat velit. Vegan mollit scenester craft beer intelligentsia. Tumblr proident banksy ethical, authentic echo park umami fixie do. Kogi in accusamus, nihil reprehenderit photo booth mlkshk williamsburg cillum whatever eu brooklyn bespoke post-ironic magna. 8-bit meh irure gluten-free brunch church-key culpa plaid leggings. Velit pariatur banksy magna, nisi lomo vice seitan retro pop-up single-origin coffee eiusmod ad.
+    	</p>
+	</div>
+	<div class="modal-footer">
 		
 	</div>
 </div>

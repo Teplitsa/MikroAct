@@ -14,46 +14,84 @@
 <div class="container">
 	<div class="row-fluid">
 		<div class="span3">
-			<div class="sideCol campaign">
-				<h1>{{ campaign.name }}</h1>
-				<h2>{{ campaign.follow_campaign.count }} Follower{{ campaign.follow_campaign.count|pluralize }}</h2>
-				<a class="btn btn-inverse" 
+			<div class="sideCol collective">
+				<div class="collectiveTitle">	
+					<div class="collectiveInfo">
+						<h2>{{ campaign.name }}</h2>
+					</div>
+				</div>
+				
+				
+			</div>
+			<a class="actionsCampaign" 
 					{% if not user|is_following:campaign %}
 					href="{% url 'campaign_follow' slug=campaign.slug %}">
-					Follow
+					<i class="icon-share-alt"></i> Follow
 					{% else %}
 					href="{% url 'campaign_unfollow' slug=campaign.slug %}">
-					Unfollow
+					<i class="icon-remove"></i> Unfollow
 					{% endif %}
-				</a>
-			</div>
-			{% for follow in campaign.follow_campaign.all %}
-				{% include "inc/userPane.html" with profile=follow.user.userprofile %}
-			{% endfor %}
-		</div>
-		<div class="span9">
-			<ul class="row-fluid campTiles">
-				{% for mikroact in campaign.mikro_acts.all %}
-				<li class="span4">
-					<div class="collectiveTile">
-						<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
-						<a href="{{ mikroact.get_absolute_url }}">{{ mikroact.title }}</a>
+			</a>
+			<div class="sideCol campaignMembers">
+				<div class="accordion" id="campaignFollowers">
+					
+					<div class="accordion-group">
+				    	<div class="accordion-heading">
+					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignFollowers" href="#followerList">
+						    	Campaign Followers <span class="followerCount">{{ campaign.follow_campaign.count }}</span>
+						    </a>
+						</div>
+						<div id="followerList" class="accordion-body collapse in">
+							<div class="accordion-inner">
+								{% for follow in campaign.follow_campaign.all %}
+									{% include "inc/userPane.html" with profile=follow.user.userprofile %}
+								{% endfor %}
+							</div>
+						</div>
 					</div>
 					
-				</li>
+					
+				</div><!-- end accordion -->
+				
+			</div>
+		</div>
+		<div class="span9">
+			<div class="row-fluid">
+				<ul class="tiles">
+				{% for mikroact in campaign.mikro_acts.all %}
+					<li class="span4">
+						<div class="actTile">
+							<div class="tilePhoto">{% if mikroact.photo %}<img src="{{ mikroact.photo.url }}" height="160"/>{% endif %}</div>
+							
+							<div class="tileTitle">{{ mikroact.title }}</div>
+							
+							<div class="tileActions">
+								<div class="tileDescription">
+								<p>{{ mikroact.description|truncatewords:30 }}</p>
+								<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+								<ul class="itemAction">
+									<li><i class="icon-plus"></i></li>
+									
+								</ul>
+							</div>
+							
+						</div>
+					</li>
 				{% endfor %}
-			</ul>
+				</ul>
+			</div>
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
 					  <li class="active"><a href="#activity">Activity</a></li>
 					  <li><a href="#stream">Comments</a></li>
+					  <li><a href="#description">Description</a></li>
 					</ul>
 					{% if "change_campaign" in campaign_perms %}
 					<div class="dropdown userAction pull-right">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-					    	<li><a href="{% url "campaign_edit" slug=campaign.slug %}">Edit</a></li>
+					    	<li><a href="{% url "campaign_edit" slug=campaign.slug %}"><i class="icon-edit"></i> Edit Campaign</a></li>
 					    </ul>
 					</div>
 					{% endif %}
@@ -62,11 +100,13 @@
 			<div class="mainCol comment">
 				<div class="tab-content">
 					<div class="tab-pane active" id="activity">
-						<ul>
-							{% for action in object_stream %}
-							<li>{% render_action action %}</li>
-							{% endfor %}
-						</ul>
+						<div class="activityCampaign">
+							<ul>
+								{% for action in object_stream|slice:":30" %}
+								<li>{% render_action action %}</li>
+								{% endfor %}
+							</ul>
+						</div>
 					</div>
 					<div class="tab-pane" id="stream">
 						{% render_comment_list for campaign %}
@@ -76,6 +116,10 @@
 						<a class="userLogin" href="{% url 'user_login' %}">Log in</a> to leave a comment
 						{% endif %}
 					</div>
+					<div class="tab-pane" id="description">
+					  	<h4>About</h4>
+					  	<p>{{ campaign.description }}</p>
+				  </div>
 				</div>
 			</div>
 		</div>
