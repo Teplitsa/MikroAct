@@ -2,6 +2,7 @@
 from django import forms
 
 from bootstrap_toolkit.widgets import BootstrapDateInput
+from guardian.shortcuts import get_objects_for_user
 
 from .models import MikroAct, Campaign
 
@@ -27,4 +28,11 @@ class CampaignForm(forms.ModelForm):
 
 
 class AddToCampaignForm(forms.Form):
-    campaign = forms.ModelChoiceField(queryset=Campaign.objects.all())
+    campaign = forms.ModelChoiceField(queryset=Campaign.objects.none())
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', False)
+        if user:
+            self.base_fields['campaign'].queryset = get_objects_for_user(
+                user, 'acts.change_campaign', Campaign)
+        return super(AddToCampaignForm, self).__init__(*args, **kwargs)
