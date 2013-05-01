@@ -4,13 +4,10 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
-from dj.choices import Choices
-from dj.choices.fields import ChoiceField
 from follow import utils as follow_utils
 from follow.models import Follow
 from stream import utils as stream_utils
 from geopy import geocoders
-from thumbs import ImageWithThumbsField 
 
 from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_LENGTH
 
@@ -28,7 +25,7 @@ class MikroAct(models.Model):
     location_address = DefaultCharField(blank=True)
 
     date_created = models.DateTimeField(default=timezone.now, editable=False)
-    is_published = models.BooleanField()
+    is_published = models.BooleanField(default=True)
 
     photo = models.ImageField(upload_to='mikro_act', null=True, blank=True)
 
