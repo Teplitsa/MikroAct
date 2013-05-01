@@ -71,7 +71,12 @@
 								<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
-									
+									{% if "change_campaign" in campaign_perms %}
+									<li><a 
+											href="{% url "mikroact_campaign_add" slug=mikroact.slug %}?campaign={{ campaign.id }}&remove=1">
+											<i class="icon-minus"></i>
+										</a></li>
+									{% endif %}
 								</ul>
 							</div>
 							

@@ -34,7 +34,6 @@
 							<li><a href="#" title="Add to Campaign" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
 							<div id="popover_content_wrapper" style="display: none;">
 								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
-								
 									{% csrf_token %}
 									{{ campaign_form|crispy }}
 									<button type="submit" class="btn btn-submit">Add</button>

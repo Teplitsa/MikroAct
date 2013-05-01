@@ -181,17 +181,39 @@ class MikroActCampaignView(PermissionRequiredMixin, DetailView, FormView):
     form_class = AddToCampaignForm
     permission_required = 'acts.change_campaign'
 
-    def get(self, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
+        self.remove = self.request.GET.get('remove', False)
+        return super(MikroActCampaignView, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if self.remove and AddToCampaignForm(request.GET, user=request.user).is_valid():
+            request.POST = request.GET
+            request.method = 'POST'
+            return self.post(request, *args, **kwargs)
+
         return HttpResponseRedirect(reverse('mikroact_detail', kwargs={
             'slug': kwargs['slug']
         }))
+
+    def get_form_kwargs(self):
+        kwargs = super(MikroActCampaignView, self).get_form_kwargs()
+        kwargs.setdefault('user', self.request.user)
+        return kwargs
 
     def form_valid(self, form):
         self.object = self.get_object()
 
         campaign = form.cleaned_data.get('campaign')
-        campaign.mikro_acts.add(self.object)
 
+        if self.remove:
+            campaign.mikro_acts.remove(self.object)
+            # TODO record action?
+
+            return HttpResponseRedirect(reverse('campaign_detail', kwargs={
+                'slug': campaign.slug
+            }))
+
+        campaign.mikro_acts.add(self.object)
         stream_utils.action.send(self.request.user, 'added', self.object, campaign)
 
-        return self.get(slug=self.object.slug)
+        return self.get(self.request, slug=self.object.slug)
