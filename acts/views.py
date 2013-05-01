@@ -1,4 +1,6 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
+from django.conf import settings
+from django.contrib.auth.decorators import REDIRECT_FIELD_NAME
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -12,6 +14,7 @@ from stream.models import Action
 from stream import utils as stream_utils
 from guardian.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from guardian.shortcuts import assign
+from guardian.utils import get_403_or_None
 
 from .models import Campaign, MikroAct
 from .forms import MikroActForm, CampaignForm, AddToCampaignForm
@@ -176,10 +179,9 @@ class MikroActDetailView(DetailView):
         return super(MikroActDetailView, self).get_context_data(**kwargs)
 
 
-class MikroActCampaignView(PermissionRequiredMixin, DetailView, FormView):
+class MikroActCampaignView(DetailView, FormView):
     model = MikroAct
     form_class = AddToCampaignForm
-    permission_required = 'acts.change_campaign'
 
     def dispatch(self, request, *args, **kwargs):
         self.remove = self.request.GET.get('remove', False)
@@ -204,6 +206,17 @@ class MikroActCampaignView(PermissionRequiredMixin, DetailView, FormView):
         self.object = self.get_object()
 
         campaign = form.cleaned_data.get('campaign')
+
+        forbidden = get_403_or_None(self.request,
+            perms=['acts.change_campaign',],
+            obj=campaign,
+            login_url=settings.LOGIN_URL,
+            redirect_field_name=REDIRECT_FIELD_NAME,
+            return_403=False,
+        )
+
+        if forbidden:
+            return forbidden
 
         if self.remove:
             campaign.mikro_acts.remove(self.object)
