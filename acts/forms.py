@@ -32,7 +32,7 @@ class AddToCampaignForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', False)
-        if user:
+        if user and user.is_authenticated():
             self.base_fields['campaign'].queryset = get_objects_for_user(
                 user, 'acts.change_campaign', Campaign)
         return super(AddToCampaignForm, self).__init__(*args, **kwargs)

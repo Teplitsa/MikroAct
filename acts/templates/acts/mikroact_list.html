@@ -30,6 +30,7 @@
 						<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
 						<ul class="itemAction">
 							<li><i class="icon-plus"></i></li>
+							{% if user.is_authenticated %}
 							<li><a href="#" title="Add to Campaign" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
 							<div id="popover_content_wrapper" style="display: none;">
 								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
@@ -40,7 +41,7 @@
 								</form>
 							</div>
 							</li>
-							
+							{% endif %}
 						</ul>
 					</div>
 					
