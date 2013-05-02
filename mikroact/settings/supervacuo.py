@@ -3,10 +3,13 @@ from .base import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+SERVE_STATIC = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+
+MEDIA_ROOT = '/var/www/django/mikroact/shared/media/'
 
 MANAGERS = ADMINS
 

@@ -56,6 +56,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+SERVE_STATIC = True
 
 TEMPLATE_DIRS = (
     root('mikroact', 'templates'),
