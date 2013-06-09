@@ -20,7 +20,7 @@ def stream(request):
     stream_keys = []
     stream_list = []
     while len(stream_keys) < 20 and len(stream) > 0:
-        o = stream.pop()
+        o = stream.pop(0)
         keys = (o.target_mikroact, o.target_campaign, o.target_collective,
                 o.actor_user, o.verb)
         if keys not in stream_keys:
