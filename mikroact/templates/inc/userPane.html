@@ -1,4 +1,5 @@
 <div class="sideCol author">
+	{% if profile.user %}
 	<a href="{% url 'user_detail' username=profile.user.username %}">
 	<div class="authorImg">
 	{% if profile.photo %}
@@ -12,4 +13,5 @@
 		{{ profile.twitter }}
 </a></p>{% endif %}
 </a>
+	{% endif %}
 </div>

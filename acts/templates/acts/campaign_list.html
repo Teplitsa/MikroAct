@@ -26,7 +26,7 @@
 						{% if campaign.mikro_acts %}
 						<ul class="mosaic">
 						{% for act in campaign.mikro_acts.all|slice:":4" %}
-							<li class="mosaicItem"><img src="{{ act.photo.url }}" /></li>
+							{% if act.photo %}<li class="mosaicItem"><img src="{{ act.photo.url }}" height="160"/></li>{% endif %}
 						{% endfor %}
 						</ul>
 						{% endif %}
