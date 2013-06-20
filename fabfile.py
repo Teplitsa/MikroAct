@@ -19,6 +19,10 @@ HOSTS = {
         ['supervacuo.com', ],
         '/var/www/django/'
     ),
+    'hippolito': (
+        ['hippolito.supervacuo.com', ],
+        '/var/www/django/'
+    ),
 }
 
 env.project_name = "mikroact"
