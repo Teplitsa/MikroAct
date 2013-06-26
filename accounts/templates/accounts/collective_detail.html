@@ -41,10 +41,10 @@
 			<a class="actionsCollective" 
 					{% if not user|is_following:collective %}
 					href="{% url 'collective_follow' slug=collective.slug %}">
-					<i class="icon-share-alt"></i> Follow
+					<i class="icon-share-alt"></i> Наблюдать
 					{% else %}
 					href="{% url 'collective_unfollow' slug=collective.slug %}">
-					<i class="icon-remove"></i> Unfollow
+					<i class="icon-remove"></i> Перестать следить
 					{% endif %}
 			</a>
 			<div class="sideCol collectiveMembers">
@@ -53,7 +53,7 @@
 					<div class="accordion-group">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#collectiveMembers" href="#adminList">
-						    	Collective Members <span class="followerCount">{{ collective.members.count }}</span>
+						    	Участников коллектива <span class="followerCount">{{ collective.members.count }}</span>
 						    </a>
 						</div>
 						<div id="adminList" class="accordion-body collapse in">
@@ -67,7 +67,7 @@
 					<div class="accordion-group">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#collectiveMembers" href="#followerlist">
-						    	Collective Followers <span class="followerCount">{{ collective.follow_collective.count }}</span>
+						    	Наблюдателей коллектива <span class="followerCount">{{ collective.follow_collective.count }}</span>
 						    </a>
 						</div>
 						<div id="followerlist" class="accordion-body collapse">
@@ -92,8 +92,8 @@
 					<div class="dropdown userAction pull-right">
 					  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-					    <li><a href="{% url "collective_edit" slug=collective.slug %}"><i class="icon-edit"></i>Edit Collective</a></li>
-					    <li><a href="{% url "collective_promote" slug=collective.slug %}"><i class="icon-edit"></i>Add members</a></li>
+					    <li><a href="{% url "collective_edit" slug=collective.slug %}"><i class="icon-edit"></i>Редактировать коллектив</a></li>
+					    <li><a href="{% url "collective_promote" slug=collective.slug %}"><i class="icon-edit"></i>Добавить участников</a></li>
 					  </ul>
 					</div>
 				</div>
@@ -112,7 +112,7 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ mikroact.description|truncatewords:30 }}</p>
-								<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к MikroAct</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 									
@@ -129,9 +129,9 @@
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
-					  <li class="active"><a href="#activity">Activity</a></li>
-					  <li><a href="#stream">Stream</a></li>
-					  <li><a href="#description">Description</a></li>
+					  <li class="active"><a href="#activity">Активности</a></li>
+					  <li><a href="#stream">Лента</a></li>
+					  <li><a href="#description">Описание</a></li>
 					</ul>
 				</div>
 			</div>
@@ -155,9 +155,9 @@
 						{% endif %}
 				  </div>
 				  <div class="tab-pane" id="description">
-					  	<h4>Location</h4>
+					  	<h4>Местоположение</h4>
 					  	<p>{{ collective.location_address }}</p>
-					  	<h4>About</h4>
+					  	<h4>Описание</h4>
 					  	<p>{{ collective.description }}</p>
 				  </div>
 				</div>

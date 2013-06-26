@@ -31,7 +31,7 @@
 					<div class="accordion-group dark">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignList" href="#collapseListAdd">
-						    	<i class="icon-plus"></i> Add to Campaign
+						    	<i class="icon-plus"></i> Добавить к кампании
 						    </a>
 						</div>
 						<div id="collapseListAdd" class="accordion-body collapse">
@@ -39,7 +39,7 @@
 								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
 									{% csrf_token %}
 									{{ campaign_form|crispy }}
-									<button type="submit" class="btn btn-inverse">Add</button>
+									<button type="submit" class="btn btn-inverse">Добавить</button>
 								</form>
 							</div>
 						</div>
@@ -48,7 +48,7 @@
 					<div class="accordion-group">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignList" href="#collapseList">
-						    	Campaigns
+						    	Кампании
 						    </a>
 						</div>
 						<div id="collapseList" class="accordion-body collapse in">
@@ -60,7 +60,7 @@
 								{% endfor %}
 							</ul>	
 							{% else %}
-							<p>This MikroAct is not associated with any campaigns.</p>
+							<p>Этот MikroAct не связан ни с одной кампанией</p>
 							{% endif %}
 							</div>
 						</div>
@@ -99,16 +99,16 @@
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
-					  <li class="active"><a href="#stream">Stream</a></li>
-					  <li><a href="#instruction">Instructions</a></li>
+					  <li class="active"><a href="#stream">Лента</a></li>
+					  <li><a href="#instruction">Инструкции</a></li>
 					</ul>
 					{% if "change_mikroact" in mikroact_perms %}
 					<div class="dropdown userAction pull-right">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-					    	<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-edit"></i>Edit MikroAct</a></li>
+					    	<li><a href="{% url "mikroact_edit" slug=mikroact.slug %}"><i class="icon-edit"></i>Редактировать MikroAct</a></li>
 					    	{% if "delete_mikroact" in mikroact_perms %}
-					    	<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}"><i class="icon-remove"></i>Delete MikroAct</a></li>
+					    	<li><a href="{% url "mikroact_delete" slug=mikroact.slug %}"><i class="icon-remove"></i>Удалить MikroAct</a></li>
 					    	{% endif %}
 					    </ul>
 					</div>
@@ -129,7 +129,7 @@
 						{% if mikroact.process %}
 							<p>{{ mikroact.process }}</p>
 						{% else %}
-							<p>There are currently no instructions for this MikroAct.</p>
+							<p>Сейчас нет инструкций для этого MikroAct.</p>
 						{% endif %}
 					</div>
 				</div>

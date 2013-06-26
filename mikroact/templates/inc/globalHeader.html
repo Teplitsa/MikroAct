@@ -6,18 +6,18 @@
 				<div class="userNav pull-right">
 					{% if user.is_authenticated %}
 					<ul>
-					<li>Приветсвую, <span style="color: #6fcbd7;">{{ user.get_username }}! </span></li>
+					<li>Приветствую, <span style="color: #6fcbd7;">{{ user.get_username }}! </span></li>
 					<li class="dropdown">
 						  <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% if user.userprofile.photo %}<img src="{{ user.userprofile.photo.url }}" width="32" />{% endif %}<i class="icon-angle-down"></i></a>
 						  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
-						  	<li><a href="{% url "user_detail" username=user.get_username %}"><i class="icon-user"></i>My Profile</a></li>
-						    <li><a href="{% url "user_logout" %}"><i class="icon-signout"></i>Logout</a></li>
+						  	<li><a href="{% url "user_detail" username=user.get_username %}"><i class="icon-user"></i>Мой профиль</a></li>
+						    <li><a href="{% url "user_logout" %}"><i class="icon-signout"></i>Выйти</a></li>
 						  </ul>
 					</li>
 					</ul>
 					{% else %}
 					<ul>
-						<li>Приветсвую, <span style="color: #6fcbd7;">MikroActivist!</span></li>
+						<li>Приветствую, <span style="color: #6fcbd7;">MikroActivist!</span></li>
 						<li class="registerLink"><a href="{% url "user_register" %}">Регистрация</a></li>
 						<li><a href="#loginModal" data-toggle="modal">Войти</a></li>
 					</ul>
@@ -47,7 +47,7 @@
 						<li><a href="{% url 'collective_list' %}"><i class="icon-group icon-large"></i> Коллективы</a></li>
 						<li><a href="{% url 'mikroact_list' %}"><i class="icon-fullscreen icon-large"></i> Исследовать</a></li>
 						{% if user.is_authenticated %}
-						<li><a href="{% url 'mikroact_add' %}"><i class="icon-edit icon-large"></i> Create</a></li>
+						<li><a href="{% url 'mikroact_add' %}"><i class="icon-edit icon-large"></i> Создать</a></li>
 						{% else %}
 						<li><a href="http://mikroact.org/process/"><i class="icon-rss icon-large"></i> Блог</a></li>
 						{% endif %}

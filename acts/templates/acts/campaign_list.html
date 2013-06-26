@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load follow_tags %}
-{% block title %}{{ block.super }}: Campaigns{% endblock %}
+{% block title %}{{ block.super }}: Кампании{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -37,15 +37,15 @@
 					<div class="tileActions">
 						<div class="tileDescription">
 						<p>{{ campaign.description|truncatewords:30 }}</p>
-						<p><a href="{{ campaign.get_absolute_url }}">Visit Campaign</a></p></div>
+						<p><a href="{{ campaign.get_absolute_url }}">Перейти к кампании</a></p></div>
 						<ul class="itemAction">
 							<li><i class="icon-plus"></i></li>
 							<li>
 								<a data-toggle="tooltip" data-placement="top" {% if not user|is_following:campaign %}
-					href="{% url 'campaign_follow' slug=campaign.slug %}" title="Follow">
+					href="{% url 'campaign_follow' slug=campaign.slug %}" title="Наблюдать">
 					<i class="icon-share-alt"></i>
 					{% else %}
-					href="{% url 'campaign_unfollow' slug=campaign.slug %}" title="Unfollow">
+					href="{% url 'campaign_unfollow' slug=campaign.slug %}" title="Перестать наблюдать">
 					<i class="icon-remove"></i>
 					{% endif %}
 			</a>

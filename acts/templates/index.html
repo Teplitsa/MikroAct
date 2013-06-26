@@ -26,16 +26,16 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ mikroact.description|truncatewords:30 }}</p>
-								<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к MikroAct</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
-									<li><a href="#" title="Add to Campaign" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
+									<li><a href="#" title="Добавить к кампании" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
 									<div id="popover_content_wrapper" style="display: none;">
 										<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
 										
 											{% csrf_token %}
 											{{ campaign_form|crispy }}
-											<button type="submit" class="btn btn-submit">Add</button>
+											<button type="submit" class="btn btn-submit">Добавить</button>
 										</form>
 									</div>
 									</li>
@@ -66,11 +66,11 @@
 								{% endif %}
 							</div>
 							
-							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Участников</span></div>
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ collective.description|truncatewords:30 }}</p>
-								<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+								<p><a href="{{ collective.get_absolute_url }}">Перейти к коллективу</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 								</ul>
@@ -120,11 +120,11 @@
 								{% endif %}
 							</div>
 							
-							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Участников</span></div>
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ collective.description|truncatewords:30 }}</p>
-								<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+								<p><a href="{{ collective.get_absolute_url }}">Перейти к коллективу</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 								</ul>
@@ -162,7 +162,7 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ campaign.description|truncatewords:30 }}</p>
-								<p><a href="{{ campaign.get_absolute_url }}">Visit Campaign</a></p></div>
+								<p><a href="{{ campaign.get_absolute_url }}">Перейти к кампании</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 								</ul>

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}{{ block.super }}: Delete Mikroact{% endblock %}
+{% block title %}{{ block.super }}: Удалить Mikroact{% endblock %}
 
 {% block content %}
 <form action="." method="post">
 	{% csrf_token %}
-	<button type="submit">Delete</button>
+	<button type="submit">Удалить</button>
 </form>
 {% endblock content %}
