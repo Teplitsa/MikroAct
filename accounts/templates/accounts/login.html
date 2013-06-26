@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="span6 offset3">
 			<div class="loginPanel">
-				<p>Please Login to Continue</p>
+				<p>Пожалуйста, авторизируйтесь для продолжения</p>
 				{% if form.errors %}
 					<div class="alert alert-error">Your username and password didn't match. Please try again.</div>
 				{% endif %}
@@ -14,18 +14,18 @@
 				<form method="post" autocomplete="off" action="{% url 'django.contrib.auth.views.login' %}">
 					{% csrf_token %}
 					<p>
-						<input name="username" id="id_username" type="text" class="span2" placeholder="Username">
+						<input name="username" id="id_username" type="text" class="span2" placeholder="Имя пользователя">
 					</p>
 					<p>
-						<input name="password" type="password" class="span2" placeholder="Password">
+						<input name="password" type="password" class="span2" placeholder="Пароль">
 					</p>
 					<p>
-						Don't have an account? <a href="{% url "user_register" %}">Register</a>
+						Нет учетной записи? <a href="{% url "user_register" %}">Зарегистрируйся!</a>
 					</p>
 					<p>
-						<a href="{% url "user_password_reset" %}">Forgotten your password?</a>
+						<a href="{% url "user_password_reset" %}">Забыли пароль?</a>
 					</p>
-					<button type="submit" class="btn">Login</button>
+					<button type="submit" class="btn">Войти</button>
 					<input type="hidden" name="next" value="{{ next }}" />
 				</form>
 			</div>
