@@ -8,13 +8,13 @@
 			{% csrf_token %}
 			
 			<p><i class="icon-user"></i><input name="username" id="id_username" type="text" class="span2" placeholder="Имя пользователя"></p>
-			<p><i class="icon-lock"></i><input name="password" type="password" class="span2" placeholder="Password"></p>
+			<p><i class="icon-lock"></i><input name="password" type="password" class="span2" placeholder="Пароль"></p>
 			<div class="submitBottom">
 				<button type="submit" class="btn">Вход</button>
 			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
-		Not registered? <a href="{% url "user_register" %}">Register Now</a>
+		Не зарегистрированы? <a href="{% url "user_register" %}">Зарегистрируйтесь!</a>
 	</div>
 </div>

@@ -122,7 +122,7 @@
 						{% if user.is_authenticated %}
 						{% render_comment_form for mikroact %}
 						{% else %}
-						<a class="userLogin" href="{% url 'user_login' %}">Log in</a> to leave a comment
+						<a class="userLogin" href="{% url 'user_login' %}">Авторизируйтесь</a> , чтобы оставить комментарий
 						{% endif %}
 					</div>
 					<div class="tab-pane" id="instruction">
