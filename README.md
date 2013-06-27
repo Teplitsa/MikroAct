@@ -45,6 +45,42 @@ After every `git pull`, run
       $ pip install -r requirements.txt
       $ django-admin.py syncdb --migrate
 
+Deployment
+--------
+
+### httpd (Apache) / `mod_wsgi`
+
+Requirements (configured and working):
+
+* httpd
+* `mod_wsgi`
+* [`virtualenv`](http://www.virtualenv.org/en/latest/)
+* Python >= 2.6
+
+This git repository includes an [example httpd `VirtualHost` configuration file](https://github.com/Teplitsa/MikroAct/blob/master/apache.conf.example).
+
+MikroAct uses [Fabric](http://docs.fabfile.org/en/1.6/) for deployment, and assumes various things (configurable by editing [`fabfile.py`](https://github.com/Teplitsa/MikroAct/blob/master/fabfile.py)):
+
+* installed dependences (see above)
+* top-level project directory created; `/var/www/django` by default
+* virtualenv directory; `/usr/local/virtualenvs`
+* sudo available for your user account
+
+To deploy to your own host, add details to `HOSTS` at the top of `fabfile.py`
+
+With all of these in place, set up the server (replace `<yourhost>` with a server name from `HOSTS`) with:
+
+      $ fab host:<yourhost> setup
+
+Then deploy releases with:
+
+      $ fab host:<yourhost> deploy
+
+You can also run `manage.py` commands, e.g. `manage.py shell`, with:
+
+      $ fab host:<yourhost> manage:shell
+      # or with arguments
+      $ fab host:<yourhost> manage:"migrate --merge"
 
 Contributing
 --------
