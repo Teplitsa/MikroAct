@@ -35,19 +35,19 @@ class UserProfile(models.Model):
 
 class Collective(models.Model):
     # TODO should be related to a contrib.auth.models.Group for permissions
-    name = DefaultCharField()
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH)
+    name = DefaultCharField(verbose_name='Название')
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, verbose_name='Ярлык')
 
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
-    location_address = DefaultCharField(blank=True)
+    location_address = DefaultCharField(blank=True, verbose_name='Место')
     
-    description = models.TextField()
+    description = models.TextField(verbose_name='Описание')
     twitter = DefaultCharField(blank=True)
-    email = DefaultCharField(blank=True)
+    email = DefaultCharField(blank=True, verbose_name='Эл. почта')
     
     
-    photo = models.ImageField(upload_to='collective', null=True, blank=True)
+    photo = models.ImageField(upload_to='collective', null=True, blank=True, verbose_name='Фото')
 
     members = models.ManyToManyField(User, related_name='collectives',
             null=True, blank=True)

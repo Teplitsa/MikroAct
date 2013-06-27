@@ -13,16 +13,16 @@ from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_L
 
 
 class MikroAct(models.Model):
-    title = DefaultCharField()
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
-    date = models.DateField()
-    description = models.TextField()
-    process = models.TextField(blank=True)
+    title = DefaultCharField(verbose_name='Название')
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, verbose_name='Ярлык')
+    date = models.DateField(verbose_name='Дата')
+    description = models.TextField(verbose_name='Описание')
+    process = models.TextField(blank=True, verbose_name='Процесс')
     author = models.ForeignKey(User, related_name='mikroacts')
     
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
-    location_address = DefaultCharField(blank=True)
+    location_address = DefaultCharField(blank=True, verbose_name='Место')
 
     date_created = models.DateTimeField(default=timezone.now, editable=False)
     is_published = models.BooleanField(default=True)
@@ -54,11 +54,11 @@ class MikroAct(models.Model):
 
 
 class Campaign(models.Model):
-    name = DefaultCharField()
+    name = DefaultCharField(verbose_name='Название')
     author = models.ForeignKey(User)
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True)
-    description = models.TextField(blank=True)
-    is_private = models.BooleanField()
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, verbose_name='Ярлык')
+    description = models.TextField(blank=True, verbose_name='Описание')
+    is_private = models.BooleanField(verbose_name='Личный?')
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
     mikro_acts = models.ManyToManyField(MikroAct, related_name='campaigns')
