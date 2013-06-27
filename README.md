@@ -59,7 +59,7 @@ Requirements (configured and working):
 
 This git repository includes an [example httpd `VirtualHost` configuration file](https://github.com/Teplitsa/MikroAct/blob/master/apache.conf.example).
 
-MikroAct uses [Fabric](http://docs.fabfile.org/en/1.6/) for deployment, which assumes various things:
+MikroAct uses [Fabric](http://docs.fabfile.org/en/1.6/) for deployment, and assumes various things (configurable by editing [`fabfile.py`](https://github.com/Teplitsa/MikroAct/blob/master/fabfile.py)):
 
 * installed dependences (see above)
 * top-level project directory created; `/var/www/django` by default
