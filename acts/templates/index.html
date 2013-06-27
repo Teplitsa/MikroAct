@@ -26,16 +26,16 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ mikroact.description|truncatewords:30 }}</p>
-								<p><a href="{{ mikroact.get_absolute_url }}">Visit MikroAct</a></p></div>
+								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к MikroAct</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
-									<li><a href="#" title="Add to Campaign" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
+									<li><a href="#" title="Добавить к кампании" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
 									<div id="popover_content_wrapper" style="display: none;">
 										<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
 										
 											{% csrf_token %}
 											{{ campaign_form|crispy }}
-											<button type="submit" class="btn btn-submit">Add</button>
+											<button type="submit" class="btn btn-submit">Добавить</button>
 										</form>
 									</div>
 									</li>
@@ -50,7 +50,7 @@
 			</div>
 			<div class="row-fluid">
 				<div class="rowHeader">
-					<h2>My Collectives</h2>
+					<h2>My Коллективы</h2>
 				</div>
 				<ul class="tiles">
 				{% for collective in user.collectives.all %}
@@ -66,11 +66,11 @@
 								{% endif %}
 							</div>
 							
-							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Участников</span></div>
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ collective.description|truncatewords:30 }}</p>
-								<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+								<p><a href="{{ collective.get_absolute_url }}">Перейти к коллективу</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 								</ul>
@@ -88,10 +88,9 @@
 
 <div class="fullCol message">
 	<div class="container">
-		<h1 class="welcome">Welcome to MikroAct</h1>
-				<p><strong>MikroAct is an open source, collaborative actions platform for mobilizing and connecting local communities through the DIY actions they perform. </strong><br />The website seeks to facilitate effective mobilization of actions by supporting communities with a set of collaboration and ideation tools. A secondary goal of this platform is to link online and offline public spaces and actions, towards building stronger, more resilient communities.</p>
+		<h1 class="welcome">Добро пожаловать на MikroAct</h1>
 				<p>МикроАкт—платформа мобилизации и объединения локальных сообществ активистов с помощью взаимодействия в рамках небольших самоорганизуемых акций. Платформа создана на открытом коде (Open Source) и обладает рядом функций, позволяющих эффективную мобилизацию и синхронизацию акций . Другая цель платформы—соединять онлайн- и оффлайн- пространства и действия, создавая более устойчивые и сильные сообщества.</p>
-				<a href="{% url "user_register" %}" style="margin-top: 15px; font-size:12px;" class="btn btn-inverse">Register Now</a>
+				<a href="{% url "user_register" %}" style="margin-top: 15px; font-size:12px;" class="btn btn-inverse">Зарегистрируйся!</a>
 	</div>
 </div>
 <div class="container">
@@ -105,7 +104,7 @@
 		<div class="span6">
 			<div class="row-fluid">
 				<div class="rowHeader">
-					<h2>Collectives</h2>
+					<h2>Коллективы</h2>
 				</div>
 				<ul class="tiles indexTiles">
 				{% for collective in collectives %}
@@ -121,11 +120,11 @@
 								{% endif %}
 							</div>
 							
-							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Members</span></div>
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Участников</span></div>
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ collective.description|truncatewords:30 }}</p>
-								<p><a href="{{ collective.get_absolute_url }}">Visit Collective</a></p></div>
+								<p><a href="{{ collective.get_absolute_url }}">Перейти к коллективу</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 								</ul>
@@ -141,7 +140,7 @@
 		<div class="span6">
 			<div class="row-fluid">
 				<div class="rowHeader">
-					<h2>Campaigns</h2>
+					<h2>Кампании</h2>
 				</div>
 				<ul class="tiles indexTiles">
 				{% for campaign in campaigns %}
@@ -163,7 +162,7 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ campaign.description|truncatewords:30 }}</p>
-								<p><a href="{{ campaign.get_absolute_url }}">Visit Campaign</a></p></div>
+								<p><a href="{{ campaign.get_absolute_url }}">Перейти к кампании</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 								</ul>

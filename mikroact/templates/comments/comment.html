@@ -19,7 +19,7 @@
 {% load i18n %}
 {% load micawber_tags %}
         <div{% if preview %} id="comment-preview"{% else %} id="c{{ comment.id }}"{% endif %} class="comment-item">
-          {% if preview %}<h3>{% trans "Preview of your comment" %}</h3>{% endif %}
+          {% if preview %}<h3>{% trans "Предпросмотр вашего комментария" %}</h3>{% endif %}
           {% spaceless %}
             <div class="commentUser">
               {% if comment.user %}

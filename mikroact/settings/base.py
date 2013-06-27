@@ -95,13 +95,13 @@ INSTALLED_APPS = (
 )
 
 STREAM_VERBS = (
-    ('default', 'Stream Item'),
-    ('edited', 'edited'),
-    ('created','created'),
-    ('deleted','deleted'),
-    ('followed', 'followed'),
-    ('commented', 'left a comment'),  # ".. on"
-    ('added','added'),  # ".. to"
+    ('default', 'Элемент ленты'),
+    ('edited', 'отредактировал'),
+    ('created','создал'),
+    ('deleted','удалил'),
+    ('followed', 'наблюдает за'),
+    ('commented', 'оставил комментарий'),  # ".. on"
+    ('added','добавил'),  # ".. to"
 )
 
 LOGGING = {
