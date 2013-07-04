@@ -13,7 +13,7 @@
 			
 			
 				<div class="rowHeader">
-					<h2>My MikroActs</h2>
+					<h2>Мои микроакты</h2>
 				</div>
 				<ul class="tiles">
 				{% for mikroact in user.mikroacts.all %}
@@ -26,7 +26,7 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ mikroact.description|truncatewords:30 }}</p>
-								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к MikroAct</a></p></div>
+								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к микроакту</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 									<li><a href="#" title="Добавить к кампании" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
@@ -50,7 +50,7 @@
 			</div>
 			<div class="row-fluid">
 				<div class="rowHeader">
-					<h2>My Коллективы</h2>
+					<h2>Мои коллективы</h2>
 				</div>
 				<ul class="tiles">
 				{% for collective in user.collectives.all %}
@@ -88,7 +88,7 @@
 
 <div class="fullCol message">
 	<div class="container">
-		<h1 class="welcome">Добро пожаловать на MikroAct</h1>
+		<h1 class="welcome">Добро пожаловать на МикроАкт</h1>
 				<p>МикроАкт—платформа мобилизации и объединения локальных сообществ активистов с помощью взаимодействия в рамках небольших самоорганизуемых акций. Платформа создана на открытом коде (Open Source) и обладает рядом функций, позволяющих эффективную мобилизацию и синхронизацию акций . Другая цель платформы—соединять онлайн- и оффлайн- пространства и действия, создавая более устойчивые и сильные сообщества.</p>
 				<a href="{% url "user_register" %}" style="margin-top: 15px; font-size:12px;" class="btn btn-inverse">Зарегистрируйся!</a>
 	</div>

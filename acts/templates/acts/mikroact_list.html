@@ -10,7 +10,7 @@
 			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
-						<li><a href="{% url "mikroact_add" %}"><i class="icon-edit icon-large"></i> Создать MikroAct</a></li>
+						<li><a href="{% url "mikroact_add" %}"><i class="icon-edit icon-large"></i> Создать микроакт</a></li>
 						<li class="pull-right"><a href="#mikroActHelp" data-toggle="modal"><i class="icon-question-sign icon-large"></i></a></li>
 					</ul>
 				</div>
@@ -27,7 +27,7 @@
 					<div class="tileActions">
 						<div class="tileDescription">
 						<p>{{ mikroact.description|truncatewords:30 }}</p>
-						<p><a href="{{ mikroact.get_absolute_url }}">Перейти к MikroAct</a></p></div>
+						<p><a href="{{ mikroact.get_absolute_url }}">Перейти к микроакту</a></p></div>
 						<ul class="itemAction">
 							<li><i class="icon-plus"></i></li>
 							{% if user.is_authenticated %}
@@ -53,7 +53,7 @@
 <div id="mikroActHelp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    	<h1>What's a MikroAct?</h1>
+    	<h1>Что такое микроакт?</h1>
     </div>
     <div class="modal-body">
     	<p>

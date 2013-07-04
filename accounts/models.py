@@ -17,9 +17,9 @@ class UserProfile(models.Model):
                                 unique=True)
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
-    location_address = DefaultCharField(blank=True)
+    location_address = DefaultCharField(blank=True, verbose_name='Местоположение')
     
-    photo = models.ImageField(upload_to='user', null=True, blank=True)
+    photo = models.ImageField(upload_to='user', null=True, blank=True, verbose_name='Фото')
     twitter = DefaultCharField(blank=True)
     
     def __unicode__(self):

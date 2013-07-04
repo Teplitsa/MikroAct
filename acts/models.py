@@ -15,9 +15,9 @@ from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_L
 class MikroAct(models.Model):
     title = DefaultCharField(verbose_name='Название')
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, verbose_name='Ярлык')
-    date = models.DateField(verbose_name='Дата')
-    description = models.TextField(verbose_name='Описание')
-    process = models.TextField(blank=True, verbose_name='Процесс')
+    date = models.DateField(verbose_name='Дата микроакта')
+    description = models.TextField(verbose_name='Описание микроакта')
+    process = models.TextField(blank=True, verbose_name='Инструкция: как сделать самому')
     author = models.ForeignKey(User, related_name='mikroacts')
     
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
@@ -27,7 +27,7 @@ class MikroAct(models.Model):
     date_created = models.DateTimeField(default=timezone.now, editable=False)
     is_published = models.BooleanField(default=True)
 
-    photo = models.ImageField(upload_to='mikro_act', null=True, blank=True)
+    photo = models.ImageField(upload_to='mikro_act', null=True, blank=True, verbose_name='Фото')
 
     objects = models.Manager()
 
@@ -58,7 +58,7 @@ class Campaign(models.Model):
     author = models.ForeignKey(User)
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, verbose_name='Ярлык')
     description = models.TextField(blank=True, verbose_name='Описание')
-    is_private = models.BooleanField(verbose_name='Личный?')
+    is_private = models.BooleanField(verbose_name='Закрытая кампания? (будет видна только для вас)')
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
     mikro_acts = models.ManyToManyField(MikroAct, related_name='campaigns')

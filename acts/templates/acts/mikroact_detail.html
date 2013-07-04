@@ -60,7 +60,7 @@
 								{% endfor %}
 							</ul>	
 							{% else %}
-							<p>Этот MikroAct не связан ни с одной кампанией</p>
+							<p>Этот микроакт не связан ни с одной кампанией</p>
 							{% endif %}
 							</div>
 						</div>
@@ -99,7 +99,7 @@
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
-					  <li class="active"><a href="#stream">Лента</a></li>
+					  <li class="active"><a href="#stream">Лента комментариев</a></li>
 					  <li><a href="#instruction">Инструкции</a></li>
 					</ul>
 					{% if "change_mikroact" in mikroact_perms %}
@@ -129,7 +129,7 @@
 						{% if mikroact.process %}
 							<p>{{ mikroact.process }}</p>
 						{% else %}
-							<p>Сейчас нет инструкций для этого MikroAct.</p>
+							<p>Сейчас нет инструкций для этого микроакта.</p>
 						{% endif %}
 					</div>
 				</div>
