@@ -33,13 +33,12 @@ sys.path[:0] = new_sys_path
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
-# FIXME hard-coded variables
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mikroact.settings.supervacuo")
-os.environ.setdefault("SECRET_KEY", "not too secret")
+import django.core.handlers.wsgi
+_application = django.core.handlers.wsgi.WSGIHandler()
 
-# This application object is used by any WSGI server configured to use this
-# file. This includes Django's development server, if the WSGI_APPLICATION
-# setting points here.
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+def application(environ, start_response):
+		os.environ['DJANGO_SETTINGS_MODULE'] = environ['DJANGO_SETTINGS_MODULE']
+		os.environ['SECRET_KEY'] = environ['SECRET_KEY']
+		return _application(environ, start_response)
+
 import os

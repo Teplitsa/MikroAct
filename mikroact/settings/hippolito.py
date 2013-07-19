@@ -1,7 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from .base import *
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

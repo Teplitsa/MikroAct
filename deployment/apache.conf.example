@@ -1,0 +1,77 @@
+<VirtualHost *:80 *:8080>
+	ServerName mikroact.org
+	ServerAlias www.mikroact.org
+
+	WSGIDaemonProcess mikroact threads=10 python-path=/usr/local/virtualenvs/mikroact/lib/python2.6/site-packages
+	WSGIProcessGroup mikroact
+
+	<Directory /var/www/django/mikroact/releases/current/>
+		Order deny,allow
+		Allow from all
+	</Directory>
+
+	Alias /static /var/www/django/mikroact/releases/current/collected_static
+	Alias /media/ /var/www/django/mikroact/shared/media/
+
+	<Location /static>
+		Order deny,allow
+		Allow from all
+		# Insert mod_deflate filter
+		SetOutputFilter DEFLATE
+		# Netscape 4.x has some problems...
+		BrowserMatch ^Mozilla/4 gzip-only-text/onlyhtml
+		# Netscape 4.06-4.08 have some more problems
+		BrowserMatch ^Mozilla/4\.0[678] no-gzip
+		# MSIE masquerades as Netscape, but it is fine
+		BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+		# Don't compress images
+		SetEnvIfNoCase Request_URI \
+		\.(?:gif|jpe?g|png)$ no-gzip defaultont-vary
+		# Make sure proxies don't deliver the wrong content
+		Header append Vary User-Agent env=!dont-vary
+	</Location>
+
+	SetEnv DJANGO_SETTINGS_MODULE mikroact.settings.hippolito
+	SetEnv SECRET_KEY "a long and very secret phrase"
+
+	WSGIScriptAlias / /var/www/django/mikroact/releases/current/mikroact/wsgi.py
+</VirtualHost>
+
+<VirtualHost *:80 *:8080>
+	WSGIDaemonProcess mikroact_ru python-path=/usr/local/virtualenvs/mikroact/lib/python2.6/site-packages/
+	WSGIProcessGroup mikroact_ru
+	
+	ServerName ru.mikroact.org
+	ServerAlias www.ru.mikroact.org
+
+	<Directory /var/www/django/mikroact/releases/current/>
+		Order deny,allow
+		Allow from all
+	</Directory>
+
+	Alias /static/ /var/www/django/mikroact/releases/current/collected_static/
+	Alias /media/ /var/www/django/mikroact/shared/media/
+
+	<Location /static>
+		Order deny,allow
+		Allow from all
+		# Insert mod_deflate filter
+		SetOutputFilter DEFLATE
+		# Netscape 4.x has some problems...
+		BrowserMatch ^Mozilla/4 gzip-only-text/onlyhtml
+		# Netscape 4.06-4.08 have some more problems
+		BrowserMatch ^Mozilla/4\.0[678] no-gzip
+		# MSIE masquerades as Netscape, but it is fine
+		BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+		# Don't compress images
+		SetEnvIfNoCase Request_URI \
+		\.(?:gif|jpe?g|png)$ no-gzip defaultont-vary
+		# Make sure proxies don't deliver the wrong content
+		Header append Vary User-Agent env=!dont-vary
+	</Location>
+
+	SetEnv DJANGO_SETTINGS_MODULE mikroact.settings.hippolito_ru
+	SetEnv SECRET_KEY "a long and very secret phrase"
+
+	WSGIScriptAlias / /var/www/django/mikroact/releases/current/mikroact/wsgi.py
+</VirtualHost>
