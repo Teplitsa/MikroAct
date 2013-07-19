@@ -2,3 +2,4 @@
 from .hippolito import *
 
 LANGUAGE_CODE = 'ru'
+SITE_ID = 2
