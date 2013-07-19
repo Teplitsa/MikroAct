@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from follow import utils as follow_utils
 from follow.models import Follow
@@ -13,21 +14,23 @@ from shortcuts import DefaultCharField, DefaultDecimalField, DEFAULT_CHARFIELD_L
 
 
 class MikroAct(models.Model):
-    title = DefaultCharField(verbose_name='Название')
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, verbose_name='Ярлык')
-    date = models.DateField(verbose_name='Дата микроакта')
-    description = models.TextField(verbose_name='Описание микроакта')
-    process = models.TextField(blank=True, verbose_name='Инструкция: как сделать самому')
+    title = DefaultCharField(verbose_name=_('title'))
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, 
+                            verbose_name=_('slug'))
+    date = models.DateField(verbose_name=_('date'))
+    description = models.TextField(verbose_name=_('description'))
+    process = models.TextField(blank=True, verbose_name=_('process'))
     author = models.ForeignKey(User, related_name='mikroacts')
     
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
-    location_address = DefaultCharField(blank=True, verbose_name='Место')
+    location_address = DefaultCharField(blank=True, verbose_name=_('address'))
 
     date_created = models.DateTimeField(default=timezone.now, editable=False)
     is_published = models.BooleanField(default=True)
 
-    photo = models.ImageField(upload_to='mikro_act', null=True, blank=True, verbose_name='Фото')
+    photo = models.ImageField(upload_to='mikro_act', null=True, blank=True,
+                              verbose_name=_('photo'))
 
     objects = models.Manager()
 
@@ -54,11 +57,12 @@ class MikroAct(models.Model):
 
 
 class Campaign(models.Model):
-    name = DefaultCharField(verbose_name='Название')
+    name = DefaultCharField(verbose_name=_('name'))
     author = models.ForeignKey(User)
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, verbose_name='Ярлык')
-    description = models.TextField(blank=True, verbose_name='Описание')
-    is_private = models.BooleanField(verbose_name='Закрытая кампания? (будет видна только для вас)')
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, 
+                            verbose_name=_('slug'))
+    description = models.TextField(blank=True, verbose_name=_('description'))
+    is_private = models.BooleanField(verbose_name=_('private?'))
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 
     mikro_acts = models.ManyToManyField(MikroAct, related_name='campaigns')

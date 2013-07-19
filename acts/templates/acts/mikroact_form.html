@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load bootstrap_toolkit %}
+{% load i18n %}
 
-{% block title %}{{ block.super }}: Edit Mikroact{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Edit MikroAct" %}{% endblock %}
 
 {% block extra_head %}
 	<script src="{{ STATIC_URL }}js/jquery.slugify.js"></script>
@@ -21,10 +22,9 @@
 			<form  class="createForm" enctype="multipart/form-data" action="." method="post">
 				{% csrf_token %}
 				{{ form|as_bootstrap }}
-				<button type="submit">Сохранить</button>
+				<button type="submit">{% trans "Save" %}</button>
 			</form>
 		</div>
 	</div>
 </div>
-
 {% endblock content %}

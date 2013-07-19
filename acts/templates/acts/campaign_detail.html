@@ -3,12 +3,16 @@
 {% load follow_tags %}
 {% load stream_tags %}
 {% load comments %}
+{% load i18n %}
+
 {% block title %}{{ block.super }}: {{ campaign.name }}{% endblock %}
+
 {% block extra_head %}
 	{{ block.super }}
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}fluent_comments/css/ajaxcomments.css" />
 	<script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
 {% endblock %}
+
 {% block content %}
 {% get_obj_perms user for campaign as "campaign_perms" %}
 <div class="container">
@@ -20,25 +24,22 @@
 						<h2>{{ campaign.name }}</h2>
 					</div>
 				</div>
-				
-				
 			</div>
 			<a class="actionsCampaign" 
 					{% if not user|is_following:campaign %}
 					href="{% url 'campaign_follow' slug=campaign.slug %}">
-					<i class="icon-share-alt"></i> Наблюдать
+					<i class="icon-share-alt"></i> {% trans "Follow" %}
 					{% else %}
 					href="{% url 'campaign_unfollow' slug=campaign.slug %}">
-					<i class="icon-remove"></i> Перестать следить
+					<i class="icon-remove"></i> {% trans "Unfollow" %}
 					{% endif %}
 			</a>
 			<div class="sideCol campaignMembers">
 				<div class="accordion" id="campaignFollowers">
-					
 					<div class="accordion-group">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#campaignFollowers" href="#followerList">
-						    	Наблюдателей кампании <span class="followerCount">{{ campaign.follow_campaign.count }}</span>
+									{% trans "Campaign followers" %} <span class="followerCount">{{ campaign.follow_campaign.count }}</span>
 						    </a>
 						</div>
 						<div id="followerList" class="accordion-body collapse in">
@@ -49,10 +50,7 @@
 							</div>
 						</div>
 					</div>
-					
-					
 				</div><!-- end accordion -->
-				
 			</div>
 		</div>
 		<div class="span9">
@@ -68,7 +66,7 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ mikroact.description|truncatewords:30 }}</p>
-								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к микроакту</a></p></div>
+								<p><a href="{{ mikroact.get_absolute_url }}">{% trans "Visit MikroAct" %}</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 									{% if "change_campaign" in campaign_perms %}
@@ -79,7 +77,6 @@
 									{% endif %}
 								</ul>
 							</div>
-							
 						</div>
 					</li>
 				{% endfor %}
@@ -88,15 +85,15 @@
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
-					  <li class="active"><a href="#activity">Активности</a></li>
-					  <li><a href="#stream">Комментарии</a></li>
-					  <li><a href="#description">Описание</a></li>
+						<li class="active"><a href="#activity">{% trans "Activity" %}</a></li>
+						<li><a href="#stream">{% trans "Comments" %}</a></li>
+						<li><a href="#description">{% trans "Description" %}</a></li>
 					</ul>
 					{% if "change_campaign" in campaign_perms %}
 					<div class="dropdown userAction pull-right">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-					    	<li><a href="{% url "campaign_edit" slug=campaign.slug %}"><i class="icon-edit"></i> Редактировать Кампанию</a></li>
+					    	<li><a href="{% url "campaign_edit" slug=campaign.slug %}"><i class="icon-edit"></i> {% trans "Edit campaign" %}</a></li>
 					    </ul>
 					</div>
 					{% endif %}
@@ -118,11 +115,12 @@
 						{% if user.is_authenticated %}
 						{% render_comment_form for campaign %}
 						{% else %}
-						<a class="userLogin" href="{% url 'user_login' %}">Авторизируйтесь</a> , чтобы оставить комментарий
+						<a class="userLogin" href="{% url 'user_login' %}">{% trans "Login" %}</a>
+						{% trans "to leave a comment" %}
 						{% endif %}
 					</div>
 					<div class="tab-pane" id="description">
-					  	<h4>Описание</h4>
+						<h4>{% trans "Description" %}</h4>
 					  	<p>{{ campaign.description }}</p>
 				  </div>
 				</div>

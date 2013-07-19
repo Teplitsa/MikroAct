@@ -1,49 +1,47 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}{{ block.super }}: Registration Complete!{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Registration Complete!" %}{% endblock %}
 
 {% block content %}
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			
 			<div class="registerNotice alert fade in">
 				<a class="close" data-dismiss="alert" href="#">&times;</a>
-				Регистрация завершена!
+				{% trans "Registration complete!" %}
 			</div>
-			
 		</div>
 	</div>
 	<div class="row">
 		<div class="span3">
 			<a href="{% url "user_detail" username=user.get_username %}"><div class="callAction">
 				<i class="icon-user icon-4x"></i>
-				<h2>Ваш профиль</h2>
+				<h2>{% trans "Your profile" %}</h2>
 				<p>Stumptown fixie pork belly, sartorial authentic you probably haven't heard of them retro.</p>
 			</div></a>
 		</div>
 		<div class="span3">
 			<a href="{% url 'mikroact_list' %}"><div class="callAction">
 				<i class="icon-edit icon-4x"></i>
-				<h2>MikroActs</h2>
+				<h2>{% trans "MikroActs" %}</h2>
 				<p>Swag skateboard put a bird on it 90's readymade tofu, cardigan mixtape hashtag williamsburg wayfarers mcsweeney's next level trust fund.</p>
 			</div></a>
 		</div>
 		<div class="span3">
 			<a href="{% url 'collective_list' %}"><div class="callAction">
 				<i class="icon-group icon-4x"></i>
-				<h2>Коллективы</h2>
+				<h2>{% trans "Collectives" %}</h2>
 				<p>Swag skateboard put a bird on it 90's readymade tofu, cardigan mixtape hashtag williamsburg wayfarers mcsweeney's next level trust fund.</p>
 			</div></a>
 		</div>
 		<div class="span3">
 			<a href="{% url 'campaign_list' %}"><div class="callAction">
 				<i class="icon-sitemap icon-4x"></i>
-				<h2>Кампании</h2>
+				<h2>{% trans "Campaigns" %}</h2>
 				<p>Stumptown fixie pork belly, sartorial authentic you probably haven't heard of them retro. </p>
 			</div></a>
 		</div>
 	</div>
-	
 </div>
 {% endblock content %}

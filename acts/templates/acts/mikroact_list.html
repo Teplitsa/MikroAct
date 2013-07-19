@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
-{% block title %}{{ block.super }}: Mikroacts{% endblock %}
+{% block title %}{{ block.super }}: {% trans "MikroActs" %}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -10,7 +11,7 @@
 			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
-						<li><a href="{% url "mikroact_add" %}"><i class="icon-edit icon-large"></i> Создать микроакт</a></li>
+						<li><a href="{% url "mikroact_add" %}"><i class="icon-edit icon-large"></i> {% trans "Add MikroAct" %}</a></li>
 						<li class="pull-right"><a href="#mikroActHelp" data-toggle="modal"><i class="icon-question-sign icon-large"></i></a></li>
 					</ul>
 				</div>
@@ -27,23 +28,22 @@
 					<div class="tileActions">
 						<div class="tileDescription">
 						<p>{{ mikroact.description|truncatewords:30 }}</p>
-						<p><a href="{{ mikroact.get_absolute_url }}">Перейти к микроакту</a></p></div>
+						<p><a href="{{ mikroact.get_absolute_url }}">{% trans "Visit MikroAct" %}</a></p></div>
 						<ul class="itemAction">
 							<li><i class="icon-plus"></i></li>
 							{% if user.is_authenticated %}
-							<li><a href="#" title="Добавить к кампании" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
+							<li><a href="#" title="{% trans "Add to campaign" %}" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
 							<div id="popover_content_wrapper" style="display: none;">
 								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
 									{% csrf_token %}
 									{{ campaign_form|crispy }}
-									<button type="submit" class="btn btn-submit">Добавить</button>
+									<button type="submit" class="btn btn-submit">{% trans "Add" %}</button>
 								</form>
 							</div>
 							</li>
 							{% endif %}
 						</ul>
 					</div>
-					
 				</div>
 			</li>
 		{% endfor %}
@@ -53,15 +53,21 @@
 <div id="mikroActHelp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    	<h1>Что такое микроакт?</h1>
+		<h1>{% trans "What's a MikroAct?" %}</h1>
     </div>
     <div class="modal-body">
     	<p>
-	    Aliquip etsy fixie ethnic. Polaroid gentrify fugiat pug, 90's occaecat velit. Vegan mollit scenester craft beer intelligentsia. Tumblr proident banksy ethical, authentic echo park umami fixie do. Kogi in accusamus, nihil reprehenderit photo booth mlkshk williamsburg cillum whatever eu brooklyn bespoke post-ironic magna. 8-bit meh irure gluten-free brunch church-key culpa plaid leggings. Velit pariatur banksy magna, nisi lomo vice seitan retro pop-up single-origin coffee eiusmod ad.
+			Aliquip etsy fixie ethnic. Polaroid gentrify fugiat pug, 90's
+			occaecat velit. Vegan mollit scenester craft beer intelligentsia.
+			Tumblr proident banksy ethical, authentic echo park umami fixie do.
+			Kogi in accusamus, nihil reprehenderit photo booth mlkshk
+			williamsburg cillum whatever eu brooklyn bespoke post-ironic magna.
+			8-bit meh irure gluten-free brunch church-key culpa plaid leggings.
+			Velit pariatur banksy magna, nisi lomo vice seitan retro pop-up
+			single-origin coffee eiusmod ad.
     	</p>
 	</div>
 	<div class="modal-footer">
-		
 	</div>
 </div>
 {% endblock content %}

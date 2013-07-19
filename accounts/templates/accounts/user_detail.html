@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 {% load guardian_tags %}
+{% load i18n %}
 
 {% block title %}{{ block.super }}: {{ userprofile.user }}{% endblock %}
 
 {% block content %}
 {% get_obj_perms user for userprofile as "userprofile_perms" %}
-
 <div class="container">
 	<div class="row-fluid">
 		<div class="span3">
-		
 			<div class="sideCol userPhoto">
 					{% if userprofile.photo %}
 					<img src="{{ userprofile.photo.url }}" title="{{ userprofile.user }}"/>
@@ -29,8 +28,8 @@
 					<div class="dropdown userAction pull-right">
 					  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-					    <li><a href="{% url "user_edit" username=userprofile.user.username %}"><i class="icon-edit"></i> Редактировать профиль</a></li>
-					    <li><a href="{% url "user_logout" %}"><i class="icon-signout"></i>Выйти</a></li>
+					    <li><a href="{% url "user_edit" username=userprofile.user.username %}"><i class="icon-edit"></i> {% trans "Edit profile" %}</a></li>
+					    <li><a href="{% url "user_logout" %}"><i class="icon-signout"></i>{% trans "Logout" %}</a></li>
 					  </ul>
 					</div>
 				</div>
@@ -48,13 +47,11 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ mikroact.description|truncatewords:30 }}</p>
-								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к микроакту</a></p></div>
+								<p><a href="{{ mikroact.get_absolute_url }}">{% trans "Visit MikroAct" %}</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
-									
 								</ul>
 							</div>
-							
 						</div>
 					</li>
 				{% endfor %}
@@ -74,17 +71,15 @@
 								</ul>
 								{% endif %}
 							</div>
-							
-							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} Участники</span></div>
+							<div class="tileTitle">{{ collective.name }}<span class="count">{{ collective.members.count }} {% trans "members" %}</span></div>
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ collective.description|truncatewords:30 }}</p>
-								<p><a href="{{ collective.get_absolute_url }}">Перейти к коллективу</a></p></div>
+								<p><a href="{{ collective.get_absolute_url }}">{% trans "Visit collective" %}</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
 								</ul>
 							</div>
-							
 						</div>
 					</li>
 				{% endfor %}

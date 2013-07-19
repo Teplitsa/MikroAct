@@ -1,17 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load follow_tags %}
-{% block title %}{{ block.super }}: Кампании{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Campaigns" %}{% endblock %}
 
 {% block content %}
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			
 			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
-						<li><a href="{% url "campaign_add" %}"><i class="icon-sitemap icon-large"></i>Создать кампанию</a></li>
+						<li><a href="{% url "campaign_add" %}"><i class="icon-sitemap icon-large"></i>{% trans "Create campaign" %}</a></li>
 						<li class="pull-right"><a href="#campaignHelp" data-toggle="modal"><i class="icon-question-sign icon-large"></i></a></li>
 					</ul>
 				</div>
@@ -21,7 +21,6 @@
 		{% for campaign in campaign_list %}
 			<li class="span3">
 				<div class="campaignTile">
-				
 					<div class="tilePhoto">
 						{% if campaign.mikro_acts %}
 						<ul class="mosaic">
@@ -32,47 +31,55 @@
 						{% endif %}
 					</div>
 					
-					<div class="tileTitle">{{ campaign.name }}<span class="campaignCount">{{ campaign.mikro_acts.count }} микроактов</span></div>
+					<div class="tileTitle">{{ campaign.name }}<span class="campaignCount">{{ campaign.mikro_acts.count }} {% trans "MikroActs" %}</span></div>
 					
 					<div class="tileActions">
 						<div class="tileDescription">
 						<p>{{ campaign.description|truncatewords:30 }}</p>
-						<p><a href="{{ campaign.get_absolute_url }}">Перейти к кампании</a></p></div>
+						<p><a href="{{ campaign.get_absolute_url }}">{% trans "Visit campaign" %}</a></p></div>
 						<ul class="itemAction">
 							<li><i class="icon-plus"></i></li>
 							<li>
 								<a data-toggle="tooltip" data-placement="top" {% if not user|is_following:campaign %}
-					href="{% url 'campaign_follow' slug=campaign.slug %}" title="Наблюдать">
-					<i class="icon-share-alt"></i>
-					{% else %}
-					href="{% url 'campaign_unfollow' slug=campaign.slug %}" title="Перестать наблюдать">
-					<i class="icon-remove"></i>
-					{% endif %}
-			</a>
+									href="{% url 'campaign_follow' slug=campaign.slug %}" 
+									title="{% trans "Follow" %}">
+									<i class="icon-share-alt"></i>
+									{% else %}
+									href="{% url 'campaign_unfollow' slug=campaign.slug %}" 
+									title="{% trans "Unfollow" %}">
+									<i class="icon-remove"></i>
+									{% endif %}
+								</a>
 							</li>
 						</ul>
 					</div>
-				
 				</div>
 			</li>
 		{% endfor %}
 		</ul>
-		
-		
 	</div>
 </div>
 <div id="campaignHelp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+<<<<<<< HEAD
     	<h1>Что такое Кампания?</h1>
+=======
+		<h1>{% trans "What's a Campaign?" %}</h1>
+>>>>>>> Use gettext for internationalisation..
     </div>
     <div class="modal-body">
     	<p>
-	    Aliquip etsy fixie ethnic. Polaroid gentrify fugiat pug, 90's occaecat velit. Vegan mollit scenester craft beer intelligentsia. Tumblr proident banksy ethical, authentic echo park umami fixie do. Kogi in accusamus, nihil reprehenderit photo booth mlkshk williamsburg cillum whatever eu brooklyn bespoke post-ironic magna. 8-bit meh irure gluten-free brunch church-key culpa plaid leggings. Velit pariatur banksy magna, nisi lomo vice seitan retro pop-up single-origin coffee eiusmod ad.
+			Aliquip etsy fixie ethnic. Polaroid gentrify fugiat pug, 90's occaecat
+			velit. Vegan mollit scenester craft beer intelligentsia. Tumblr proident
+			banksy ethical, authentic echo park umami fixie do. Kogi in accusamus,
+			nihil reprehenderit photo booth mlkshk williamsburg cillum whatever eu
+			brooklyn bespoke post-ironic magna. 8-bit meh irure gluten-free brunch
+			church-key culpa plaid leggings. Velit pariatur banksy magna, nisi lomo
+			vice seitan retro pop-up single-origin coffee eiusmod ad.
     	</p>
 	</div>
 	<div class="modal-footer">
-		
 	</div>
 </div>
 {% endblock content %}

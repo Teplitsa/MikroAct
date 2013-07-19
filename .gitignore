@@ -4,3 +4,4 @@
 mikroact.db
 .DS_Store
 /env/
+/locale/*/LC_MESSAGES/*.mo

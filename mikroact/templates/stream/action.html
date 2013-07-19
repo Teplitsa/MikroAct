@@ -1,4 +1,4 @@
-
+{% load i18n %}
 <a href="{{ action.target.get_absolute_url }}">
 <span class="actionIcon">
 		{% if action.verb == 'added' %}<i class="icon-sitemap"></i>{% endif %}
@@ -6,12 +6,11 @@
 		{% if action.verb == 'commented' %}<i class="icon-comments"></i>{% endif %}
 		{% if action.verb == 'edited' %}<i class="icon-edit"></i>{% endif %}
 		{% if action.verb == 'followed' %}<i class="icon-share-alt"></i>{% endif %}
-	
 </span>&nbsp;
 <!-- <a href="{{ action.actor.userprofile.get_absolute_url }}"> -->
 	{{ action.actor }}
 <!-- </a>  -->
-{{ action.get_verb_display }} 
+{% trans action.get_verb_display %} 
 <!-- <a href="{{ action.target.get_absolute_url }}"> -->
 	<span class="activityTarget">
 	{% if action.target.title %}
@@ -30,8 +29,6 @@
 	{% else %}
 		{{ action.action_object.name }}
 	{% endif %}
-	
-
 {% endif %}
 <span class="activityDate">
 {{ action.datetime|date:"D - G:i" }}

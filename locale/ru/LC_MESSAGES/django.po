@@ -1,0 +1,480 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mikroact 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-19 13:35-0400\n"
+"PO-Revision-Date: 2013-07-19 18:38+0100\n"
+"Last-Translator: Carl van Tonder <carl@supervacuo.com>\n"
+"Language-Team: ru <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: accounts/forms.py:16 accounts/templates/accounts/login.html:22
+#: mikroact/templates/inc/loginModal.html:19
+msgid "Password"
+msgstr "Пароль"
+
+#: accounts/forms.py:18
+msgid "Confirm password"
+msgstr "Подтвердите пароль"
+
+#: accounts/forms.py:29
+msgid "Passwords don't match"
+msgstr ""
+
+#: accounts/models.py:39
+msgid "Name"
+msgstr "Название"
+
+#: accounts/models.py:41 acts/models.py:19 acts/models.py:63
+msgid "slug"
+msgstr "ярлык"
+
+#: accounts/models.py:45 acts/models.py:27
+msgid "address"
+msgstr "место"
+
+#: accounts/models.py:47 acts/models.py:21 acts/models.py:64
+msgid "description"
+msgstr "описание"
+
+#: accounts/models.py:48
+msgid "twitter"
+msgstr ""
+
+#: accounts/models.py:49
+msgid "email"
+msgstr "эл. почта"
+
+#: accounts/models.py:52 acts/models.py:33
+msgid "photo"
+msgstr "фото"
+
+#: accounts/templates/accounts/collective_detail.html:44
+#: accounts/templates/accounts/collective_list.html:54
+#: acts/templates/acts/campaign_detail.html:31
+#: acts/templates/acts/campaign_list.html:45
+msgid "Follow"
+msgstr "Наблюдать"
+
+#: accounts/templates/accounts/collective_detail.html:47
+#: accounts/templates/accounts/collective_list.html:57
+#: acts/templates/acts/campaign_detail.html:34
+#: acts/templates/acts/campaign_list.html:49
+msgid "Unfollow"
+msgstr "Перестать следить"
+
+#: accounts/templates/accounts/collective_detail.html:55
+msgid "Collective members"
+msgstr "Участников коллектива"
+
+#: accounts/templates/accounts/collective_detail.html:69
+msgid "Collective followers"
+msgstr "Наблюдателей коллектива"
+
+#: accounts/templates/accounts/collective_detail.html:91
+msgid "Edit collectve"
+msgstr "Редактировать коллектив"
+
+#: accounts/templates/accounts/collective_detail.html:92
+msgid "Add members"
+msgstr "Добавить участников"
+
+#: accounts/templates/accounts/collective_detail.html:111
+#: accounts/templates/accounts/user_detail.html:50
+#: acts/templates/index.html:27 acts/templates/acts/campaign_detail.html:69
+#: acts/templates/acts/mikroact_list.html:31
+msgid "Visit MikroAct"
+msgstr "Перейти к микроакту"
+
+#: accounts/templates/accounts/collective_detail.html:126
+#: acts/templates/acts/campaign_detail.html:88
+#: mikroact/templates/inc/activityPane.html:5
+msgid "Activity"
+msgstr "Активности"
+
+#: accounts/templates/accounts/collective_detail.html:127
+#: acts/templates/acts/mikroact_detail.html:96
+msgid "Stream"
+msgstr "Лента комментариев"
+
+#: accounts/templates/accounts/collective_detail.html:128
+#: accounts/templates/accounts/collective_invite.html:29
+#: acts/templates/acts/campaign_detail.html:90
+#: acts/templates/acts/campaign_detail.html:123
+msgid "Description"
+msgstr "Описание"
+
+#: accounts/templates/accounts/collective_detail.html:148
+msgid "Log in"
+msgstr "Авторизируйтесь"
+
+#: accounts/templates/accounts/collective_detail.html:149
+#: acts/templates/acts/campaign_detail.html:119
+#: acts/templates/acts/mikroact_detail.html:120
+msgid "to leave a comment"
+msgstr "чтобы оставить комментарий"
+
+#: accounts/templates/accounts/collective_detail.html:153
+#: accounts/templates/accounts/collective_invite.html:27
+msgid "Location"
+msgstr "Местоположение"
+
+#: accounts/templates/accounts/collective_detail.html:155
+msgid "About"
+msgstr "Описание"
+
+#: accounts/templates/accounts/collective_form.html:5
+msgid "Collective"
+msgstr "коллектив"
+
+#: accounts/templates/accounts/collective_form.html:25
+#: accounts/templates/accounts/user_form.html:28
+#: acts/templates/acts/campaign_form.html:23
+#: acts/templates/acts/mikroact_form.html:25
+msgid "Save"
+msgstr "Сохранить"
+
+#: accounts/templates/accounts/collective_invite.html:21
+msgid "Email"
+msgstr "Эл. почта"
+
+#: accounts/templates/accounts/collective_invite.html:42
+msgid "Add as members"
+msgstr "Добавить участников"
+
+#: accounts/templates/accounts/collective_list.html:5
+#: accounts/templates/accounts/user_register_done.html:34
+#: acts/templates/index.html:108 mikroact/templates/inc/globalHeader.html:48
+msgid "Collectives"
+msgstr "Коллективы"
+
+#: accounts/templates/accounts/collective_list.html:16
+msgid "Create collective"
+msgstr "Создать коллектив"
+
+#: accounts/templates/accounts/collective_list.html:41
+#: accounts/templates/accounts/user_detail.html:74
+#: acts/templates/index.html:64 acts/templates/index.html.py:124
+msgid "members"
+msgstr "yчастников"
+
+#: accounts/templates/accounts/collective_list.html:46
+#: accounts/templates/accounts/user_detail.html:78
+#: acts/templates/index.html:68 acts/templates/index.html.py:128
+msgid "Visit collective"
+msgstr "Перейти к коллективу"
+
+#: accounts/templates/accounts/collective_list.html:72
+msgid "What's a Collective?"
+msgstr "Что такое Коллектив?"
+
+#: accounts/templates/accounts/login.html:4
+#: accounts/templates/accounts/login.html:30
+#: acts/templates/acts/campaign_detail.html:118
+#: acts/templates/acts/mikroact_detail.html:119
+#: mikroact/templates/inc/globalHeader.html:23
+msgid "Login"
+msgstr "Войти"
+
+#: accounts/templates/accounts/login.html:11
+msgid "Please login to continue"
+msgstr "Пожалуйста, авторизируйтесь для продолжения"
+
+#: accounts/templates/accounts/login.html:13
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+"Ваш пароль и имя пользователя не совпадают. Пожалуйста попытайтесь снова."
+
+#: accounts/templates/accounts/login.html:19
+#: mikroact/templates/inc/loginModal.html:14
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: accounts/templates/accounts/login.html:25
+msgid "Don't have an account?"
+msgstr "Нет учетной записи?"
+
+#: accounts/templates/accounts/login.html:25
+msgid "Register!"
+msgstr "Зарегистрируйся!"
+
+#: accounts/templates/accounts/login.html:28
+msgid "Forgot password?"
+msgstr ">Забыли пароль?"
+
+#: accounts/templates/accounts/user_detail.html:31
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: accounts/templates/accounts/user_detail.html:32
+#: mikroact/templates/inc/globalHeader.html:15
+msgid "Logout"
+msgstr "Выйти"
+
+#: accounts/templates/accounts/user_form.html:5
+msgid "Edit User"
+msgstr ""
+
+#: accounts/templates/accounts/user_register.html:4
+#: accounts/templates/accounts/user_register.html:14
+#: mikroact/templates/inc/globalHeader.html:22
+msgid "Register"
+msgstr "Регистрация"
+
+#: accounts/templates/accounts/user_register_done.html:4
+msgid "Registration Complete!"
+msgstr "Регистрация завершена!"
+
+#: accounts/templates/accounts/user_register_done.html:12
+msgid "Registration complete!"
+msgstr "Регистрация завершена!"
+
+#: accounts/templates/accounts/user_register_done.html:20
+msgid "Your profile"
+msgstr "Ваш профиль"
+
+#: accounts/templates/accounts/user_register_done.html:27
+#: acts/templates/index.html:158 acts/templates/acts/campaign_list.html:34
+#: acts/templates/acts/mikroact_list.html:5
+msgid "MikroActs"
+msgstr "Микроакти"
+
+#: accounts/templates/accounts/user_register_done.html:41
+#: acts/templates/index.html:142 acts/templates/acts/campaign_list.html:5
+#: acts/templates/acts/mikroact_detail.html:50
+#: mikroact/templates/inc/globalHeader.html:47
+msgid "Campaigns"
+msgstr "Кампании"
+
+#: acts/models.py:17
+msgid "title"
+msgstr "название"
+
+#: acts/models.py:20
+msgid "date"
+msgstr "дата"
+
+#: acts/models.py:22
+msgid "process"
+msgstr "процесс"
+
+#: acts/models.py:60
+msgid "name"
+msgstr "название"
+
+#: acts/models.py:65
+msgid "private?"
+msgstr "личный?"
+
+#: acts/templates/index.html:5
+msgid "Home"
+msgstr ""
+
+#: acts/templates/index.html:14
+msgid "My MikroActs"
+msgstr "Мои микроакты"
+
+#: acts/templates/index.html:30 acts/templates/acts/mikroact_detail.html:33
+#: acts/templates/acts/mikroact_list.html:35
+msgid "Add to campaign"
+msgstr "Добавить к кампании"
+
+#: acts/templates/index.html:35 acts/templates/acts/mikroact_detail.html:41
+#: acts/templates/acts/mikroact_list.html:40
+msgid "Add"
+msgstr "Добавить"
+
+#: acts/templates/index.html:48
+msgid "My Collectives"
+msgstr "Мои коллективы"
+
+#: acts/templates/index.html:85
+msgid "Welcome to MikroAct"
+msgstr "Добро пожаловать на МикроАкт"
+
+#: acts/templates/index.html:88
+msgid ""
+"MikroAct is an open source, collaborative actions platform for mobilizing "
+"and connecting local communities through the DIY actions they perform. "
+msgstr ""
+"МикроАкт—платформа мобилизации и объединения локальных сообществ активистов "
+"с помощью взаимодействия в рамках небольших самоорганизуемых акций. "
+"Платформа создана на открытом коде (Open Source) и обладает рядом функций, "
+"позволяющих эффективную мобилизацию и синхронизацию акций . "
+
+#: acts/templates/index.html:92
+msgid ""
+"The website seeks to facilitate effective mobilization of actions by "
+"supporting communities with a set of collaboration and ideation tools. A "
+"secondary goal of this platform is to link online and offline public spaces "
+"and actions, towards building stronger, more resilient communities."
+msgstr ""
+"Другая цель платформы—соединять онлайн- и оффлайн- пространства и действия, "
+"создавая более устойчивые и сильные сообщества."
+
+#: acts/templates/index.html:95 mikroact/templates/inc/loginModal.html:27
+msgid "Register now!"
+msgstr "Зарегистрируйся!"
+
+#: acts/templates/index.html:163 acts/templates/acts/campaign_list.html:39
+msgid "Visit campaign"
+msgstr "Перейти к кампании"
+
+#: acts/templates/acts/campaign_detail.html:42
+msgid "Campaign followers"
+msgstr "Наблюдателей кампании"
+
+#: acts/templates/acts/campaign_detail.html:89
+msgid "Comments"
+msgstr "Комментарии"
+
+#: acts/templates/acts/campaign_detail.html:96
+msgid "Edit campaign"
+msgstr "Редактировать Кампанию"
+
+#: acts/templates/acts/campaign_form.html:3
+msgid "Campaign"
+msgstr "Кампания"
+
+#: acts/templates/acts/campaign_list.html:14
+msgid "Create campaign"
+msgstr "Создать кампанию"
+
+#: acts/templates/acts/campaign_list.html:65
+msgid "What's a Campaign?"
+msgstr "Что такое Кампания?"
+
+#: acts/templates/acts/mikroact_confirm_delete.html:4
+#: acts/templates/acts/mikroact_detail.html:105
+msgid "Delete MikroAct"
+msgstr "Удалить Mikroact"
+
+#: acts/templates/acts/mikroact_confirm_delete.html:9
+msgid "Delete"
+msgstr "Удалить"
+
+#: acts/templates/acts/mikroact_detail.html:62
+msgid "This MikroAct is not associated with any campaigns."
+msgstr "Этот MikroAct не связан ни с одной кампанией"
+
+#: acts/templates/acts/mikroact_detail.html:97
+msgid "Instructions"
+msgstr "Инструкции"
+
+#: acts/templates/acts/mikroact_detail.html:103
+#: acts/templates/acts/mikroact_form.html:5
+msgid "Edit MikroAct"
+msgstr "Редактировать микроакт"
+
+#: acts/templates/acts/mikroact_detail.html:127
+msgid "There are currently no instructions for this MikroAct."
+msgstr "Сейчас нет инструкций для этого MikroAct."
+
+#: acts/templates/acts/mikroact_list.html:14
+msgid "Add MikroAct"
+msgstr "Создать микроакт"
+
+#: acts/templates/acts/mikroact_list.html:56
+msgid "What's a MikroAct?"
+msgstr "Что такое микроакт?"
+
+#: mikroact/settings/base.py:107
+msgid "Stream Item"
+msgstr "Элемент ленты"
+
+#: mikroact/settings/base.py:108
+msgid "edited"
+msgstr "отредактировал"
+
+#: mikroact/settings/base.py:109
+msgid "created"
+msgstr "создал"
+
+#: mikroact/settings/base.py:110
+msgid "deleted"
+msgstr "удалил"
+
+#: mikroact/settings/base.py:111
+msgid "followed"
+msgstr "наблюдает за"
+
+#: mikroact/settings/base.py:112
+msgid "left a comment"
+msgstr "оставил комментарий"
+
+#: mikroact/settings/base.py:113
+msgid "added"
+msgstr "добавил"
+
+#: mikroact/templates/comments/comment.html:22
+msgid "Preview of your comment"
+msgstr "Предпросмотр вашего комментария"
+
+#: mikroact/templates/comments/comment.html:32
+msgid "Anonymous"
+msgstr ""
+
+#: mikroact/templates/comments/comment.html:37
+#, python-format
+msgid "on %(submit_date)s"
+msgstr ""
+
+#: mikroact/templates/comments/comment.html:41
+msgid "moderated"
+msgstr ""
+
+#: mikroact/templates/comments/form.html:4
+msgid "Comments are closed."
+msgstr ""
+
+#: mikroact/templates/comments/form.html:13
+msgid "Post"
+msgstr "Опубликовать"
+
+#: mikroact/templates/comments/form.html:14
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: mikroact/templates/inc/globalHeader.html:10
+#: mikroact/templates/inc/globalHeader.html:21
+msgid "Hello"
+msgstr "Приветствую"
+
+#: mikroact/templates/inc/globalHeader.html:14
+msgid "My profile"
+msgstr "Мой профиль"
+
+#: mikroact/templates/inc/globalHeader.html:21
+msgid "MikroActivist"
+msgstr "МикроАктивист"
+
+#: mikroact/templates/inc/globalHeader.html:49
+msgid "Explore"
+msgstr "Исследовать"
+
+#: mikroact/templates/inc/globalHeader.html:51
+msgid "Create"
+msgstr "Создать"
+
+#: mikroact/templates/inc/globalHeader.html:53
+msgid "Blog"
+msgstr "Блог"
+
+#: mikroact/templates/inc/globalHeader.html:57
+msgid "Search"
+msgstr "Искать"
+
+#: mikroact/templates/inc/loginModal.html:27
+msgid "Not registered?"
+msgstr "Не зарегистрированы?"
