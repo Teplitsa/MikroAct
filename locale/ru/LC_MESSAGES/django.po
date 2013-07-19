@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Denis <kuladin@te-st.ru>, 2013.
 #
 msgid ""
 msgstr ""
@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-07-19 13:35-0400\n"
 "PO-Revision-Date: 2013-07-19 18:38+0100\n"
-"Last-Translator: Carl van Tonder <carl@supervacuo.com>\n"
-"Language-Team: ru <LL@li.org>\n"
+"Last-Translator: Denis <kuladin@te-st.ru>\n"
+"Language-Team: ru <support@mikroact.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
