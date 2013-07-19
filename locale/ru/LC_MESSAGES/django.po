@@ -211,7 +211,7 @@ msgstr "Зарегистрируйся!"
 
 #: accounts/templates/accounts/login.html:28
 msgid "Forgot password?"
-msgstr ">Забыли пароль?"
+msgstr "Забыли пароль?"
 
 #: accounts/templates/accounts/user_detail.html:31
 msgid "Edit profile"
