@@ -30,7 +30,7 @@ msgstr "Подтвердите пароль"
 
 #: accounts/forms.py:29
 msgid "Passwords don't match"
-msgstr ""
+msgstr "Пароли не совпадают"
 
 #: accounts/models.py:39
 msgid "Name"
@@ -72,7 +72,7 @@ msgstr "Наблюдать"
 #: acts/templates/acts/campaign_detail.html:34
 #: acts/templates/acts/campaign_list.html:49
 msgid "Unfollow"
-msgstr "Перестать следить"
+msgstr "Перестать наблядать"
 
 #: accounts/templates/accounts/collective_detail.html:55
 msgid "Collective members"
@@ -224,7 +224,7 @@ msgstr "Выйти"
 
 #: accounts/templates/accounts/user_form.html:5
 msgid "Edit User"
-msgstr ""
+msgstr "Редактировать пользователя"
 
 #: accounts/templates/accounts/user_register.html:4
 #: accounts/templates/accounts/user_register.html:14
@@ -248,7 +248,7 @@ msgstr "Ваш профиль"
 #: acts/templates/index.html:158 acts/templates/acts/campaign_list.html:34
 #: acts/templates/acts/mikroact_list.html:5
 msgid "MikroActs"
-msgstr "Микроакти"
+msgstr "Микроакты"
 
 #: accounts/templates/accounts/user_register_done.html:41
 #: acts/templates/index.html:142 acts/templates/acts/campaign_list.html:5
@@ -263,11 +263,11 @@ msgstr "название"
 
 #: acts/models.py:20
 msgid "date"
-msgstr "дата"
+msgstr "дата микроакта"
 
 #: acts/models.py:22
 msgid "process"
-msgstr "процесс"
+msgstr "Как повторить"
 
 #: acts/models.py:60
 msgid "name"
@@ -275,11 +275,11 @@ msgstr "название"
 
 #: acts/models.py:65
 msgid "private?"
-msgstr "личный?"
+msgstr "Закрытая кампания? (будет видна только для вас)"
 
 #: acts/templates/index.html:5
 msgid "Home"
-msgstr ""
+msgstr "Домой"
 
 #: acts/templates/index.html:14
 msgid "My MikroActs"
@@ -358,7 +358,7 @@ msgstr "Что такое Кампания?"
 #: acts/templates/acts/mikroact_confirm_delete.html:4
 #: acts/templates/acts/mikroact_detail.html:105
 msgid "Delete MikroAct"
-msgstr "Удалить Mikroact"
+msgstr "Удалить микроакт"
 
 #: acts/templates/acts/mikroact_confirm_delete.html:9
 msgid "Delete"
@@ -366,7 +366,7 @@ msgstr "Удалить"
 
 #: acts/templates/acts/mikroact_detail.html:62
 msgid "This MikroAct is not associated with any campaigns."
-msgstr "Этот MikroAct не связан ни с одной кампанией"
+msgstr "Этот микроакт не связан ни с одной кампанией"
 
 #: acts/templates/acts/mikroact_detail.html:97
 msgid "Instructions"
@@ -379,7 +379,7 @@ msgstr "Редактировать микроакт"
 
 #: acts/templates/acts/mikroact_detail.html:127
 msgid "There are currently no instructions for this MikroAct."
-msgstr "Сейчас нет инструкций для этого MikroAct."
+msgstr "Сейчас нет инструкций для этого микроактa."
 
 #: acts/templates/acts/mikroact_list.html:14
 msgid "Add MikroAct"
@@ -423,7 +423,7 @@ msgstr "Предпросмотр вашего комментария"
 
 #: mikroact/templates/comments/comment.html:32
 msgid "Anonymous"
-msgstr ""
+msgstr "Аноним"
 
 #: mikroact/templates/comments/comment.html:37
 #, python-format
@@ -436,7 +436,7 @@ msgstr ""
 
 #: mikroact/templates/comments/form.html:4
 msgid "Comments are closed."
-msgstr ""
+msgstr "Комментарии закрыты."
 
 #: mikroact/templates/comments/form.html:13
 msgid "Post"
@@ -478,3 +478,15 @@ msgstr "Искать"
 #: mikroact/templates/inc/loginModal.html:27
 msgid "Not registered?"
 msgstr "Не зарегистрированы?"
+
+msgid "Group a selection of Mikroacts which are inspiring, interesting and share your interests with others." 
+msgstr "Групируйте интересные и вдохновляющие микроакты для того, чтобы делиться с другими."
+
+msgid "Collective is a group of people who work together on specific themes or in defined areas to collectively take action and transform urban spaces."
+msgstr "Коллектив это группа людей, работающих вместе над определенной задачей по изменению городского ландшафта."
+
+msgid "A mikroact is a building block for you to transform your community or city! Propose an idea and work with others to achieve it." 
+msgstr "Микроакт это строительный блок который вы можете использовать для изменения вашего сообщества или города! Предложие идею и работайте над ее реализацией вместе с другими."
+
+msgid "Share your interests with other users in your city and around the world. Get inspired, join a community and take action together."
+msgstr "Делитесь своими интересами с другими пользователями из вашего городa и других стран. Вдохновляйтесь идеями других, присоединяйтесь к сообществам, чтобы участвовать в совместном творчестве." 
