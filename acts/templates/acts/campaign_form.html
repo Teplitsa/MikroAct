@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ block.super }}: Campaign{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Campaign" %}{% endblock %}
 
 {% block extra_head %}
 	<script src="{{ STATIC_URL }}js/jquery.slugify.js"></script>
@@ -20,7 +20,7 @@
 			<form  class="createForm" action="." method="post">
 				{% csrf_token %}
 				{{ form.as_p }}
-				<button type="submit">Сохранить</button>
+				<button type="submit">{% trans "Save" %}</button>
 			</form>
 		</div>
 	</div>

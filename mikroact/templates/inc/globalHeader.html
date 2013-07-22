@@ -1,3 +1,4 @@
+{% load i18n %}
 <section class="panel">
 	<div class="container">
 		<div class="row">
@@ -6,20 +7,20 @@
 				<div class="userNav pull-right">
 					{% if user.is_authenticated %}
 					<ul>
-					<li>Приветствую, <span style="color: #6fcbd7;">{{ user.get_username }}! </span></li>
-					<li class="dropdown">
-						  <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% if user.userprofile.photo %}<img src="{{ user.userprofile.photo.url }}" width="32" />{% endif %}<i class="icon-angle-down"></i></a>
-						  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
-						  	<li><a href="{% url "user_detail" username=user.get_username %}"><i class="icon-user"></i>Мой профиль</a></li>
-						    <li><a href="{% url "user_logout" %}"><i class="icon-signout"></i>Выйти</a></li>
-						  </ul>
-					</li>
+						<li>{% trans "Hello" %}, <span style="color: #6fcbd7;">{{ user.get_username }}!</span></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">{% if user.userprofile.photo %}<img src="{{ user.userprofile.photo.url }}" width="32" />{% endif %}<i class="icon-angle-down"></i></a>
+							<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+								<li><a href="{% url "user_detail" username=user.get_username %}"><i class="icon-user"></i>{% trans "My profile" %}</a></li>
+								<li><a href="{% url "user_logout" %}"><i class="icon-signout"></i>{% trans "Logout" %}</a></li>
+							</ul>
+						</li>
 					</ul>
 					{% else %}
 					<ul>
-						<li>Приветствую, <span style="color: #6fcbd7;">МикроАктивист!</span></li>
-						<li class="registerLink"><a href="{% url "user_register" %}">Регистрация</a></li>
-						<li><a href="#loginModal" data-toggle="modal">Войти</a></li>
+						<li>{% trans "Hello" %}, <span style="color: #6fcbd7;">{% trans "MikroActivist" %}!</span></li>
+						<li class="registerLink"><a href="{% url "user_register" %}">{% trans "Register" %}</a></li>
+						<li><a href="#loginModal" data-toggle="modal">{% trans "Login" %}</a></li>
 					</ul>
 					{% endif %}
 				</div>
@@ -43,17 +44,17 @@
 	    		<div class="nav-collapse collapse pull-right">	 
 	    			      		
 					<ul class="nav mainNav">
-						<li><a href="{% url 'campaign_list' %}"><i class="icon-sitemap icon-large"></i> Кампании</a></li>
-						<li><a href="{% url 'collective_list' %}"><i class="icon-group icon-large"></i> Коллективы</a></li>
-						<li><a href="{% url 'mikroact_list' %}"><i class="icon-fullscreen icon-large"></i> Исследовать</a></li>
+						<li><a href="{% url 'campaign_list' %}"><i class="icon-sitemap icon-large"></i> {% trans "Campaigns" %}</a></li>
+						<li><a href="{% url 'collective_list' %}"><i class="icon-group icon-large"></i> {% trans "Collectives" %}</a></li>
+						<li><a href="{% url 'mikroact_list' %}"><i class="icon-fullscreen icon-large"></i> {% trans "Explore" %}</a></li>
 						{% if user.is_authenticated %}
-						<li><a href="{% url 'mikroact_add' %}"><i class="icon-edit icon-large"></i> Создать</a></li>
+						<li><a href="{% url 'mikroact_add' %}"><i class="icon-edit icon-large"></i> {% trans "Create" %}</a></li>
 						{% else %}
-						<li><a href="http://mikroact.org/process/"><i class="icon-rss icon-large"></i> Блог</a></li>
+						<li><a href="http://mikroact.org/process/"><i class="icon-rss icon-large"></i> {% trans "Blog" %}</a></li>
 						{% endif %}
 					</ul>	
 					<form class="navbar-search">
-					  <input type="text" class="search-query span2 headerSearch" data-provide="typeahead" placeholder="Искать">
+					  <input type="text" class="search-query span2 headerSearch" data-provide="typeahead" placeholder="{% trans "Search" %}">
 					</form> 			
 					
 	    		</div>

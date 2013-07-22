@@ -1,7 +1,7 @@
 # vim: fileencoding=utf-8 ai ts=4 sts=4 et sw=4
 from .base import *
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -18,3 +18,6 @@ DATABASES = {
 }
 
 INTERNAL_IPS = ('127.0.0.1',)
+
+ALLOWED_HOSTS = ('.mikroact.org',)
+MEDIA_ROOT = '/var/www/django/mikroact/shared/media/'

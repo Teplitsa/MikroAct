@@ -14,7 +14,7 @@ Getting started
         $ git clone git@github.com:Teplitsa/MikroAct.git
         ...
         $ cd MikroAct.git
-        $ pip install -r requirements.txt
+        $ pip install -r deployment/requirements.txt
         ...
 
 3. If you need to change default settings (such as database connection details),
@@ -42,7 +42,7 @@ Updating
 
 After every `git pull`, run
 
-      $ pip install -r requirements.txt
+      $ pip install -r deployment/requirements.txt
       $ django-admin.py syncdb --migrate
 
 Deployment
@@ -57,7 +57,7 @@ Requirements (configured and working):
 * [`virtualenv`](http://www.virtualenv.org/en/latest/)
 * Python >= 2.6
 
-This git repository includes an [example httpd `VirtualHost` configuration file](https://github.com/Teplitsa/MikroAct/blob/master/apache.conf.example).
+This git repository includes an [example httpd `VirtualHost` configuration file](https://github.com/Teplitsa/MikroAct/blob/master/deployment/apache.conf.example).
 
 MikroAct uses [Fabric](http://docs.fabfile.org/en/1.6/) for deployment, and assumes various things (configurable by editing [`fabfile.py`](https://github.com/Teplitsa/MikroAct/blob/master/fabfile.py)):
 

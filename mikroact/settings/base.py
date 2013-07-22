@@ -2,6 +2,8 @@
 from os import environ
 from os.path import join, abspath, dirname
 
+ugettext = lambda s: s
+
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
 from django.core.exceptions import ImproperlyConfigured
@@ -27,7 +29,14 @@ root = lambda *x: join(abspath(PROJECT_ROOT), *x)
 TIME_ZONE = 'America/New_York'
 
 # Language code for this installation.
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = (
+    ('en-us', 'English (US)'),
+    ('ru', 'Russian'),
+    ('xx', 'XX')
+)
+LOCALE_PATHS = (root('locale'),)
 
 USE_I18N = True
 USE_L10N = True
@@ -95,13 +104,13 @@ INSTALLED_APPS = (
 )
 
 STREAM_VERBS = (
-    ('default', 'Элемент ленты'),
-    ('edited', 'отредактировал'),
-    ('created','создал'),
-    ('deleted','удалил'),
-    ('followed', 'наблюдает за'),
-    ('commented', 'оставил комментарий'),  # ".. on"
-    ('added','добавил'),  # ".. to"
+    ('default', ugettext('Stream Item')),
+    ('edited', ugettext('edited')),
+    ('created', ugettext('created')),
+    ('deleted', ugettext('deleted')),
+    ('followed', ugettext('followed')),
+    ('commented', ugettext('left a comment')),  # ".. on"
+    ('added', ugettext('added')),  # ".. to"
 )
 
 LOGGING = {

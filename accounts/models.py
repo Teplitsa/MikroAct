@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.comments.models import Comment
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from follow import utils as follow_utils
 from follow.models import Follow
@@ -35,22 +36,23 @@ class UserProfile(models.Model):
 
 class Collective(models.Model):
     # TODO should be related to a contrib.auth.models.Group for permissions
-    name = DefaultCharField(verbose_name='Название')
-    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, verbose_name='Ярлык')
+    name = DefaultCharField(verbose_name=_('Name'))
+    slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, 
+                            verbose_name=_('slug'))
 
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
     location_lon = DefaultDecimalField(editable=False, blank=True, null=True)
-    location_address = DefaultCharField(blank=True, verbose_name='Место')
+    location_address = DefaultCharField(blank=True, verbose_name=_('address'))
     
-    description = models.TextField(verbose_name='Описание')
-    twitter = DefaultCharField(blank=True)
-    email = DefaultCharField(blank=True, verbose_name='Эл. почта')
+    description = models.TextField(verbose_name=_('description'))
+    twitter = DefaultCharField(blank=True, verbose_name=_('twitter'))
+    email = DefaultCharField(blank=True, verbose_name=_('email'))
     
-    
-    photo = models.ImageField(upload_to='collective', null=True, blank=True, verbose_name='Фото')
+    photo = models.ImageField(upload_to='collective', null=True, 
+                              blank=True, verbose_name=_('photo'))
 
     members = models.ManyToManyField(User, related_name='collectives',
-            null=True, blank=True)
+                                     null=True, blank=True)
 
     date_created = models.DateTimeField(default=timezone.now, editable=False)
 

@@ -3,6 +3,8 @@
 {% load follow_tags %}
 {% load stream_tags %}
 {% load comments %}
+{% load i18n %}
+
 {% block title %}{{ block.super }}: {{ collective.name }}{% endblock %}
 
 {% block extra_head %}
@@ -32,28 +34,25 @@
 							{% if collective.email %}<li><a href="mailto:{{ collective.email }}"><i class="icon-envelope"></i>Email</a></li>{% endif %}
 							{% if collective.twitter %}<li><a href="http://twitter.com/{{ collective.twitter }}" target="_blank"><i class="icon-twitter"></i></a></li>{% endif %}	
 						</ul>
-						
 					</div>
 					<div class="clear"></div>
 				</div>
-				
 			</div>
 			<a class="actionsCollective" 
 					{% if not user|is_following:collective %}
 					href="{% url 'collective_follow' slug=collective.slug %}">
-					<i class="icon-share-alt"></i> Наблюдать
+					<i class="icon-share-alt"></i> {% trans "Follow" %}
 					{% else %}
 					href="{% url 'collective_unfollow' slug=collective.slug %}">
-					<i class="icon-remove"></i> Перестать следить
+					<i class="icon-remove"></i> {% trans "Unfollow" %}
 					{% endif %}
 			</a>
 			<div class="sideCol collectiveMembers">
 				<div class="accordion" id="collectiveMembers">
-					
 					<div class="accordion-group">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#collectiveMembers" href="#adminList">
-						    	Участников коллектива <span class="followerCount">{{ collective.members.count }}</span>
+									{% trans "Collective members" %} <span class="followerCount">{{ collective.members.count }}</span>
 						    </a>
 						</div>
 						<div id="adminList" class="accordion-body collapse in">
@@ -67,7 +66,7 @@
 					<div class="accordion-group">
 				    	<div class="accordion-heading">
 					    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#collectiveMembers" href="#followerlist">
-						    	Наблюдателей коллектива <span class="followerCount">{{ collective.follow_collective.count }}</span>
+									{% trans "Collective followers" %} <span class="followerCount">{{ collective.follow_collective.count }}</span>
 						    </a>
 						</div>
 						<div id="followerlist" class="accordion-body collapse">
@@ -78,11 +77,8 @@
 							</div>
 						</div>
 					</div>
-					
 				</div><!-- end accordion -->
-				
 			</div>
-			
 		</div>
 		<div class="span9">
 			{% if "change_collective" in collective_perms %}
@@ -92,8 +88,8 @@
 					<div class="dropdown userAction pull-right">
 					  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog icon-large"></i></a>
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-					    <li><a href="{% url "collective_edit" slug=collective.slug %}"><i class="icon-edit"></i>Редактировать коллектив</a></li>
-					    <li><a href="{% url "collective_promote" slug=collective.slug %}"><i class="icon-edit"></i>Добавить участников</a></li>
+					    <li><a href="{% url "collective_edit" slug=collective.slug %}"><i class="icon-edit"></i>{% trans "Edit collectve" %}</a></li>
+					    <li><a href="{% url "collective_promote" slug=collective.slug %}"><i class="icon-edit"></i>{% trans "Add members" %}</a></li>
 					  </ul>
 					</div>
 				</div>
@@ -112,13 +108,11 @@
 							<div class="tileActions">
 								<div class="tileDescription">
 								<p>{{ mikroact.description|truncatewords:30 }}</p>
-								<p><a href="{{ mikroact.get_absolute_url }}">Перейти к микроакту</a></p></div>
+								<p><a href="{{ mikroact.get_absolute_url }}">{% trans "Visit MikroAct" %}</a></p></div>
 								<ul class="itemAction">
 									<li><i class="icon-plus"></i></li>
-									
 								</ul>
 							</div>
-							
 						</div>
 					</li>
 					{% endfor %}
@@ -129,9 +123,9 @@
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
-					  <li class="active"><a href="#activity">Активности</a></li>
-					  <li><a href="#stream">Лента комментариев</a></li>
-					  <li><a href="#description">Описание</a></li>
+						<li class="active"><a href="#activity">{% trans "Activity" %}</a></li>
+						<li><a href="#stream">{% trans "Stream" %}</a></li>
+						<li><a href="#description">{% trans "Description" %}</a></li>
 					</ul>
 				</div>
 			</div>
@@ -151,13 +145,14 @@
 						{% if user.is_authenticated %}
 						{% render_comment_form for collective %}
 						{% else %}
-						<a class="userLogin" href="{% url 'user_login' %}">Авторизируйтесь</a> , чтобы оставить комментарий
+						<a class="userLogin" href="{% url 'user_login' %}">{% trans "Log in" %}</a>
+						{% trans "to leave a comment" %}
 						{% endif %}
 				  </div>
 				  <div class="tab-pane" id="description">
-					  	<h4>Местоположение</h4>
+						<h4>{% trans "Location" %}</h4>
 					  	<p>{{ collective.location_address }}</p>
-					  	<h4>Описание</h4>
+							<h4>{% trans "About" %}</h4>
 					  	<p>{{ collective.description }}</p>
 				  </div>
 				</div>

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}{{ block.super }}: Register{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Register" %}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -10,10 +11,9 @@
 				{% csrf_token %}
 				{{ form.as_p }}
 				{{ profile_form.as_p }}
-				<button type="submit">Зарегистрироваться</button>
+				<button type="submit">{% trans "Register" %}</button>
 			</form>
 		</div>
 	</div>
-	
 </div>
 {% endblock content %}

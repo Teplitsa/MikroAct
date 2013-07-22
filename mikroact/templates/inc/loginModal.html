@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -7,14 +8,22 @@
     	<form action="{% url "user_login" %}" autocomplete="off" method="post">
 			{% csrf_token %}
 			
-			<p><i class="icon-user"></i><input name="username" id="id_username" type="text" class="span2" placeholder="Имя пользователя"></p>
-			<p><i class="icon-lock"></i><input name="password" type="password" class="span2" placeholder="Пароль"></p>
+			<p>
+				<i class="icon-user"></i>
+				<input name="username" id="id_username" type="text" class="span2"
+					placeholder="{% trans "Username" %}">
+			</p>
+			<p>
+				<i class="icon-lock"></i>
+				<input name="password" type="password" class="span2" 
+					placeholder="{% trans "Password" %}">
+			</p>
 			<div class="submitBottom">
 				<button type="submit" class="btn">Вход</button>
 			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
-		Не зарегистрированы? <a href="{% url "user_register" %}">Зарегистрируйтесь!</a>
+		{% trans "Not registered?"%} <a href="{% url "user_register" %}">{% trans "Register now!" %}</a>
 	</div>
 </div>

@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}{{ block.super }}: Удалить Mikroact{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Delete MikroAct" %}{% endblock %}
 
 {% block content %}
 <form action="." method="post">
 	{% csrf_token %}
-	<button type="submit">Удалить</button>
+	<button type="submit">{% trans "Delete" %}</button>
 </form>
 {% endblock content %}

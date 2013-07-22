@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
-{% block title %}{{ block.super }}: Mikroacts{% endblock %}
+{% block title %}{{ block.super }}: {% trans "MikroActs" %}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -10,7 +11,7 @@
 			<div class="mainCol collectiveAll">
 				<div class="actions">
 					<ul>
-						<li><a href="{% url "mikroact_add" %}"><i class="icon-edit icon-large"></i> Создать микроакт</a></li>
+						<li><a href="{% url "mikroact_add" %}"><i class="icon-edit icon-large"></i> {% trans "Add MikroAct" %}</a></li>
 						<li class="pull-right"><a href="#mikroActHelp" data-toggle="modal"><i class="icon-question-sign icon-large"></i></a></li>
 					</ul>
 				</div>
@@ -27,16 +28,16 @@
 					<div class="tileActions">
 						<div class="tileDescription">
 						<p>{{ mikroact.description|truncatewords:30 }}</p>
-						<p><a href="{{ mikroact.get_absolute_url }}">Перейти к микроакту</a></p></div>
+						<p><a href="{{ mikroact.get_absolute_url }}">{% trans "Visit MikroAct" %}</a></p></div>
 						<ul class="itemAction">
 							<li><i class="icon-plus"></i></li>
 							{% if user.is_authenticated %}
-							<li><a href="#" title="Добавить к кампании" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
+							<li><a href="#" title="{% trans "Add to campaign" %}" data-placement="top" data-toggle="popover"><i class="icon-sitemap"></i></a>
 							<div id="popover_content_wrapper" style="display: none;">
 								<form action="{% url 'mikroact_campaign_add' slug=mikroact.slug %}" method="POST">
 									{% csrf_token %}
 									{{ campaign_form|crispy }}
-									<button type="submit" class="btn btn-submit">Добавить</button>
+									<button type="submit" class="btn btn-submit">{% trans "Add" %}</button>
 								</form>
 							</div>
 							</li>
@@ -53,11 +54,11 @@
 <div id="mikroActHelp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    	<h1>Что такое микроакт?</h1>
+		<h1>{% trans "What's a MikroAct?" %}</h1>
     </div>
     <div class="modal-body">
     	<p>
-	A mikroact is a building block for you to transform your community or city! Propose an idea and work with others to achieve it.
+			{% trans "A mikroact is a building block for you to transform your community or city! Propose an idea and work with others to achieve it." %}
     	</p>
 	</div>
 	<div class="modal-footer">

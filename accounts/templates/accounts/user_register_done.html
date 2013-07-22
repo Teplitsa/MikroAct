@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}{{ block.super }}: Registration Complete!{% endblock %}
+{% block title %}{{ block.super }}: {% trans "Registration Complete!" %}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -9,7 +10,7 @@
 			
 			<div class="registerNotice alert fade in">
 				<a class="close" data-dismiss="alert" href="#">&times;</a>
-				Регистрация завершена!
+				{% trans "Registration complete!" %}
 			</div>
 			
 		</div>
@@ -18,37 +19,29 @@
 		<div class="span3">
 			<a href="{% url "user_detail" username=user.get_username %}"><div class="callAction">
 				<i class="icon-user icon-4x"></i>
-				<h2>Ваш профиль</h2>
-				<p>
-				Share your interests, location and connect with other users— in your city and around the world. Get inspired, join a community and take action together. 
-				</p>
+				<h2>{% trans "Your profile" %}</h2>
+				<p>{% trans "Share your interests, location and connect with other users— in your city and around the world. Get inspired, join a community and take action together." %}</p>
 			</div></a>
 		</div>
 		<div class="span3">
 			<a href="{% url 'mikroact_list' %}"><div class="callAction">
 				<i class="icon-edit icon-4x"></i>
-				<h2>MikroActs</h2>
-				<p>
-				Share actions and interventions you have taken or would like to propose in your community.
-				</p>
+				<h2>{% trans "MikroActs" %}</h2>
+				<p>{% trans "Share actions and interventions you have taken or would like to propose in your community." %}</p>
 			</div></a>
 		</div>
 		<div class="span3">
 			<a href="{% url 'collective_list' %}"><div class="callAction">
 				<i class="icon-group icon-4x"></i>
-				<h2>Коллективы</h2>
-				<p>
-				Group a selection of Mikroacts which are inspiring, interesting and share your interests with others.
-				</p>
+				<h2>{% trans "Collectives" %}</h2>
+				<p>{% trans "A group of people who work together on specific themes or in defined areas to collectively take action and transform urban spaces." %}</p>
 			</div></a>
 		</div>
 		<div class="span3">
 			<a href="{% url 'campaign_list' %}"><div class="callAction">
 				<i class="icon-sitemap icon-4x"></i>
-				<h2>Кампании</h2>
-				<p>
-				Group a selection of Mikroacts which are inspiring, interesting and share your interests with others.	
-				</p>
+				<h2>{% trans "Campaigns" %}</h2>
+				<p>{% trans "Group a selection of Mikroacts which are inspiring, interesting and share your interests with others." %}</p>
 			</div></a>
 		</div>
 	</div>
