@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mikroact 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:00-0400\n"
+"POT-Creation-Date: 2013-07-25 06:27-0400\n"
 "PO-Revision-Date: 2013-07-22 19:00+0100\n"
 "Last-Translator: Carl van Tonder <carl@supervacuo.com>\n"
 "Language-Team: ru <support@mikroact.org>\n"
@@ -183,6 +183,15 @@ msgstr "Перейти к коллективу"
 msgid "What's a Collective?"
 msgstr "Что такое Коллектив?"
 
+#: accounts/templates/accounts/collective_list.html:76
+#: accounts/templates/accounts/user_register_done.html:37
+msgid ""
+"Collective is a group of people who work together on specific themes or in "
+"defined areas to collectively take action and transform urban spaces."
+msgstr ""
+"Коллектив это группа людей, работающих вместе над определенной задачей по "
+"изменению городского ландшафта."
+
 #: accounts/templates/accounts/login.html:4
 #: accounts/templates/accounts/login.html:30
 #: acts/templates/acts/campaign_detail.html:118
@@ -250,10 +259,12 @@ msgstr "Ваш профиль"
 
 #: accounts/templates/accounts/user_register_done.html:23
 msgid ""
-"Share your interests, location and connect with other users— in your city "
-"and around the world. Get inspired, join a community and take action "
-"together."
+"Share your interests with other users in your city and around the world. Get "
+"inspired, join a community and take action together."
 msgstr ""
+"Делитесь своими интересами с другими пользователями из вашего городa и "
+"других стран. Вдохновляйтесь идеями других, присоединяйтесь к сообществам, "
+"чтобы участвовать в совместном творчестве."
 
 #: accounts/templates/accounts/user_register_done.html:29
 #: acts/templates/index.html:158 acts/templates/acts/campaign_list.html:36
@@ -262,16 +273,14 @@ msgid "MikroActs"
 msgstr "Микроакты"
 
 #: accounts/templates/accounts/user_register_done.html:30
+#: acts/templates/acts/mikroact_list.html:61
 msgid ""
-"Share actions and interventions you have taken or would like to propose in "
-"your community."
+"A mikroact is a building block for you to transform your community or city! "
+"Propose an idea and work with others to achieve it."
 msgstr ""
-
-#: accounts/templates/accounts/user_register_done.html:37
-msgid ""
-"A group of people who work together on specific themes or in defined areas "
-"to collectively take action and transform urban spaces."
-msgstr ""
+"Микроакт это строительный блок который вы можете использовать для изменения "
+"вашего сообщества или города! Предложие идею и работайте над ее реализацией "
+"вместе с другими."
 
 #: accounts/templates/accounts/user_register_done.html:43
 #: acts/templates/index.html:142 acts/templates/acts/campaign_list.html:5
@@ -286,6 +295,8 @@ msgid ""
 "Group a selection of Mikroacts which are inspiring, interesting and share "
 "your interests with others."
 msgstr ""
+"Групируйте интересные и вдохновляющие микроакты для того, чтобы делиться с "
+"другими."
 
 #: acts/models.py:17
 msgid "title"
@@ -419,12 +430,6 @@ msgstr "Создать микроакт"
 msgid "What's a MikroAct?"
 msgstr "Что такое микроакт?"
 
-#: acts/templates/acts/mikroact_list.html:61
-msgid ""
-"A mikroact is a building block for you to transform your community or city! "
-"Propose an idea and work with others to achieve it."
-msgstr ""
-
 #: mikroact/settings/base.py:107
 msgid "Stream Item"
 msgstr "Элемент ленты"
@@ -522,15 +527,3 @@ msgstr "Искать"
 #: mikroact/templates/inc/loginModal.html:27
 msgid "Not registered?"
 msgstr "Не зарегистрированы?"
-
-msgid "Group a selection of Mikroacts which are inspiring, interesting and share your interests with others." 
-msgstr "Групируйте интересные и вдохновляющие микроакты для того, чтобы делиться с другими."
-
-msgid "Collective is a group of people who work together on specific themes or in defined areas to collectively take action and transform urban spaces."
-msgstr "Коллектив это группа людей, работающих вместе над определенной задачей по изменению городского ландшафта."
-
-msgid "A mikroact is a building block for you to transform your community or city! Propose an idea and work with others to achieve it." 
-msgstr "Микроакт это строительный блок который вы можете использовать для изменения вашего сообщества или города! Предложие идею и работайте над ее реализацией вместе с другими."
-
-msgid "Share your interests with other users in your city and around the world. Get inspired, join a community and take action together."
-msgstr "Делитесь своими интересами с другими пользователями из вашего городa и других стран. Вдохновляйтесь идеями других, присоединяйтесь к сообществам, чтобы участвовать в совместном творчестве." 
