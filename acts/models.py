@@ -19,7 +19,7 @@ class MikroAct(models.Model):
                             verbose_name=_('slug'))
     date = models.DateField(verbose_name=_('date'))
     description = models.TextField(verbose_name=_('description'))
-    process = models.TextField(blank=True, verbose_name=_('process'))
+    process = models.TextField(blank=True, verbose_name=_('how to repeate mikroact'))
     author = models.ForeignKey(User, related_name='mikroacts')
     
     location_lat = DefaultDecimalField(editable=False, blank=True, null=True)
