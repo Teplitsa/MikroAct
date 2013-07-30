@@ -2,7 +2,7 @@
 <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    	<h1><span style="font-weight: 300;">Микро</span>Акт</h1>
+		<h1><span style="font-weight: 300;">{% trans "Mikro" %}</span>{% trans "Act" %}</h1>
     </div>
     <div class="modal-body">
     	<form action="{% url "user_login" %}" autocomplete="off" method="post">
@@ -19,7 +19,7 @@
 					placeholder="{% trans "Password" %}">
 			</p>
 			<div class="submitBottom">
-				<button type="submit" class="btn">Вход</button>
+				<button type="submit" class="btn">{% trans "Login" %}</button>
 			</div>
 		</form>
 	</div>
