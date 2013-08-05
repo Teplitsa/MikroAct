@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mikroact 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 06:27-0400\n"
+"POT-Creation-Date: 2013-08-05 14:39-0400\n"
 "PO-Revision-Date: 2013-07-22 19:00+0100\n"
 "Last-Translator: Carl van Tonder <carl@supervacuo.com>\n"
 "Language-Team: ru <support@mikroact.org>\n"
@@ -66,14 +66,14 @@ msgstr "фото"
 
 #: accounts/templates/accounts/collective_detail.html:44
 #: accounts/templates/accounts/collective_list.html:54
-#: acts/templates/acts/campaign_detail.html:31
+#: acts/templates/acts/campaign_detail.html:32
 #: acts/templates/acts/campaign_list.html:47
 msgid "Follow"
 msgstr "Наблюдать"
 
 #: accounts/templates/accounts/collective_detail.html:47
 #: accounts/templates/accounts/collective_list.html:57
-#: acts/templates/acts/campaign_detail.html:34
+#: acts/templates/acts/campaign_detail.html:35
 #: acts/templates/acts/campaign_list.html:51
 msgid "Unfollow"
 msgstr "Перестать наблядать"
@@ -96,13 +96,13 @@ msgstr "Добавить участников"
 
 #: accounts/templates/accounts/collective_detail.html:111
 #: accounts/templates/accounts/user_detail.html:50
-#: acts/templates/index.html:27 acts/templates/acts/campaign_detail.html:69
+#: acts/templates/index.html:27 acts/templates/acts/campaign_detail.html:70
 #: acts/templates/acts/mikroact_list.html:31
 msgid "Visit MikroAct"
 msgstr "Перейти к микроакту"
 
 #: accounts/templates/accounts/collective_detail.html:126
-#: acts/templates/acts/campaign_detail.html:88
+#: acts/templates/acts/campaign_detail.html:90
 #: mikroact/templates/inc/activityPane.html:5
 msgid "Activity"
 msgstr "Активности"
@@ -114,8 +114,6 @@ msgstr "Лента комментариев"
 
 #: accounts/templates/accounts/collective_detail.html:128
 #: accounts/templates/accounts/collective_invite.html:29
-#: acts/templates/acts/campaign_detail.html:90
-#: acts/templates/acts/campaign_detail.html:123
 msgid "Description"
 msgstr "Описание"
 
@@ -124,7 +122,7 @@ msgid "Log in"
 msgstr "Авторизируйтесь"
 
 #: accounts/templates/accounts/collective_detail.html:149
-#: acts/templates/acts/campaign_detail.html:119
+#: acts/templates/acts/campaign_detail.html:110
 #: acts/templates/acts/mikroact_detail.html:120
 msgid "to leave a comment"
 msgstr "чтобы оставить комментарий"
@@ -194,9 +192,10 @@ msgstr ""
 
 #: accounts/templates/accounts/login.html:4
 #: accounts/templates/accounts/login.html:30
-#: acts/templates/acts/campaign_detail.html:118
+#: acts/templates/acts/campaign_detail.html:109
 #: acts/templates/acts/mikroact_detail.html:119
 #: mikroact/templates/inc/globalHeader.html:23
+#: mikroact/templates/inc/loginModal.html:22
 msgid "Login"
 msgstr "Войти"
 
@@ -372,13 +371,13 @@ msgstr "Зарегистрируйся!"
 msgid "Visit campaign"
 msgstr "Перейти к кампании"
 
-#: acts/templates/acts/campaign_detail.html:42
+#: acts/templates/acts/campaign_detail.html:43
 msgid "Campaign followers"
 msgstr "Наблюдателей кампании"
 
 #: acts/templates/acts/campaign_detail.html:89
-msgid "Comments"
-msgstr "Комментарии"
+msgid "Discussion"
+msgstr ""
 
 #: acts/templates/acts/campaign_detail.html:96
 msgid "Edit campaign"
@@ -501,10 +500,12 @@ msgid "MikroActivist"
 msgstr "МикроАктивист"
 
 #: mikroact/templates/inc/globalHeader.html:43
+#: mikroact/templates/inc/loginModal.html:5
 msgid "Mikro"
 msgstr "Микро"
 
 #: mikroact/templates/inc/globalHeader.html:43
+#: mikroact/templates/inc/loginModal.html:5
 msgid "Act"
 msgstr "Акт"
 
