@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mikroact 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 14:39-0400\n"
+"POT-Creation-Date: 2013-08-05 14:40-0400\n"
 "PO-Revision-Date: 2013-07-22 19:00+0100\n"
 "Last-Translator: Carl van Tonder <carl@supervacuo.com>\n"
 "Language-Team: ru <support@mikroact.org>\n"
@@ -268,6 +268,7 @@ msgstr ""
 #: accounts/templates/accounts/user_register_done.html:29
 #: acts/templates/index.html:158 acts/templates/acts/campaign_list.html:36
 #: acts/templates/acts/mikroact_list.html:5
+#: mikroact/templates/inc/globalHeader.html:49
 msgid "MikroActs"
 msgstr "Микроакты"
 
@@ -508,10 +509,6 @@ msgstr "Микро"
 #: mikroact/templates/inc/loginModal.html:5
 msgid "Act"
 msgstr "Акт"
-
-#: mikroact/templates/inc/globalHeader.html:49
-msgid "Explore"
-msgstr "Исследовать"
 
 #: mikroact/templates/inc/globalHeader.html:51
 msgid "Create"
