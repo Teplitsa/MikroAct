@@ -18,7 +18,7 @@ class MikroAct(models.Model):
     slug = models.SlugField(max_length=DEFAULT_CHARFIELD_LENGTH, unique=True, 
                             verbose_name=_('slug'))
     date = models.DateField(verbose_name=_('date'))
-    description = models.TextField(verbose_name=_('description'))
+    description = models.TextField(verbose_name=_('mikroact description'))
     process = models.TextField(blank=True, verbose_name=_('process'))
     author = models.ForeignKey(User, related_name='mikroacts')
     
