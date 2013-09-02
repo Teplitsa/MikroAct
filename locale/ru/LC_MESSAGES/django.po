@@ -52,6 +52,10 @@ msgstr "место"
 msgid "description"
 msgstr "описание"
 
+#: accounts/models.py:47 acts/models.py:21 acts/models.py:64
+msgid "mikroact description"
+msgstr "описание микроакта"
+
 #: accounts/models.py:48
 msgid "twitter"
 msgstr ""

@@ -3,7 +3,7 @@ from .base import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+#LANGUAGE_CODE = "ru"
 ADMINS = ( 
 	# ('Your Name', 'you_email@example.com'),
 )
