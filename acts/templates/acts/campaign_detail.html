@@ -22,6 +22,7 @@
 				<div class="collectiveTitle">	
 					<div class="collectiveInfo">
 						<h2>{{ campaign.name }}</h2>
+						<p class="desc">{{ campaign.description }}</p>
 					</div>
 				</div>
 			</div>
@@ -85,9 +86,8 @@
 			<div class="mainCol act">
 				<div class="actions">
 					<ul class="nav nav-tabs" id="actTabs">
-						<li class="active"><a href="#activity">{% trans "Activity" %}</a></li>
-						<li><a href="#stream">{% trans "Comments" %}</a></li>
-						<li><a href="#description">{% trans "Description" %}</a></li>
+						<li class="active"><a href="#stream">{% trans "Discussion" %}</a></li>
+						<li><a href="#activity">{% trans "Activity" %}</a></li>
 					</ul>
 					{% if "change_campaign" in campaign_perms %}
 					<div class="dropdown userAction pull-right">
@@ -101,16 +101,7 @@
 			</div>
 			<div class="mainCol comment">
 				<div class="tab-content">
-					<div class="tab-pane active" id="activity">
-						<div class="activityCampaign">
-							<ul>
-								{% for action in object_stream|slice:":30" %}
-								<li>{% render_action action %}</li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-					<div class="tab-pane" id="stream">
+					<div class="tab-pane active" id="stream">
 						{% render_comment_list for campaign %}
 						{% if user.is_authenticated %}
 						{% render_comment_form for campaign %}
@@ -119,10 +110,15 @@
 						{% trans "to leave a comment" %}
 						{% endif %}
 					</div>
-					<div class="tab-pane" id="description">
-						<h4>{% trans "Description" %}</h4>
-					  	<p>{{ campaign.description }}</p>
-				  </div>
+					<div class="tab-pane" id="activity">
+						<div class="activityCampaign">
+							<ul>
+								{% for action in object_stream|slice:":30" %}
+								<li>{% render_action action %}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -57,7 +57,8 @@ class CollectiveForm(forms.ModelForm):
 class CollectiveUserPromotionForm(forms.Form):
     users = forms.ModelMultipleChoiceField(
         queryset=User.objects.none(),
-        widget=forms.CheckboxSelectMultiple
+        widget=forms.CheckboxSelectMultiple,
+        label=_("Users")
     )
 
     def __init__(self, *args, **kwargs):

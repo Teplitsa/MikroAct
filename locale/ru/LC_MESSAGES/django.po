@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mikroact 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-19 13:35-0400\n"
-"PO-Revision-Date: 2013-07-19 18:38+0100\n"
-"Last-Translator: Denis <kuladin@te-st.ru>\n"
+"POT-Creation-Date: 2013-08-05 14:40-0400\n"
+"PO-Revision-Date: 2013-07-22 19:00+0100\n"
+"Last-Translator: Carl van Tonder <carl@supervacuo.com>\n"
 "Language-Team: ru <support@mikroact.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,10 @@ msgstr "Подтвердите пароль"
 #: accounts/forms.py:29
 msgid "Passwords don't match"
 msgstr "Пароли не совпадают"
+
+#: accounts/forms.py:61 accounts/templates/accounts/user_list.html:3
+msgid "Users"
+msgstr "Участники"
 
 #: accounts/models.py:39
 msgid "Name"
@@ -62,15 +66,15 @@ msgstr "фото"
 
 #: accounts/templates/accounts/collective_detail.html:44
 #: accounts/templates/accounts/collective_list.html:54
-#: acts/templates/acts/campaign_detail.html:31
-#: acts/templates/acts/campaign_list.html:45
+#: acts/templates/acts/campaign_detail.html:32
+#: acts/templates/acts/campaign_list.html:47
 msgid "Follow"
 msgstr "Наблюдать"
 
 #: accounts/templates/accounts/collective_detail.html:47
 #: accounts/templates/accounts/collective_list.html:57
-#: acts/templates/acts/campaign_detail.html:34
-#: acts/templates/acts/campaign_list.html:49
+#: acts/templates/acts/campaign_detail.html:35
+#: acts/templates/acts/campaign_list.html:51
 msgid "Unfollow"
 msgstr "Перестать наблядать"
 
@@ -92,13 +96,13 @@ msgstr "Добавить участников"
 
 #: accounts/templates/accounts/collective_detail.html:111
 #: accounts/templates/accounts/user_detail.html:50
-#: acts/templates/index.html:27 acts/templates/acts/campaign_detail.html:69
+#: acts/templates/index.html:27 acts/templates/acts/campaign_detail.html:70
 #: acts/templates/acts/mikroact_list.html:31
 msgid "Visit MikroAct"
 msgstr "Перейти к микроакту"
 
 #: accounts/templates/accounts/collective_detail.html:126
-#: acts/templates/acts/campaign_detail.html:88
+#: acts/templates/acts/campaign_detail.html:90
 #: mikroact/templates/inc/activityPane.html:5
 msgid "Activity"
 msgstr "Активности"
@@ -110,8 +114,6 @@ msgstr "Лента комментариев"
 
 #: accounts/templates/accounts/collective_detail.html:128
 #: accounts/templates/accounts/collective_invite.html:29
-#: acts/templates/acts/campaign_detail.html:90
-#: acts/templates/acts/campaign_detail.html:123
 msgid "Description"
 msgstr "Описание"
 
@@ -120,7 +122,7 @@ msgid "Log in"
 msgstr "Авторизируйтесь"
 
 #: accounts/templates/accounts/collective_detail.html:149
-#: acts/templates/acts/campaign_detail.html:119
+#: acts/templates/acts/campaign_detail.html:110
 #: acts/templates/acts/mikroact_detail.html:120
 msgid "to leave a comment"
 msgstr "чтобы оставить комментарий"
@@ -140,7 +142,7 @@ msgstr "коллектив"
 
 #: accounts/templates/accounts/collective_form.html:25
 #: accounts/templates/accounts/user_form.html:28
-#: acts/templates/acts/campaign_form.html:23
+#: acts/templates/acts/campaign_form.html:24
 #: acts/templates/acts/mikroact_form.html:25
 msgid "Save"
 msgstr "Сохранить"
@@ -154,7 +156,7 @@ msgid "Add as members"
 msgstr "Добавить участников"
 
 #: accounts/templates/accounts/collective_list.html:5
-#: accounts/templates/accounts/user_register_done.html:34
+#: accounts/templates/accounts/user_register_done.html:36
 #: acts/templates/index.html:108 mikroact/templates/inc/globalHeader.html:48
 msgid "Collectives"
 msgstr "Коллективы"
@@ -179,11 +181,21 @@ msgstr "Перейти к коллективу"
 msgid "What's a Collective?"
 msgstr "Что такое Коллектив?"
 
+#: accounts/templates/accounts/collective_list.html:76
+#: accounts/templates/accounts/user_register_done.html:37
+msgid ""
+"Collective is a group of people who work together on specific themes or in "
+"defined areas to collectively take action and transform urban spaces."
+msgstr ""
+"Коллектив это группа людей, работающих вместе над определенной задачей по "
+"изменению городского ландшафта."
+
 #: accounts/templates/accounts/login.html:4
 #: accounts/templates/accounts/login.html:30
-#: acts/templates/acts/campaign_detail.html:118
+#: acts/templates/acts/campaign_detail.html:109
 #: acts/templates/acts/mikroact_detail.html:119
 #: mikroact/templates/inc/globalHeader.html:23
+#: mikroact/templates/inc/loginModal.html:22
 msgid "Login"
 msgstr "Войти"
 
@@ -236,26 +248,55 @@ msgstr "Регистрация"
 msgid "Registration Complete!"
 msgstr "Регистрация завершена!"
 
-#: accounts/templates/accounts/user_register_done.html:12
+#: accounts/templates/accounts/user_register_done.html:13
 msgid "Registration complete!"
 msgstr "Регистрация завершена!"
 
-#: accounts/templates/accounts/user_register_done.html:20
+#: accounts/templates/accounts/user_register_done.html:22
 msgid "Your profile"
 msgstr "Ваш профиль"
 
-#: accounts/templates/accounts/user_register_done.html:27
-#: acts/templates/index.html:158 acts/templates/acts/campaign_list.html:34
+#: accounts/templates/accounts/user_register_done.html:23
+msgid ""
+"Share your interests with other users in your city and around the world. Get "
+"inspired, join a community and take action together."
+msgstr ""
+"Делитесь своими интересами с другими пользователями из вашего городa и "
+"других стран. Вдохновляйтесь идеями других, присоединяйтесь к сообществам, "
+"чтобы участвовать в совместном творчестве."
+
+#: accounts/templates/accounts/user_register_done.html:29
+#: acts/templates/index.html:158 acts/templates/acts/campaign_list.html:36
 #: acts/templates/acts/mikroact_list.html:5
+#: mikroact/templates/inc/globalHeader.html:49
 msgid "MikroActs"
 msgstr "Микроакты"
 
-#: accounts/templates/accounts/user_register_done.html:41
+#: accounts/templates/accounts/user_register_done.html:30
+#: acts/templates/acts/mikroact_list.html:61
+msgid ""
+"A mikroact is a building block for you to transform your community or city! "
+"Propose an idea and work with others to achieve it."
+msgstr ""
+"Микроакт это строительный блок который вы можете использовать для изменения "
+"вашего сообщества или города! Предложие идею и работайте над ее реализацией "
+"вместе с другими."
+
+#: accounts/templates/accounts/user_register_done.html:43
 #: acts/templates/index.html:142 acts/templates/acts/campaign_list.html:5
 #: acts/templates/acts/mikroact_detail.html:50
 #: mikroact/templates/inc/globalHeader.html:47
 msgid "Campaigns"
 msgstr "Кампании"
+
+#: accounts/templates/accounts/user_register_done.html:44
+#: acts/templates/acts/campaign_list.html:74
+msgid ""
+"Group a selection of Mikroacts which are inspiring, interesting and share "
+"your interests with others."
+msgstr ""
+"Групируйте интересные и вдохновляющие микроакты для того, чтобы делиться с "
+"другими."
 
 #: acts/models.py:17
 msgid "title"
@@ -327,31 +368,31 @@ msgstr ""
 msgid "Register now!"
 msgstr "Зарегистрируйся!"
 
-#: acts/templates/index.html:163 acts/templates/acts/campaign_list.html:39
+#: acts/templates/index.html:163 acts/templates/acts/campaign_list.html:41
 msgid "Visit campaign"
 msgstr "Перейти к кампании"
 
-#: acts/templates/acts/campaign_detail.html:42
+#: acts/templates/acts/campaign_detail.html:43
 msgid "Campaign followers"
 msgstr "Наблюдателей кампании"
 
 #: acts/templates/acts/campaign_detail.html:89
-msgid "Comments"
-msgstr "Комментарии"
+msgid "Discussion"
+msgstr ""
 
 #: acts/templates/acts/campaign_detail.html:96
 msgid "Edit campaign"
 msgstr "Редактировать Кампанию"
 
-#: acts/templates/acts/campaign_form.html:3
+#: acts/templates/acts/campaign_form.html:4
 msgid "Campaign"
 msgstr "Кампания"
 
-#: acts/templates/acts/campaign_list.html:14
+#: acts/templates/acts/campaign_list.html:15
 msgid "Create campaign"
 msgstr "Создать кампанию"
 
-#: acts/templates/acts/campaign_list.html:65
+#: acts/templates/acts/campaign_list.html:70
 msgid "What's a Campaign?"
 msgstr "Что такое Кампания?"
 
@@ -385,7 +426,7 @@ msgstr "Сейчас нет инструкций для этого микроа�
 msgid "Add MikroAct"
 msgstr "Создать микроакт"
 
-#: acts/templates/acts/mikroact_list.html:56
+#: acts/templates/acts/mikroact_list.html:57
 msgid "What's a MikroAct?"
 msgstr "Что такое микроакт?"
 
@@ -459,9 +500,15 @@ msgstr "Мой профиль"
 msgid "MikroActivist"
 msgstr "МикроАктивист"
 
-#: mikroact/templates/inc/globalHeader.html:49
-msgid "Explore"
-msgstr "Исследовать"
+#: mikroact/templates/inc/globalHeader.html:43
+#: mikroact/templates/inc/loginModal.html:5
+msgid "Mikro"
+msgstr "Микро"
+
+#: mikroact/templates/inc/globalHeader.html:43
+#: mikroact/templates/inc/loginModal.html:5
+msgid "Act"
+msgstr "Акт"
 
 #: mikroact/templates/inc/globalHeader.html:51
 msgid "Create"
@@ -478,15 +525,3 @@ msgstr "Искать"
 #: mikroact/templates/inc/loginModal.html:27
 msgid "Not registered?"
 msgstr "Не зарегистрированы?"
-
-msgid "Group a selection of Mikroacts which are inspiring, interesting and share your interests with others." 
-msgstr "Групируйте интересные и вдохновляющие микроакты для того, чтобы делиться с другими."
-
-msgid "Collective is a group of people who work together on specific themes or in defined areas to collectively take action and transform urban spaces."
-msgstr "Коллектив это группа людей, работающих вместе над определенной задачей по изменению городского ландшафта."
-
-msgid "A mikroact is a building block for you to transform your community or city! Propose an idea and work with others to achieve it." 
-msgstr "Микроакт это строительный блок который вы можете использовать для изменения вашего сообщества или города! Предложие идею и работайте над ее реализацией вместе с другими."
-
-msgid "Share your interests with other users in your city and around the world. Get inspired, join a community and take action together."
-msgstr "Делитесь своими интересами с другими пользователями из вашего городa и других стран. Вдохновляйтесь идеями других, присоединяйтесь к сообществам, чтобы участвовать в совместном творчестве." 
