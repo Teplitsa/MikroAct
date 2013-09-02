@@ -307,8 +307,8 @@ msgid "date"
 msgstr "дата микроакта"
 
 #: acts/models.py:22
-msgid "process"
-msgstr "Как повторить"
+msgid "how to repeat mikroact"
+msgstr "как повторить микроакт"
 
 #: acts/models.py:60
 msgid "name"
