@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico')),
 )
 
-if settings.DEBUG:     
+if settings.SERVE_STATIC:     
     urlpatterns += staticfiles_urlpatterns()                              
     urlpatterns +=  patterns('',                                          
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {       

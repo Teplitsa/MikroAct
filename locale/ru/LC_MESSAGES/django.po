@@ -52,6 +52,10 @@ msgstr "место"
 msgid "description"
 msgstr "описание"
 
+#: accounts/models.py:47 acts/models.py:21 acts/models.py:64
+msgid "mikroact description"
+msgstr "описание микроакта"
+
 #: accounts/models.py:48
 msgid "twitter"
 msgstr ""
@@ -307,8 +311,8 @@ msgid "date"
 msgstr "дата микроакта"
 
 #: acts/models.py:22
-msgid "process"
-msgstr "Как повторить"
+msgid "how to repeat mikroact"
+msgstr "как повторить микроакт"
 
 #: acts/models.py:60
 msgid "name"
