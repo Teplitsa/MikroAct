@@ -76,7 +76,7 @@ msgstr "Наблюдать"
 #: acts/templates/acts/campaign_detail.html:35
 #: acts/templates/acts/campaign_list.html:51
 msgid "Unfollow"
-msgstr "Перестать наблядать"
+msgstr "Перестать наблюдать"
 
 #: accounts/templates/accounts/collective_detail.html:55
 msgid "Collective members"
@@ -378,7 +378,7 @@ msgstr "Наблюдателей кампании"
 
 #: acts/templates/acts/campaign_detail.html:89
 msgid "Discussion"
-msgstr ""
+msgstr "Обсуждение"
 
 #: acts/templates/acts/campaign_detail.html:96
 msgid "Edit campaign"
